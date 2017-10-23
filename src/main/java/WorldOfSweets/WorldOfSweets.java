@@ -1,3 +1,5 @@
+package WorldOfSweets;
+
 public class WorldOfSweets extends javax.swing.JFrame {
 
     /**
