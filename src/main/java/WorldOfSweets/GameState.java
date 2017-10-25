@@ -5,8 +5,8 @@ import javax.swing.*;
 
 public class GameState{
 	
-	int response = 0;		//Number of total players
-	int totalPlayers = 0;
+	int response = 0;		
+	int totalPlayers = 0;	//Number of total players
 	
 	public GameState(){
 		//initialize panel and combo box
@@ -25,7 +25,7 @@ public class GameState{
 		if (response != JOptionPane.OK_OPTION){
 			System.exit(0);
 		} else {
-			totalPlayers = selection.getSelectedItem();
+			totalPlayers = Integer.parseInt(selection.getSelectedItem().toString());
 		}
 	}
 	
