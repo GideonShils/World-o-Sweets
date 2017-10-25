@@ -1,4 +1,5 @@
 package WorldOfSweets;
+import GameObjects.*;
 
 public class WorldOfSweets extends javax.swing.JFrame {
 
