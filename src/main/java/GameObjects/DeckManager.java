@@ -1,6 +1,7 @@
 package GameObjects;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class DeckManager{
 	
@@ -10,12 +11,12 @@ public class DeckManager{
 		(totalCardCount - 1) will be the index of the card on top of the deck.
 		0 will be the index of the card at the bottom of the deck.
 	*/
-	private ArrayList<Card> Deck;
+	private ArrayList<Card> deck;
 	private int totalCardCount;
 	private int currentIndex;
 
 	public DeckManager(){
-		Deck = new ArrayList<Card>();
+		deck = new ArrayList<Card>();
 		totalCardCount = 0;
 		currentIndex = 0;		
 	}
@@ -35,11 +36,11 @@ public class DeckManager{
 			Card yellow = new Card("yellow", false);
 			Card orange = new Card("orange", false);
 
-			Deck.add(green);
-			Deck.add(blue);
-			Deck.add(red);
-			Deck.add(yellow);
-			Deck.add(orange);
+			deck.add(green);
+			deck.add(blue);
+			deck.add(red);
+			deck.add(yellow);
+			deck.add(orange);
 		}
 
 		// generates the specified number of doubles for each color
@@ -50,11 +51,11 @@ public class DeckManager{
 			Card yellow = new Card("yellow", true);
 			Card orange = new Card("orange", true);
 
-			Deck.add(green);
-			Deck.add(blue);
-			Deck.add(red);
-			Deck.add(yellow);
-			Deck.add(orange);
+			deck.add(green);
+			deck.add(blue);
+			deck.add(red);
+			deck.add(yellow);
+			deck.add(orange);
 		}
 
 		totalCardCount = singles*5 + doubles*5;
@@ -66,4 +67,27 @@ public class DeckManager{
 	public int getTotalCardCount(){
 		return totalCardCount;
 	}
+
+	// return the card at the top of the deck
+	// currentIndex designates which card is currently at the top
+	public Card pop(){
+
+		// if the deck is empty, need to shuffle
+		if (currentIndex == 0){
+			shuffle();
+		}
+
+		Card top = deck.get(currentIndex);
+		currentIndex--;
+		return top;
+	}
+
+	// shuffle and reset pointer for the stack
+	public void shuffle(){
+		Collections.shuffle(deck);
+		currentIndex = totalCardCount - 1;
+	}
+
+
+
 }

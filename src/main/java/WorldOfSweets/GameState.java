@@ -30,9 +30,6 @@ public class GameState{
 	}
 	
 	
-	public static void main(String args[]) {
-		//ASK HOW MANY PLAYERS
-		GameState gameState = new GameState();
-	}
+	
 }
 

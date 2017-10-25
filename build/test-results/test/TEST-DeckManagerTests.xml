@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="DeckManagerTests" tests="6" skipped="0" failures="0" errors="0" timestamp="2017-10-25T23:03:40" hostname="christian-Lenovo-G510" time="0.014">
+<testsuite name="DeckManagerTests" tests="6" skipped="0" failures="0" errors="0" timestamp="2017-10-25T23:19:01" hostname="christian-Lenovo-G510" time="0.012">
   <properties/>
-  <testcase name="deckCountTest10" classname="DeckManagerTests" time="0.007"/>
-  <testcase name="deckCountTest60" classname="DeckManagerTests" time="0.0"/>
-  <testcase name="deckNegativeInputTest1" classname="DeckManagerTests" time="0.002"/>
+  <testcase name="deckCountTest10" classname="DeckManagerTests" time="0.008"/>
+  <testcase name="deckCountTest60" classname="DeckManagerTests" time="0.001"/>
+  <testcase name="deckNegativeInputTest1" classname="DeckManagerTests" time="0.001"/>
   <testcase name="deckNegativeInputTest2" classname="DeckManagerTests" time="0.0"/>
   <testcase name="deck0InputTest1" classname="DeckManagerTests" time="0.001"/>
   <testcase name="deck0InputTest2" classname="DeckManagerTests" time="0.0"/>
