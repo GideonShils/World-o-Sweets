@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="DeckManagerTests" tests="6" skipped="0" failures="0" errors="0" timestamp="2017-10-25T23:19:01" hostname="christian-Lenovo-G510" time="0.012">
+<testsuite name="DeckManagerTests" tests="6" skipped="0" failures="0" errors="0" timestamp="2017-10-27T22:48:42" hostname="christian-Lenovo-G510" time="0.009">
   <properties/>
-  <testcase name="deckCountTest10" classname="DeckManagerTests" time="0.008"/>
+  <testcase name="deckCountTest10" classname="DeckManagerTests" time="0.006"/>
   <testcase name="deckCountTest60" classname="DeckManagerTests" time="0.001"/>
   <testcase name="deckNegativeInputTest1" classname="DeckManagerTests" time="0.001"/>
   <testcase name="deckNegativeInputTest2" classname="DeckManagerTests" time="0.0"/>
-  <testcase name="deck0InputTest1" classname="DeckManagerTests" time="0.001"/>
+  <testcase name="deck0InputTest1" classname="DeckManagerTests" time="0.0"/>
   <testcase name="deck0InputTest2" classname="DeckManagerTests" time="0.0"/>
   <system-out><![CDATA[Parameters must be a non-zero input.
 Parameters must be a non-zero input.
