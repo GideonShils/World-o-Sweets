@@ -154,6 +154,7 @@ public class WorldOfSweets extends javax.swing.JFrame {
         jLabel34.setForeground(new java.awt.Color(255, 255, 255));
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home-house-icon-94831.png")));
+
         board_panel.add(jLabel34);
 
         jLabel35.setBackground(new java.awt.Color(0, 255, 0));
