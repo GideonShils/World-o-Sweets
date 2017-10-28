@@ -118,7 +118,6 @@ public class WorldOfSweets extends javax.swing.JFrame {
         jPanel121 = new javax.swing.JPanel();
         jPanel122 = new javax.swing.JPanel();
         non_board_panel = new javax.swing.JPanel();
-        cards_panel = new javax.swing.JPanel();
         instructions_panel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -161,7 +160,8 @@ public class WorldOfSweets extends javax.swing.JFrame {
         board_panel.add(jPanel33);
 
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel34.setIcon(new javax.swing.ImageIcon("home-house-icon-94831.png"));
+        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/home-house-icon-94831.png")));
+
         board_panel.add(jLabel34);
 
         jPanel35.setBackground(new java.awt.Color(0, 255, 0));
@@ -490,20 +490,10 @@ public class WorldOfSweets extends javax.swing.JFrame {
 
         non_board_panel.setPreferredSize(new java.awt.Dimension(250, 620));
 
-        cards_panel.setPreferredSize(new java.awt.Dimension(250, 310));
 
-        javax.swing.GroupLayout cards_panelLayout = new javax.swing.GroupLayout(cards_panel);
-        cards_panel.setLayout(cards_panelLayout);
-        cards_panelLayout.setHorizontalGroup(
-            cards_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
-        );
-        cards_panelLayout.setVerticalGroup(
-            cards_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 310, Short.MAX_VALUE)
-        );
+        CardPanel cards_panel = new CardPanel(dm);
+        non_board_panel.add(cards_panel.getCardsPanel());
 
-        non_board_panel.add(cards_panel);
 
         instructions_panel.setPreferredSize(new java.awt.Dimension(250, 310));
 
@@ -533,6 +523,13 @@ public class WorldOfSweets extends javax.swing.JFrame {
     public static void main(String args[]) {
 		//GAMESTATE
 		GameState gameState = new GameState();
+
+        // create deck manager object
+        // create the deck itself
+        // shuffle the deck
+        dm = new DeckManager();
+        dm.createDeck(10, 2);
+        dm.shuffle();
 		
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -558,7 +555,6 @@ public class WorldOfSweets extends javax.swing.JFrame {
         });
     }
     private javax.swing.JPanel board_panel;
-    private javax.swing.JPanel cards_panel;
     private javax.swing.JPanel game_container_panel;
     private javax.swing.JLabel header_label;
     private javax.swing.JPanel instructions_panel;
@@ -663,4 +659,6 @@ public class WorldOfSweets extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel98;
     private javax.swing.JPanel jPanel99;
     private javax.swing.JPanel non_board_panel;
+
+    private static DeckManager dm;
 }
