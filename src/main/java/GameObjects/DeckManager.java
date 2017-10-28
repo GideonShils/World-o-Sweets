@@ -70,7 +70,7 @@ public class DeckManager{
 
 	// return the card at the top of the deck
 	// currentIndex designates which card is currently at the top
-	public Card pop(){
+	public Card draw(){
 
 		// if the deck is empty, need to shuffle
 		if (currentIndex == 0){
@@ -84,6 +84,7 @@ public class DeckManager{
 
 	// shuffle and reset pointer for the stack
 	public void shuffle(){
+		System.out.println("Shuffle!");
 		Collections.shuffle(deck);
 		currentIndex = totalCardCount - 1;
 	}
