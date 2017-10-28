@@ -29,7 +29,9 @@ public class GameState{
 		}
 	}
 	
-	
+    public int getPlayers(){
+	return totalPlayers;
+    }
 	
 }
 
