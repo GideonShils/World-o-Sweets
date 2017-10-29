@@ -514,7 +514,7 @@ public class WorldOfSweets extends JFrame {
         non_board_panel.setPreferredSize(new java.awt.Dimension(250, 620));
 
 
-        CardPanel cards_panel = new CardPanel(dm);
+        CardPanel cards_panel = new CardPanel(dm, gameState);
         non_board_panel.add(cards_panel.getCardsPanel());
 
 
@@ -545,7 +545,7 @@ public class WorldOfSweets extends JFrame {
      */
     public static void main(String args[]) {
 	//GAMESTATE
-	GameState gameState = new GameState();
+	gameState = new GameState();
 
 	// create deck manager object
         // create the deck itself
@@ -573,6 +573,7 @@ public class WorldOfSweets extends JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new WorldOfSweets(gameState.getPlayers()).setVisible(true);
+				JOptionPane.showMessageDialog(null, "Player " + gameState.getCurrentPlayer() + "'s turn!");
             }
         });
 
@@ -686,4 +687,5 @@ public class WorldOfSweets extends JFrame {
     private JPanel non_board_panel;
 
     private static DeckManager dm;
+	private static GameState gameState;
 }

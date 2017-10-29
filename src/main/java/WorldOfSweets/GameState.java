@@ -7,11 +7,12 @@ public class GameState{
 	
 	int response = 0;		
 	int totalPlayers = 0;	//Number of total players
+	int currentPlayer = 0;
+	
 	
 	public GameState(){
 		//initialize panel and combo box
 		JPanel panel = new JPanel();
-		panel.add(new JLabel("Welcome to the World-o-Sweets, the GAME of games.  How many people are playing? :"));
 		DefaultComboBoxModel model = new DefaultComboBoxModel();
 		
 		//Add my elements to the dropdown
@@ -26,12 +27,26 @@ public class GameState{
 			System.exit(0);
 		} else {
 			totalPlayers = Integer.parseInt(selection.getSelectedItem().toString());
+			
+			
 		}
 	}
 	
     public int getPlayers(){
-	return totalPlayers;
+		return totalPlayers;
     }
+	
+	
+	//Used for turns
+	public int getCurrentPlayer(){
+		if (currentPlayer == totalPlayers){
+			currentPlayer = 1;
+			return 1;
+		} else {
+			currentPlayer += 1;
+			return currentPlayer;
+		}
+	}
 	
 }
 

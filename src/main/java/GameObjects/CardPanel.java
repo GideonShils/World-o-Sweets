@@ -14,11 +14,13 @@ public class CardPanel{
     private JLabel deckLabel = new javax.swing.JLabel();
     private JLabel deckText = new JLabel("Deck");
     private JLabel cardText = new JLabel("Card");
+	private GameState gameState;
 
     public static DeckManager dm;
 
 	//        cards_panel.setLayout(new GridLayout(2));
-	public CardPanel(DeckManager dm){
+	public CardPanel(DeckManager dm, GameState gs){
+		gameState = gs;
         this.dm = dm;
 
 		cards_panel = new javax.swing.JPanel();
@@ -103,6 +105,7 @@ public class CardPanel{
     private class CardButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e){
             changeCard(dm.draw());
+			JOptionPane.showMessageDialog(null, "Player " + gameState.getCurrentPlayer() + "'s turn!");
         }
     }
 }
