@@ -10,7 +10,7 @@ public class Token{
     public Token(String file, JLabel label){
 	current_position = 0;
 	this.label = label;
-	this.icon = new ImageIcon(file);
+	this.icon = new ImageIcon(getClass().getResource(file));
 	label.setIcon(icon);
     }
 

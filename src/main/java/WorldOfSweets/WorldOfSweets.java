@@ -1,18 +1,21 @@
 package WorldOfSweets;
 import GameObjects.*;
 import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 public class WorldOfSweets extends JFrame {
 
     /**
      * Creates new form WorldOfSweets
      */
-    public WorldOfSweets() {
-        initComponents();
+    public WorldOfSweets(int num_players) {
+        initComponents(num_players);
     }
 
     @SuppressWarnings("unchecked")
-    private void initComponents() {
+    private void initComponents(int num_players) {
         java.awt.GridBagConstraints gridBagConstraints;
 
         header_label = new JLabel();
@@ -419,6 +422,26 @@ public class WorldOfSweets extends JFrame {
         start_panel.setBackground(new java.awt.Color(255, 255, 255));
         start_panel.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 	start_panel.setLayout(new java.awt.GridLayout(2, 2));
+	for(int i = 0; i < num_players; i++){
+	    JLabel label = new JLabel();
+	    label.setIcon(new ImageIcon(getClass().getResource("/tokens/player" + (i+1) + ".png")));
+	    Token t = new Token("/tokens/player" + (i+1) + ".png", label);
+	    start_panel.add(label);	    
+	}
+	/*JLabel label = new JLabel();
+	/*BufferedImage image = null;
+	try{	 
+	    image = ImageIO.read(getClass().getResource("/tokens/player1.png"));
+	}
+	catch(Exception e){
+	    System.out.println("Error with tokens");
+	}
+	ImageIcon icon = new ImageIcon(image);
+	if(icon == null){
+	    System.out.println("null");
+	    }
+	    label.setIcon(icon);
+	    start_panel.add(label);*/
         board_panel.add(start_panel);
         jPanel105.setOpaque(false);
         board_panel.add(jPanel105);
@@ -549,19 +572,11 @@ public class WorldOfSweets extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new WorldOfSweets().setVisible(true);
+                new WorldOfSweets(gameState.getPlayers()).setVisible(true);
             }
         });
 
-	for(int i = 0; i < gameState.getPlayers(); i++){
-	    JLabel label = new JLabel();
-	    Token t = new Token("/tokens/player" + (i+1) + ".png", label);
-	    if(start_panel == null){
-		System.out.println("NULL");
-	    }
-	    start_panel.add(t.getLabel());	    
-	}
-	start_panel.revalidate();
+	
 
     }
     private JPanel board_panel;
