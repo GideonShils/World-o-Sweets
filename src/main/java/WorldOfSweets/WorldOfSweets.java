@@ -425,23 +425,9 @@ public class WorldOfSweets extends JFrame {
 	for(int i = 0; i < num_players; i++){
 	    JLabel label = new JLabel();
 	    label.setIcon(new ImageIcon(getClass().getResource("/tokens/player" + (i+1) + ".png")));
-	    Token t = new Token("/tokens/player" + (i+1) + ".png", label);
+	    //Token t = new Token("/tokens/player" + (i+1) + ".png", label); to be added later
 	    start_panel.add(label);	    
 	}
-	/*JLabel label = new JLabel();
-	/*BufferedImage image = null;
-	try{	 
-	    image = ImageIO.read(getClass().getResource("/tokens/player1.png"));
-	}
-	catch(Exception e){
-	    System.out.println("Error with tokens");
-	}
-	ImageIcon icon = new ImageIcon(image);
-	if(icon == null){
-	    System.out.println("null");
-	    }
-	    label.setIcon(icon);
-	    start_panel.add(label);*/
         board_panel.add(start_panel);
         jPanel105.setOpaque(false);
         board_panel.add(jPanel105);
