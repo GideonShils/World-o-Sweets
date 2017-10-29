@@ -544,15 +544,20 @@ public class WorldOfSweets extends JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-	//GAMESTATE
+        
+        // Initialize game sate and bring up dialog 
+        // asking for number of players
 	gameState = new GameState();
 
-	// create deck manager object
-        // create the deck itself
-        // shuffle the deck
+	// Create deck manager object
         dm = new DeckManager();
+
+        // Create the deck itself
         dm.createDeck(10, 2);
+
+        // Shuffle the deck
         dm.shuffle();
+        
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
