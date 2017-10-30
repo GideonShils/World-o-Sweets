@@ -14,6 +14,7 @@ public class CardPanel{
     private JLabel deckLabel = new javax.swing.JLabel();
     private JLabel deckText = new JLabel("Deck");
     private JLabel cardText = new JLabel("Card");
+    private JLabel deckCount = new JLabel("0");
     private JLabel singleDoubleText = new JLabel("Single");
 	private GameState gameState;
 
@@ -76,6 +77,12 @@ public class CardPanel{
         cards_panel.add(_drawCardButton);
 
         c.weightx = 0.25;
+        c.gridx = 0;
+        c.gridy = 2;
+        cards_panel.add(deckCount, c);
+        deckCount.setText(Integer.toString(dm.getCount()));
+
+        c.weightx = 0.25;
         c.gridx = 1;
         c.gridy = 2;
         cards_panel.add(singleDoubleText, c);
@@ -107,6 +114,7 @@ public class CardPanel{
     public void changeCard(Card card){
         cardLabel.setBackground(card.getColor());
         singleDoubleText.setText(card.isDoubleText());
+        deckCount.setText(Integer.toString(dm.getCount()));
     }
 
     private class CardButtonListener implements ActionListener {

@@ -14,6 +14,7 @@ public class DeckManager{
 	private ArrayList<Card> deck;
 	private int totalCardCount;
 	private int currentIndex;
+	private int numCards;
 
 	public DeckManager(){
 		deck = new ArrayList<Card>();
@@ -66,6 +67,10 @@ public class DeckManager{
 
 	public int getTotalCardCount(){
 		return totalCardCount;
+	}
+
+	public int getCount(){
+		return currentIndex;
 	}
 
 	// return the card at the top of the deck
