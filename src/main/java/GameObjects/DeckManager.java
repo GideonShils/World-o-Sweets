@@ -70,7 +70,7 @@ public class DeckManager{
 	}
 
 	public int getCount(){
-		return currentIndex;
+		return currentIndex + 1;
 	}
 
 	// return the card at the top of the deck
