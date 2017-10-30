@@ -18,7 +18,7 @@ public class DeckManager{
 	public DeckManager(){
 		deck = new ArrayList<Card>();
 		totalCardCount = 0;
-		currentIndex = 0;		
+		currentIndex = 0;
 	}
 
 	public boolean createDeck(int singles, int doubles){

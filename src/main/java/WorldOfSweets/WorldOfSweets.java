@@ -425,23 +425,9 @@ public class WorldOfSweets extends JFrame {
 	for(int i = 0; i < num_players; i++){
 	    JLabel label = new JLabel();
 	    label.setIcon(new ImageIcon(getClass().getResource("/tokens/player" + (i+1) + ".png")));
-	    Token t = new Token("/tokens/player" + (i+1) + ".png", label);
+	    //Token t = new Token("/tokens/player" + (i+1) + ".png", label); to be added later
 	    start_panel.add(label);	    
 	}
-	/*JLabel label = new JLabel();
-	/*BufferedImage image = null;
-	try{	 
-	    image = ImageIO.read(getClass().getResource("/tokens/player1.png"));
-	}
-	catch(Exception e){
-	    System.out.println("Error with tokens");
-	}
-	ImageIcon icon = new ImageIcon(image);
-	if(icon == null){
-	    System.out.println("null");
-	    }
-	    label.setIcon(icon);
-	    start_panel.add(label);*/
         board_panel.add(start_panel);
         jPanel105.setOpaque(false);
         board_panel.add(jPanel105);
@@ -514,7 +500,7 @@ public class WorldOfSweets extends JFrame {
         non_board_panel.setPreferredSize(new java.awt.Dimension(250, 620));
 
 
-        CardPanel cards_panel = new CardPanel(dm);
+        CardPanel cards_panel = new CardPanel(dm, gameState);
         non_board_panel.add(cards_panel.getCardsPanel());
 
 
@@ -544,15 +530,20 @@ public class WorldOfSweets extends JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-	//GAMESTATE
-	GameState gameState = new GameState();
+        
+        // Initialize game sate and bring up dialog 
+        // asking for number of players
+	gameState = new GameState();
 
-	// create deck manager object
-        // create the deck itself
-        // shuffle the deck
+	// Create deck manager object
         dm = new DeckManager();
+
+        // Create the deck itself
         dm.createDeck(10, 2);
+
+        // Shuffle the deck
         dm.shuffle();
+        
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -573,6 +564,7 @@ public class WorldOfSweets extends JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new WorldOfSweets(gameState.getPlayers()).setVisible(true);
+				JOptionPane.showMessageDialog(null, "Player " + gameState.getCurrentPlayer() + "'s turn!");
             }
         });
 
@@ -686,4 +678,5 @@ public class WorldOfSweets extends JFrame {
     private JPanel non_board_panel;
 
     private static DeckManager dm;
+	private static GameState gameState;
 }

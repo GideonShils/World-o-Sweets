@@ -1,0 +1,17 @@
+Identifier: 2 players test
+Summary: testing that selecting 2 players from drop down populated game board with 2 tokens
+Preconditions: Start game with gradle run command
+Execution: Select 2 from drop down menu
+Postconditions: Observe that game board has 2 tokens upon launch
+
+Identifier: 3 players test
+Summary: testing that selecting 3 players from drop down populated game board with 3 tokens
+Preconditions: Start game with gradle run command
+Execution: Select 3 from drop down menu
+Postconditions: Observe that game board has 3 tokens upon launch
+
+Identifier: 4 players test
+Summary: testing that selecting 4 players from drop down populated game board with 4 tokens
+Preconditions: Start game with gradle run command
+Execution: Select 4 from drop down menu
+Postconditions: Observe that game board has 4 tokens upon launch
