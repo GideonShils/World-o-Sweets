@@ -82,4 +82,11 @@ public class Card{
 		return isDouble;
 	}
 
+	public String isDoubleText(){
+		if (isDouble)
+			return "Double";
+		else
+			return "Single";
+	}
+
 }
