@@ -10,9 +10,17 @@ public class Card{
 
 	private java.awt.Color color;
 	private boolean isDouble;
+	private boolean skip;
+	private boolean goToMiddle;
 
 	public Card(String color, boolean isDouble){
+		this(color, isDouble, false, false);
+	}
+
+	public Card(String color, boolean isDouble, boolean skip, boolean goToMiddle){
 		this.isDouble = isDouble;
+		this.skip = skip;
+		this.goToMiddle = goToMiddle;
 
 		switch (color){
 			case "green":
@@ -82,7 +90,31 @@ public class Card{
 		return isDouble;
 	}
 
+	public boolean skip(){
+		return skip;
+	}
+
+	public boolean goToMiddle(){
+		return goToMiddle;
+	}
+
+	// this method has been made obsolete due to skip and go to middle cards, but will keep so that I don't break anything
 	public String isDoubleText(){
+		if (isDouble)
+			return "Double";
+		else
+			return "Single";
+	}
+
+	// now that skip and 'Go to middle' cards have been created, want to return text for any of the cards
+	// if skip and goToMiddle are both true, will return Skip instead of Go to Middle
+	public String getCardText(){
+		if (skip)
+			return "Skip";
+
+		if (goToMiddle)
+			return "Go to Middle";
+
 		if (isDouble)
 			return "Double";
 		else
