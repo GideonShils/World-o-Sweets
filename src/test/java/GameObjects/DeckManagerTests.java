@@ -3,6 +3,7 @@ import org.junit.*;
 
 
 import GameObjects.DeckManager;
+import GameObjects.Card;
 
 public class DeckManagerTests {
 
@@ -52,6 +53,99 @@ public class DeckManagerTests {
 	public void deckNegativeInputTest2(){
 		assertFalse(dm.createDeck(5, -1));
 	}
+
+	// test that 50 singles were added to deck
+	@Test
+	public void deckContains50Singles(){
+		dm.createDeck(10, 2, 5, 3);
+		assertEquals(50, dm.getSinglesCount());
+	}
+
+	// test that 50 singles were added to deck by checking entire deck
+	@Test
+	public void deckContains50SinglesTest2(){
+		dm.createDeck(10, 2, 5, 3);
+		int singleCount = 0;
+
+		for (int i = 0; i < dm.getTotalCardCount(); i++){
+			Card c = dm.draw();
+
+			if (c.getCardText().equals("Single"))
+				singleCount++;
+		}
+
+		assertEquals(50, singleCount);
+	}
+
+	// test that 10 doubles were added to deck
+	@Test
+	public void deckContains10Doubles(){
+		dm.createDeck(10, 2, 5, 3);
+		assertEquals(10, dm.getDoublesCount());
+	}
+
+	// test that 10 doubles were added to deck by checking entire deck
+	@Test
+	public void deckContains10DoublesTest2(){
+		dm.createDeck(10, 2, 5, 3);
+		int doubleCount = 0;
+
+		for (int i = 0; i < dm.getTotalCardCount(); i++){
+			Card c = dm.draw();
+
+			if (c.isDouble())
+				doubleCount++;
+		}
+
+		assertEquals(10, doubleCount);
+	}
+
+	// test that 5 skips were added to deck
+	@Test
+	public void deckContains5Skips(){
+		dm.createDeck(10, 2, 5, 3);
+		assertEquals(5, dm.getSkipsCount());
+	}
+
+	// test that 5 skips were added to deck by checking entire deck
+	@Test
+	public void deckContains5SKipTest2(){
+		dm.createDeck(10, 2, 5, 3);
+		int skipCount = 0;
+
+		for (int i = 0; i < dm.getTotalCardCount(); i++){
+			Card c = dm.draw();
+
+			if (c.skip())
+				skipCount++;
+		}
+
+		assertEquals(5, skipCount);
+	}
+
+	// test that 3 Go To Middles were added to deck
+	@Test
+	public void deckContains3GoToMiddle(){
+		dm.createDeck(10, 2, 5, 3);
+		assertEquals(3, dm.getGoToMiddleCount());
+	}
+
+	// test that 3 Go To Middle cards were added by checking entire deck
+	@Test
+	public void deckContains3GoToMiddleTest2(){
+		dm.createDeck(10, 2, 5, 3);
+		int goToMiddleCount = 0;
+
+		for (int i = 0; i < dm.getTotalCardCount(); i++){
+			Card c = dm.draw();
+
+			if (c.goToMiddle())
+				goToMiddleCount++;
+		}
+
+		assertEquals(3, goToMiddleCount);
+	}
+
 
 
 }

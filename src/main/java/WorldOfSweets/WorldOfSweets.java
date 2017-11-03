@@ -539,7 +539,7 @@ public class WorldOfSweets extends JFrame {
         dm = new DeckManager();
 
         // Create the deck itself
-        dm.createDeck(10, 2);
+        dm.createDeck(10, 2, 5, 3);
 
         // Shuffle the deck
         dm.shuffle();

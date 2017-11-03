@@ -13,6 +13,7 @@ public class Card{
 	private boolean skip;
 	private boolean goToMiddle;
 
+
 	public Card(String color, boolean isDouble){
 		this(color, isDouble, false, false);
 	}
@@ -43,7 +44,6 @@ public class Card{
 				break;
 
 			default:
-				System.out.println("Invalid color for card. Default color is RGB(0,0,0). Use setColor() to update the color.");
 				this.color = black;
 				break;
 
@@ -72,9 +72,8 @@ public class Card{
 				this.color = orange;
 				return 1;
 			default:
-				System.out.println("Invalid color for card. Default color is RGB(0,0,0). Use setColor() to update the color.");
 				this.color = black;
-				return -1;
+				return 1;
 		}
 	}
 

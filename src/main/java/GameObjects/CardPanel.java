@@ -15,7 +15,7 @@ public class CardPanel{
     private JLabel deckText = new JLabel("Deck");
     private JLabel cardText = new JLabel("Card");
     private JLabel deckCount = new JLabel("0");
-    private JLabel singleDoubleText = new JLabel("Single");
+    private JLabel cardValue = new JLabel("Single");
 	private GameState gameState;
 
     public static DeckManager dm;
@@ -85,8 +85,8 @@ public class CardPanel{
         c.weightx = 0.25;
         c.gridx = 1;
         c.gridy = 2;
-        cards_panel.add(singleDoubleText, c);
-        singleDoubleText.setText(currentCard.isDoubleText());
+        cards_panel.add(cardValue, c);
+        cardValue.setText(currentCard.getCardText());
 
 
         //cards_panel.add(deckLabel);
@@ -113,7 +113,7 @@ public class CardPanel{
 
     public void changeCard(Card card){
         cardLabel.setBackground(card.getColor());
-        singleDoubleText.setText(card.isDoubleText());
+        cardValue.setText(card.getCardText());
         deckCount.setText(Integer.toString(dm.getCount()));
     }
 
