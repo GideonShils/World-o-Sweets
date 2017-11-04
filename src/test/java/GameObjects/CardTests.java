@@ -154,4 +154,36 @@ public class CardTests {
 		assertEquals("Double", value);
 	}
 
+	// check to make sure card can be identified as a skip
+	@Test
+	public void createSkipCard(){
+		Card c = new Card("red", false, true, false);
+
+		assertEquals(true, c.skip());
+	}
+
+	// check to make sure the correct text is returned for Skip card
+	@Test
+	public void getSkipText(){
+		Card c = new Card("red", false, true, false);
+
+		assertEquals("Skip", c.getCardText());
+	}
+
+	// check to make sure card can be identified as a Go To Middle card
+	@Test
+	public void createGoToMiddleCard(){
+		Card c = new Card("red", false, false, true);
+
+		assertEquals(true, c.goToMiddle());
+	}
+
+	//check to make sure correct text is returned for Go To Middle card
+	@Test
+	public void getGoToMiddleText(){
+		Card c = new Card("red", false, false, true);
+
+		assertEquals("Go to Middle", c.getCardText());
+	}
+
 }
