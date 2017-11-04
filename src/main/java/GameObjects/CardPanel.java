@@ -9,6 +9,8 @@ import javax.swing.*;
 public class CardPanel{
 
 	private JPanel cards_panel;
+	private JPanel turnsPanel;
+	private JPanel combinedPanel;
 	private JButton _drawCardButton = new JButton("Draw Card");
     private JLabel cardLabel = new javax.swing.JLabel();
     private JLabel deckLabel = new javax.swing.JLabel();
@@ -16,14 +18,14 @@ public class CardPanel{
     private JLabel cardText = new JLabel("Card");
     private JLabel deckCount = new JLabel("0");
     private JLabel cardValue = new JLabel("Single");
+	private JLabel turnNumber = new JLabel("Player");
 	private GameState gameState;
 
     public static DeckManager dm;
-
+	
 	//        cards_panel.setLayout(new GridLayout(2));
 	public CardPanel(DeckManager dm, GameState gs){
-		gameState = gs;
-        this.dm = dm;
+		this.dm = dm;
 
 		cards_panel = new javax.swing.JPanel();
 
@@ -64,7 +66,6 @@ public class CardPanel{
         c.gridy = 1;
         cards_panel.add(cardLabel, c);
 
-
         ActionListener cardButtonListener = new CardButtonListener();
         _drawCardButton.addActionListener(cardButtonListener);
 
@@ -88,7 +89,22 @@ public class CardPanel{
         cards_panel.add(cardValue, c);
         cardValue.setText(currentCard.getCardText());
 
+		
+		//USED FOR TURNS
+		gameState = gs;
+		turnsPanel = new javax.swing.JPanel();
+		turnsPanel.setPreferredSize(new java.awt.Dimension(250, 310));
+		turnsPanel.add(turnNumber);
+		turnNumber.setText("Player " + gameState.getCurrentPlayer() + "'s turn!");
+		turnNumber.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
+		
+		//Combine card panel and turn panel
+		combinedPanel = new javax.swing.JPanel();
+		combinedPanel.setLayout(new BoxLayout(combinedPanel, BoxLayout.Y_AXIS));
 
+		combinedPanel.add(cards_panel);
+		combinedPanel.add(turnsPanel);
+		
         //cards_panel.add(deckLabel);
         //cards_panel.add(cardLabel);
 
@@ -108,19 +124,19 @@ public class CardPanel{
 	}
 
 	public JPanel getCardsPanel(){
-		return cards_panel;
+		return combinedPanel;
 	}
 
     public void changeCard(Card card){
         cardLabel.setBackground(card.getColor());
         cardValue.setText(card.getCardText());
         deckCount.setText(Integer.toString(dm.getCount()));
+		turnNumber.setText("Player " + gameState.getCurrentPlayer() + "'s turn!");
     }
 
     private class CardButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e){
             changeCard(dm.draw());
-			JOptionPane.showMessageDialog(null, "Player " + gameState.getCurrentPlayer() + "'s turn!");
-        }
+		}
     }
 }

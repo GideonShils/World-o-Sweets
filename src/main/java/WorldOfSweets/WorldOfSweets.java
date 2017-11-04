@@ -502,8 +502,7 @@ public class WorldOfSweets extends JFrame {
 
         CardPanel cards_panel = new CardPanel(dm, gameState);
         non_board_panel.add(cards_panel.getCardsPanel());
-
-
+		
         instructions_panel.setPreferredSize(new java.awt.Dimension(250, 310));
 
         GroupLayout instructions_panelLayout = new GroupLayout(instructions_panel);
@@ -522,6 +521,7 @@ public class WorldOfSweets extends JFrame {
         game_container_panel.add(non_board_panel);
 
         getContentPane().add(game_container_panel, java.awt.BorderLayout.CENTER);
+		
 
         pack();
     }
@@ -564,7 +564,7 @@ public class WorldOfSweets extends JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new WorldOfSweets(gameState.getPlayers()).setVisible(true);
-				JOptionPane.showMessageDialog(null, "Player " + gameState.getCurrentPlayer() + "'s turn!");
+				JOptionPane.showMessageDialog(null, "Player 1's Turn!");
             }
         });
 
@@ -676,6 +676,7 @@ public class WorldOfSweets extends JFrame {
     private JPanel jPanel98;
     private JPanel jPanel99;
     private JPanel non_board_panel;
+	private JLabel turnNumber;
 
     private static DeckManager dm;
 	private static GameState gameState;
