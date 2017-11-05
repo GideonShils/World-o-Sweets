@@ -125,7 +125,8 @@ public class WorldOfSweets extends JFrame {
         instructions_panel = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(872, 690));
+        //setPreferredSize(new java.awt.Dimension(872, 690));
+        setExtendedState(JFrame.MAXIMIZED_BOTH); 
 
         header_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 24));
         header_label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -435,44 +436,44 @@ public class WorldOfSweets extends JFrame {
         jPanel106.setBackground(new java.awt.Color(0, 255, 0));
         jPanel106.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel106.setOpaque(true);
-	jPanel106.setLayout(new java.awt.GridLayout(2, 2));
+	    jPanel106.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(jPanel106);
 
         jPanel107.setBackground(new java.awt.Color(255, 0, 0));
         jPanel107.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel107.setOpaque(true);
-	jPanel107.setLayout(new java.awt.GridLayout(2, 2));
+	    jPanel107.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(jPanel107);
 
         jPanel108.setBackground(new java.awt.Color(255, 255, 0));
         jPanel108.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel108.setOpaque(true);
-	jPanel108.setLayout(new java.awt.GridLayout(2, 2));
+	    jPanel108.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(jPanel108);
 
         jPanel109.setBackground(new java.awt.Color(0, 0, 255));
         jPanel109.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel109.setOpaque(true);
-	jPanel109.setLayout(new java.awt.GridLayout(2, 2));
+	    jPanel109.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(jPanel109);
 
         jPanel110.setBackground(new java.awt.Color(0, 255, 0));
         jPanel110.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel110.setOpaque(true);
-	jPanel110.setLayout(new java.awt.GridLayout(2, 2));
+	    jPanel110.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(jPanel110);
 
         jPanel111.setBackground(new java.awt.Color(255, 153, 0));
         jPanel111.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel111.setOpaque(true);
-	jPanel111.setLayout(new java.awt.GridLayout(2, 2));
+	    jPanel111.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(jPanel111);
         jPanel112.setOpaque(false);
         board_panel.add(jPanel112);
         jPanel113.setOpaque(false);
         board_panel.add(jPanel113);
 
-	jLabel114.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 13)); // NOI18N
+	    jLabel114.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 13)); // NOI18N
         jLabel114.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel114.setText("Start");
         jLabel114.setVerticalAlignment(SwingConstants.TOP);
@@ -533,9 +534,9 @@ public class WorldOfSweets extends JFrame {
         
         // Initialize game sate and bring up dialog 
         // asking for number of players
-	gameState = new GameState();
+	    gameState = new GameState();
 
-	// Create deck manager object
+	    // Create deck manager object
         dm = new DeckManager();
 
         // Create the deck itself
@@ -564,7 +565,8 @@ public class WorldOfSweets extends JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new WorldOfSweets(gameState.getPlayers()).setVisible(true);
-				JOptionPane.showMessageDialog(null, "Player 1's Turn!");
+                gameState.promptPlayers();
+				//JOptionPane.showMessageDialog(null, "Player 1's Turn!");
             }
         });
 

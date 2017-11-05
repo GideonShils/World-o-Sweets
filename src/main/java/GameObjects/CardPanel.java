@@ -9,6 +9,7 @@ import javax.swing.*;
 public class CardPanel{
 
 	private JPanel cards_panel;
+    private JPanel buttonPanel;
 	private JPanel turnsPanel;
 	private JPanel combinedPanel;
 	private JButton _drawCardButton = new JButton("Draw Card");
@@ -66,16 +67,13 @@ public class CardPanel{
         c.gridy = 1;
         cards_panel.add(cardLabel, c);
 
-        ActionListener cardButtonListener = new CardButtonListener();
-        _drawCardButton.addActionListener(cardButtonListener);
 
-
-        c.weightx = 0.25;
+        /*c.weightx = 0.25;
         c.ipady = 0;
         c.anchor = GridBagConstraints.PAGE_END;
         c.gridx = 0;
-        c.gridy = 2;
-        cards_panel.add(_drawCardButton);
+        c.gridy = 3;
+        cards_panel.add(_drawCardButton);*/
 
         c.weightx = 0.25;
         c.gridx = 0;
@@ -88,6 +86,14 @@ public class CardPanel{
         c.gridy = 2;
         cards_panel.add(cardValue, c);
         cardValue.setText(currentCard.getCardText());
+
+
+        buttonPanel = new JPanel();
+        buttonPanel.setPreferredSize(new Dimension(250, 100));
+        buttonPanel.add(_drawCardButton);
+
+        ActionListener cardButtonListener = new CardButtonListener();
+        _drawCardButton.addActionListener(cardButtonListener);
 
 		
 		//USED FOR TURNS
@@ -103,7 +109,9 @@ public class CardPanel{
 		combinedPanel.setLayout(new BoxLayout(combinedPanel, BoxLayout.Y_AXIS));
 
 		combinedPanel.add(cards_panel);
+        combinedPanel.add(buttonPanel);
 		combinedPanel.add(turnsPanel);
+        
 		
         //cards_panel.add(deckLabel);
         //cards_panel.add(cardLabel);
@@ -131,7 +139,17 @@ public class CardPanel{
         cardLabel.setBackground(card.getColor());
         cardValue.setText(card.getCardText());
         deckCount.setText(Integer.toString(dm.getCount()));
-		turnNumber.setText("Player " + gameState.getCurrentPlayer() + "'s turn!");
+
+        if (card.skip()){
+            String labelText = String.format("<html><div width=%d>Player " + gameState.skipPlayer() + "'s turn has been skipped! Player " + gameState.getCurrentPlayer() + "'s turn!</div></html>", 250);
+            turnNumber.setText(labelText);
+            //turnNumber.setText("<html>Player " + gameState.skipPlayer() + "'s turn has been skipped! Player " + gameState.getCurrentPlayer() + "'s turn!</html>");
+        }
+        else{
+            turnNumber.setText("Player " + gameState.getCurrentPlayer() + "'s turn!");
+        }
+
+		       
     }
 
     private class CardButtonListener implements ActionListener {

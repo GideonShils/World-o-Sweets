@@ -9,6 +9,10 @@ public class GameState{
 	
 	
 	public GameState(){
+		
+	}
+	
+	public void promptPlayers(){
 		//initialize panel and combo box
 		JPanel panel = new JPanel();
 		DefaultComboBoxModel model = new DefaultComboBoxModel();
@@ -29,7 +33,7 @@ public class GameState{
 			totalPlayers = Integer.parseInt(selection.getSelectedItem().toString());
 		}
 	}
-	
+
     public int getPlayers(){
 		return totalPlayers;
     }
@@ -43,6 +47,10 @@ public class GameState{
 			currentPlayer += 1;
 			return currentPlayer;
 		}
+	}
+
+	public int skipPlayer(){
+		return getCurrentPlayer();
 	}
 	
 }
