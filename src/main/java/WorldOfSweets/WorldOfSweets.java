@@ -470,7 +470,7 @@ public class WorldOfSweets extends JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new WorldOfSweets(gameState.getPlayers()).setVisible(true);
-				JOptionPane.showMessageDialog(null, "Player " + gameState.getCurrentPlayer() + "'s turn!");
+				JOptionPane.showMessageDialog(null, "Player 1's turn!"");
             }
         });
 
