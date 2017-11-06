@@ -4,8 +4,10 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent; 
 
-public class WorldOfSweets extends JFrame {
+public class WorldOfSweets extends JFrame implements MouseListener{
 
     /**
      * Creates new form WorldOfSweets
@@ -20,107 +22,45 @@ public class WorldOfSweets extends JFrame {
 
         header_label = new JLabel();
         game_container_panel = new JPanel();
+	      game_container_panel.addMouseListener(this);
         board_panel = new JPanel();
-        jPanel11 = new JPanel();
-        jPanel24 = new JPanel();
-        jPanel25 = new JPanel();
-        jPanel26 = new JPanel();
-        jPanel27 = new JPanel();
-        jPanel28 = new JPanel();
-        jPanel29 = new JPanel();
-        jPanel30 = new JPanel();
-        jPanel31 = new JPanel();
-        jPanel32 = new JPanel();
-        jPanel33 = new JPanel();
-        jLabel34 = new JLabel();
-        jPanel35 = new JPanel();
-        jPanel36 = new JPanel();
-        jPanel37 = new JPanel();
-        jPanel38 = new JPanel();
-        jPanel39 = new JPanel();
-        jPanel40 = new JPanel();
-        jPanel41 = new JPanel();
-        jPanel42 = new JPanel();
-        jPanel43 = new JPanel();
-        jPanel44 = new JPanel();
-        jPanel45 = new JPanel();
-        jPanel46 = new JPanel();
-        jPanel47 = new JPanel();
-        jPanel48 = new JPanel();
-        jPanel49 = new JPanel();
-        jPanel50 = new JPanel();
-        jPanel51 = new JPanel();
-        jPanel52 = new JPanel();
-        jPanel53 = new JPanel();
-        jPanel54 = new JPanel();
-        jPanel55 = new JPanel();
-        jPanel56 = new JPanel();
-        jPanel57 = new JPanel();
-        jPanel58 = new JPanel();
-        jPanel59 = new JPanel();
-        jPanel60 = new JPanel();
-        jPanel61 = new JPanel();
-        jPanel62 = new JPanel();
-        jPanel63 = new JPanel();
-        jPanel64 = new JPanel();
-        jPanel65 = new JPanel();
-        jPanel66 = new JPanel();
-        jPanel67 = new JPanel();
-        jPanel68 = new JPanel();
-        jPanel69 = new JPanel();
-        jPanel70 = new JPanel();
-        jPanel71 = new JPanel();
-        jPanel72 = new JPanel();
-        jPanel73 = new JPanel();
-        jPanel74 = new JPanel();
-        jPanel75 = new JPanel();
-        jPanel76 = new JPanel();
-        jPanel77 = new JPanel();
-        jPanel78 = new JPanel();
-        jPanel79 = new JPanel();
-        jPanel80 = new JPanel();
-        jPanel81 = new JPanel();
-        jPanel82 = new JPanel();
-        jPanel83 = new JPanel();
-        jPanel84 = new JPanel();
-        jPanel85 = new JPanel();
-        jPanel86 = new JPanel();
-        jPanel87 = new JPanel();
-        jPanel88 = new JPanel();
-        jPanel89 = new JPanel();
-        jPanel90 = new JPanel();
-        jPanel91 = new JPanel();
-        jPanel92 = new JPanel();
-        jPanel93 = new JPanel();
-        jPanel94 = new JPanel();
-        jPanel95 = new JPanel();
-        jPanel96 = new JPanel();
-        jPanel97 = new JPanel();
-        jPanel98 = new JPanel();
-        jPanel99 = new JPanel();
-        jPanel100 = new JPanel();
-        jPanel101 = new JPanel();
-        jPanel102 = new JPanel();
-        jPanel103 = new JPanel();
+        grandmas_house = new JLabel();
+        blue = new JPanel();
+        blue_one = new JPanel();
+        blue_two = new JPanel();
+        blue_three = new JPanel();
+        blue_four = new JPanel();
+        yellow = new JPanel();
+        yellow_one = new JPanel();
+        yellow_two = new JPanel();
+        yellow_three = new JPanel();
+        yellow_four = new JPanel();
+        red = new JPanel();
+        red_one = new JPanel();
+        red_two = new JPanel();
+        red_three = new JPanel();
+        orange = new JPanel();
+        orange_one = new JPanel();
+        orange_two = new JPanel();
+        green = new JPanel();
+        green_one = new JPanel();
+        green_two = new JPanel();
+        green_three = new JPanel();
+        green_four = new JPanel();
+        orange_three = new JPanel();
+        blue_five = new JPanel();
+        yellow_five = new JPanel();
+        red_four = new JPanel();
+        orange_four = new JPanel();
+        red_five = new JPanel();
         start_panel = new JPanel();
-        jPanel105 = new JPanel();
-        jPanel106 = new JPanel();
-        jPanel107 = new JPanel();
-        jPanel108 = new JPanel();
-        jPanel109 = new JPanel();
-        jPanel110 = new JPanel();
-        jPanel111 = new JPanel();
-        jPanel112 = new JPanel();
-        jPanel113 = new JPanel();
-        jLabel114 = new JLabel();
-        jPanel115 = new JPanel();
-        jPanel116 = new JPanel();
-        jPanel117 = new JPanel();
-        jPanel118 = new JPanel();
-        jPanel119 = new JPanel();
-        jPanel120 = new JPanel();
-        jPanel121 = new JPanel();
-        jPanel122 = new JPanel();
+        green_five = new JPanel();
+        red_six = new JPanel();
+        yellow_six = new JPanel();
+        blue_six = new JPanel();
+        green_six = new JPanel();
+        orange_five = new JPanel();
+        start_label = new JLabel();
         non_board_panel = new JPanel();
         instructions_panel = new JPanel();
 
@@ -130,7 +70,7 @@ public class WorldOfSweets extends JFrame {
 
         header_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 24));
         header_label.setHorizontalAlignment(SwingConstants.CENTER);
-        header_label.setText("Welcome to the World of Sweets!");
+        header_label.setText("World of Sweets!");
         header_label.setMaximumSize(new java.awt.Dimension(248, 50));
         header_label.setMinimumSize(new java.awt.Dimension(248, 50));
         header_label.setPreferredSize(new java.awt.Dimension(248, 50));
@@ -141,360 +81,330 @@ public class WorldOfSweets extends JFrame {
         board_panel.setBackground(new java.awt.Color(181, 255, 143));
         board_panel.setPreferredSize(new java.awt.Dimension(600, 620));
         board_panel.setLayout(new java.awt.GridLayout(10, 10));
-	jPanel11.setOpaque(false);
-        board_panel.add(jPanel11);
-	jPanel24.setOpaque(false);
-        board_panel.add(jPanel24);
-	jPanel25.setOpaque(false);
-        board_panel.add(jPanel25);
-	jPanel26.setOpaque(false);
-        board_panel.add(jPanel26);
-	jPanel27.setOpaque(false);
-        board_panel.add(jPanel27);
-	jPanel28.setOpaque(false);
-        board_panel.add(jPanel28);
-	jPanel29.setOpaque(false);
-        board_panel.add(jPanel29);
-	jPanel30.setOpaque(false);
-        board_panel.add(jPanel30);
-	jPanel31.setOpaque(false);
-        board_panel.add(jPanel31);
-	jPanel32.setOpaque(false);
-        board_panel.add(jPanel32);
-	jPanel33.setOpaque(false);
-        board_panel.add(jPanel33);
+		
+		for (int x = 1; x <= 11; x++){
+			temp_panel = new JPanel();
+			temp_panel.setOpaque(false);
+			board_panel.add(temp_panel);
+		}
 
-        jLabel34.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabel34.setIcon(new ImageIcon(getClass().getResource("/home-house-icon-94831.png")));
-
-        board_panel.add(jLabel34);
-
-        jPanel35.setBackground(new java.awt.Color(0, 255, 0));
-        jPanel35.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel35.setOpaque(true);
-	jPanel35.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel35);
-
-        jPanel36.setBackground(new java.awt.Color(0, 0, 255));
-        jPanel36.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel36.setOpaque(true);
-	jPanel36.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel36);
-
-        jPanel37.setBackground(new java.awt.Color(255, 255, 0));
-        jPanel37.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel37.setOpaque(true);
-	jPanel37.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel37);
-
-        jPanel38.setBackground(new java.awt.Color(255, 0, 0));
-        jPanel38.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-	jPanel38.setLayout(new java.awt.GridLayout(2, 2));
-        jPanel38.setOpaque(true);
-        board_panel.add(jPanel38);
-	jPanel39.setOpaque(false);
-        board_panel.add(jPanel39);
-	jPanel40.setOpaque(false);
-        board_panel.add(jPanel40);
-	jPanel41.setOpaque(false);
-        board_panel.add(jPanel41);
-	jPanel42.setOpaque(false);
-        board_panel.add(jPanel42);
-	jPanel43.setOpaque(false);
-        board_panel.add(jPanel43);
-	jPanel44.setOpaque(false);
-        board_panel.add(jPanel44);
-	jPanel45.setOpaque(false);
-        board_panel.add(jPanel45);
-	jPanel46.setOpaque(false);
-        board_panel.add(jPanel46);
-	jPanel47.setOpaque(false);
-        board_panel.add(jPanel47);
-
-        jPanel48.setBackground(new java.awt.Color(255, 153, 0));
-        jPanel48.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel48.setOpaque(true);
-	jPanel48.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel48);
-
-        jPanel49.setBackground(new java.awt.Color(0, 255, 0));
-        jPanel49.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel49.setOpaque(true);
-	jPanel49.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel49);
-
-        jPanel50.setBackground(new java.awt.Color(0, 0, 255));
-        jPanel50.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel50.setOpaque(true);
-	jPanel50.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel50);
-
-        jPanel51.setBackground(new java.awt.Color(255, 255, 0));
-        jPanel51.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-	jPanel51.setLayout(new java.awt.GridLayout(2, 2));
-        jPanel51.setOpaque(true);
-        board_panel.add(jPanel51);
-	jPanel52.setOpaque(false);
-        board_panel.add(jPanel52);
-	jPanel53.setOpaque(false);
-        board_panel.add(jPanel53);
-	jPanel54.setOpaque(false);
-        board_panel.add(jPanel54);
-	jPanel55.setOpaque(false);
-        board_panel.add(jPanel55);
-	jPanel56.setOpaque(false);
-        board_panel.add(jPanel56);
-	jPanel57.setOpaque(false);
-        board_panel.add(jPanel57);
-	jPanel58.setOpaque(false);
-        board_panel.add(jPanel58);
-	jPanel59.setOpaque(false);
-        board_panel.add(jPanel59);
-	jPanel60.setOpaque(false);
-        board_panel.add(jPanel60);
+        grandmas_house.setHorizontalAlignment(SwingConstants.CENTER);
+        grandmas_house.setIcon(new ImageIcon(getClass().getResource("/home-house-icon-94831.png")));
+        board_panel.add(grandmas_house);
 
 
-        jPanel61.setBackground(new java.awt.Color(255, 0, 0));
-        jPanel61.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel61.setOpaque(true);
-	jPanel61.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel61);
-	jPanel62.setOpaque(false);
-        board_panel.add(jPanel62);
-	jPanel63.setOpaque(false);
-        board_panel.add(jPanel63);
+        green.setBackground(new java.awt.Color(0, 255, 0));
+        green.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        green.setOpaque(true);
+		green.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(green);
 
-        jPanel64.setBackground(new java.awt.Color(0, 255, 0));
-        jPanel64.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel64.setOpaque(true);
-	jPanel64.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel64);
+        blue.setBackground(new java.awt.Color(0, 0, 255));
+        blue.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        blue.setOpaque(true);
+		blue.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(blue);
 
-        jPanel65.setBackground(new java.awt.Color(255, 153, 0));
-        jPanel65.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel65.setOpaque(true);
-	jPanel65.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel65);
+        yellow.setBackground(new java.awt.Color(255, 255, 0));
+        yellow.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        yellow.setOpaque(true);
+		yellow.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(yellow);
 
-        jPanel66.setBackground(new java.awt.Color(255, 0, 0));
-        jPanel66.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel66.setOpaque(true);
-	jPanel66.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel66);
-	jPanel67.setOpaque(false);
-        board_panel.add(jPanel67);
+        red.setBackground(new java.awt.Color(255, 0, 0));
+        red.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+		red.setLayout(new java.awt.GridLayout(2, 2));
+        red.setOpaque(true);
+        board_panel.add(red);
+	
+		for (int x = 1; x <= 9; x++){
+			temp_panel = new JPanel();
+			temp_panel.setOpaque(false);
+			board_panel.add(temp_panel);
+		}
 
-        jPanel68.setBackground(new java.awt.Color(255, 255, 0));
-        jPanel68.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel68.setOpaque(true);
-	jPanel68.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel68);
+        orange.setBackground(new java.awt.Color(255, 153, 0));
+        orange.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        orange.setOpaque(true);
+		orange.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(orange);
 
-        jPanel69.setBackground(new java.awt.Color(0, 0, 255));
-        jPanel69.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel69.setOpaque(true);
-	jPanel69.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel69);
+        green_one.setBackground(new java.awt.Color(0, 255, 0));
+        green_one.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        green_one.setOpaque(true);
+		green_one.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(green_one);
 
-        jPanel70.setBackground(new java.awt.Color(0, 255, 0));
-        jPanel70.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel70.setOpaque(true);
-	jPanel70.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel70);
+        blue_one.setBackground(new java.awt.Color(0, 0, 255));
+        blue_one.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        blue_one.setOpaque(true);
+		blue_one.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(blue_one);
 
-        jPanel71.setBackground(new java.awt.Color(255, 153, 0));
-        jPanel71.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel71.setOpaque(true);
-	jPanel71.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel71);
-	jPanel72.setOpaque(false);
-        board_panel.add(jPanel72);
-	jPanel73.setOpaque(false);
-        board_panel.add(jPanel73);
+        yellow_one.setBackground(new java.awt.Color(255, 255, 0));
+        yellow_one.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+		yellow_one.setLayout(new java.awt.GridLayout(2, 2));
+        yellow_one.setOpaque(true);
+        board_panel.add(yellow_one);
+		
+		for (int x = 1; x <= 9; x++){
+			temp_panel = new JPanel();
+			temp_panel.setOpaque(false);
+			board_panel.add(temp_panel);
+		}
 
-        jPanel74.setBackground(new java.awt.Color(0, 0, 255));
-        jPanel74.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel74.setOpaque(true);
-	jPanel74.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel74);
-        jPanel75.setOpaque(false);
-        board_panel.add(jPanel75);
 
-        jPanel76.setBackground(new java.awt.Color(255, 255, 0));
-        jPanel76.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel76.setOpaque(true);
-	jPanel76.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel76);
-        jPanel77.setOpaque(false);
-        board_panel.add(jPanel77);
+        red_one.setBackground(new java.awt.Color(255, 0, 0));
+        red_one.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        red_one.setOpaque(true);
+		red_one.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(red_one);
+	
+		for (int x = 1; x <= 2; x++){
+			temp_panel = new JPanel();
+			temp_panel.setOpaque(false);
+			board_panel.add(temp_panel);
+		}
 
-        jPanel78.setBackground(new java.awt.Color(255, 0, 0));
-        jPanel78.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-	jPanel78.setLayout(new java.awt.GridLayout(2, 2));
-        jPanel78.setOpaque(true);
-        board_panel.add(jPanel78);
-        jPanel79.setOpaque(false);
-        board_panel.add(jPanel79);
-        jPanel80.setOpaque(false);
-        board_panel.add(jPanel80);
-        jPanel81.setOpaque(false);
-        board_panel.add(jPanel81);
-        jPanel82.setOpaque(false);
-        board_panel.add(jPanel82);
-        jPanel83.setOpaque(false);
-        board_panel.add(jPanel83);
+        green_two.setBackground(new java.awt.Color(0, 255, 0));
+        green_two.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        green_two.setOpaque(true);
+		green_two.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(green_two);
 
-        jPanel84.setBackground(new java.awt.Color(255, 255, 0));
-        jPanel84.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel84.setOpaque(true);
-	jPanel84.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel84);
-        jPanel85.setOpaque(false);
-        board_panel.add(jPanel85);
+        orange_one.setBackground(new java.awt.Color(255, 153, 0));
+        orange_one.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        orange_one.setOpaque(true);
+		orange_one.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(orange_one);
 
-        jPanel86.setBackground(new java.awt.Color(0, 0, 255));
-        jPanel86.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-	jPanel86.setLayout(new java.awt.GridLayout(2, 2));
-        jPanel86.setOpaque(true);
-        board_panel.add(jPanel86);
-        jPanel87.setOpaque(false);
-        board_panel.add(jPanel87);
+        red_two.setBackground(new java.awt.Color(255, 0, 0));
+        red_two.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        red_two.setOpaque(true);
+		red_two.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(red_two);
+	
+		temp_panel = new JPanel();
+		temp_panel.setOpaque(false);
+		board_panel.add(temp_panel);
 
-        jPanel88.setBackground(new java.awt.Color(255, 153, 0));
-        jPanel88.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel88.setOpaque(true);
-	jPanel88.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel88);
+        yellow_two.setBackground(new java.awt.Color(255, 255, 0));
+        yellow_two.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        yellow_two.setOpaque(true);
+		yellow_two.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(yellow_two);
 
-        jPanel89.setBackground(new java.awt.Color(0, 255, 0));
-        jPanel89.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel89.setOpaque(true);
-	jPanel89.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel89);
+        blue_two.setBackground(new java.awt.Color(0, 0, 255));
+        blue_two.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        blue_two.setOpaque(true);
+		blue_two.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(blue_two);
 
-        jPanel90.setBackground(new java.awt.Color(0, 0, 255));
-        jPanel90.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel90.setOpaque(true);
-	jPanel90.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel90);
+        green_three.setBackground(new java.awt.Color(0, 255, 0));
+        green_three.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        green_three.setOpaque(true);
+		green_three.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(green_three);
 
-        jPanel91.setBackground(new java.awt.Color(255, 255, 0));
-        jPanel91.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel91.setOpaque(true);
-	jPanel91.setLayout(new java.awt.GridLayout(2, 2));
-	board_panel.add(jPanel91);
-        jPanel92.setOpaque(false);
-        board_panel.add(jPanel92);
-        jPanel93.setOpaque(false);
-        board_panel.add(jPanel93);
+        orange_two.setBackground(new java.awt.Color(255, 153, 0));
+        orange_two.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        orange_two.setOpaque(true);
+		orange_two.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(orange_two);
+	
+		for (int x = 1; x <= 2; x++){
+			temp_panel = new JPanel();
+			temp_panel.setOpaque(false);
+			board_panel.add(temp_panel);
+		}
 
-        jPanel94.setBackground(new java.awt.Color(255, 0, 0));
-        jPanel94.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel94.setOpaque(true);
-	jPanel94.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel94);
-        jPanel95.setOpaque(false);
-        board_panel.add(jPanel95);
+        blue_three.setBackground(new java.awt.Color(0, 0, 255));
+        blue_three.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        blue_three.setOpaque(true);
+		blue_three.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(blue_three);
+        
+		temp_panel = new JPanel();
+		temp_panel.setOpaque(false);
+		board_panel.add(temp_panel);
 
-        jPanel96.setBackground(new java.awt.Color(255, 153, 0));
-        jPanel96.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel96.setOpaque(true);
-	jPanel96.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel96);
-        jPanel97.setOpaque(false);
-        board_panel.add(jPanel97);
-        jPanel98.setOpaque(false);
-        board_panel.add(jPanel98);
-        jPanel99.setOpaque(false);
-        board_panel.add(jPanel99);
-        jPanel100.setOpaque(false);
-        board_panel.add(jPanel100);
+        yellow_three.setBackground(new java.awt.Color(255, 255, 0));
+        yellow_three.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        yellow_three.setOpaque(true);
+		yellow_three.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(yellow_three);
+        
+		temp_panel = new JPanel();
+		temp_panel.setOpaque(false);
+		board_panel.add(temp_panel);
 
-        jPanel101.setBackground(new java.awt.Color(255, 0, 0));
-        jPanel101.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel101.setOpaque(true);
-	jPanel101.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel101);
-        jPanel102.setOpaque(false);
-        board_panel.add(jPanel102);
-        jPanel103.setOpaque(false);
-        board_panel.add(jPanel103);
+        red_three.setBackground(new java.awt.Color(255, 0, 0));
+        red_three.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+		red_three.setLayout(new java.awt.GridLayout(2, 2));
+        red_three.setOpaque(true);
+        board_panel.add(red_three);
+        
+		for (int x = 1; x <= 5; x++){
+			temp_panel = new JPanel();
+			temp_panel.setOpaque(false);
+			board_panel.add(temp_panel);
+		}
+
+        yellow_four.setBackground(new java.awt.Color(255, 255, 0));
+        yellow_four.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        yellow_four.setOpaque(true);
+		yellow_four.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(yellow_four);
+        
+		temp_panel = new JPanel();
+		temp_panel.setOpaque(false);
+		board_panel.add(temp_panel);
+
+        blue_four.setBackground(new java.awt.Color(0, 0, 255));
+        blue_four.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+		blue_four.setLayout(new java.awt.GridLayout(2, 2));
+        blue_four.setOpaque(true);
+        board_panel.add(blue_four);
+        
+		temp_panel = new JPanel();
+		temp_panel.setOpaque(false);
+		board_panel.add(temp_panel);
+		
+
+        orange_three.setBackground(new java.awt.Color(255, 153, 0));
+        orange_three.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        orange_three.setOpaque(true);
+		orange_three.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(orange_three);
+
+        green_four.setBackground(new java.awt.Color(0, 255, 0));
+        green_four.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        green_four.setOpaque(true);
+		green_four.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(green_four);
+
+        blue_five.setBackground(new java.awt.Color(0, 0, 255));
+        blue_five.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        blue_five.setOpaque(true);
+		blue_five.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(blue_five);
+
+        yellow_five.setBackground(new java.awt.Color(255, 255, 0));
+        yellow_five.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        yellow_five.setOpaque(true);
+		yellow_five.setLayout(new java.awt.GridLayout(2, 2));
+		board_panel.add(yellow_five);
+        
+		for (int x = 1; x <= 2; x++){
+			temp_panel = new JPanel();
+			temp_panel.setOpaque(false);
+			board_panel.add(temp_panel);
+		}
+
+        red_four.setBackground(new java.awt.Color(255, 0, 0));
+        red_four.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        red_four.setOpaque(true);
+		red_four.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(red_four);
+        
+		temp_panel = new JPanel();
+		temp_panel.setOpaque(false);
+		board_panel.add(temp_panel);
+
+        orange_four.setBackground(new java.awt.Color(255, 153, 0));
+        orange_four.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        orange_four.setOpaque(true);
+		orange_four.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(orange_four);
+        
+		for (int x = 1; x <= 4; x++){
+			temp_panel = new JPanel();
+			temp_panel.setOpaque(false);
+			board_panel.add(temp_panel);
+		}
+
+        red_five.setBackground(new java.awt.Color(255, 0, 0));
+        red_five.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        red_five.setOpaque(true);
+		red_five.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(red_five);
+        
+		for (int x = 1; x <= 2; x++){
+			temp_panel = new JPanel();
+			temp_panel.setOpaque(false);
+			board_panel.add(temp_panel);
+		}
 
         start_panel.setBackground(new java.awt.Color(255, 255, 255));
         start_panel.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-	start_panel.setLayout(new java.awt.GridLayout(2, 2));
-	for(int i = 0; i < num_players; i++){
-	    JLabel label = new JLabel();
-	    label.setIcon(new ImageIcon(getClass().getResource("/tokens/player" + (i+1) + ".png")));
-	    //Token t = new Token("/tokens/player" + (i+1) + ".png", label); to be added later
-	    start_panel.add(label);	    
-	}
+		start_panel.setLayout(new java.awt.GridLayout(2, 2));
+		for(int i = 0; i < num_players; i++){
+			JLabel label = new JLabel();
+			label.setIcon(new ImageIcon(getClass().getResource("/tokens/player" + (i+1) + ".png")));
+			//Token t = new Token("/tokens/player" + (i+1) + ".png", label); to be added later
+			start_panel.add(label);	    
+		}
         board_panel.add(start_panel);
-        jPanel105.setOpaque(false);
-        board_panel.add(jPanel105);
 
-        jPanel106.setBackground(new java.awt.Color(0, 255, 0));
-        jPanel106.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel106.setOpaque(true);
-	    jPanel106.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel106);
+        
+		temp_panel = new JPanel();
+		temp_panel.setOpaque(false);
+		board_panel.add(temp_panel);
 
-        jPanel107.setBackground(new java.awt.Color(255, 0, 0));
-        jPanel107.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel107.setOpaque(true);
-	    jPanel107.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel107);
+        green_five.setBackground(new java.awt.Color(0, 255, 0));
+        green_five.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        green_five.setOpaque(true);
+		green_five.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(green_five);
 
-        jPanel108.setBackground(new java.awt.Color(255, 255, 0));
-        jPanel108.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel108.setOpaque(true);
-	    jPanel108.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel108);
+        red_six.setBackground(new java.awt.Color(255, 0, 0));
+        red_six.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        red_six.setOpaque(true);
+		red_six.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(red_six);
 
-        jPanel109.setBackground(new java.awt.Color(0, 0, 255));
-        jPanel109.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel109.setOpaque(true);
-	    jPanel109.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel109);
+        yellow_six.setBackground(new java.awt.Color(255, 255, 0));
+        yellow_six.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        yellow_six.setOpaque(true);
+		yellow_six.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(yellow_six);
 
-        jPanel110.setBackground(new java.awt.Color(0, 255, 0));
-        jPanel110.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel110.setOpaque(true);
-	    jPanel110.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel110);
+        blue_six.setBackground(new java.awt.Color(0, 0, 255));
+        blue_six.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        blue_six.setOpaque(true);
+		blue_six.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(blue_six);
 
-        jPanel111.setBackground(new java.awt.Color(255, 153, 0));
-        jPanel111.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel111.setOpaque(true);
-	    jPanel111.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(jPanel111);
-        jPanel112.setOpaque(false);
-        board_panel.add(jPanel112);
-        jPanel113.setOpaque(false);
-        board_panel.add(jPanel113);
+        green_six.setBackground(new java.awt.Color(0, 255, 0));
+        green_six.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        green_six.setOpaque(true);
+		green_six.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(green_six);
 
-	    jLabel114.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 13)); // NOI18N
-        jLabel114.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabel114.setText("Start");
-        jLabel114.setVerticalAlignment(SwingConstants.TOP);
-        jLabel114.setOpaque(false);
-        board_panel.add(jLabel114);
-        jPanel115.setOpaque(false);
-        board_panel.add(jPanel115);
-        jPanel116.setOpaque(false);
-        board_panel.add(jPanel116);
-        jPanel117.setOpaque(false);
-        board_panel.add(jPanel117);
-        jPanel118.setOpaque(false);
-        board_panel.add(jPanel118);
-        jPanel119.setOpaque(false);
-        board_panel.add(jPanel119);
-        jPanel120.setOpaque(false);
-        board_panel.add(jPanel120);
-        jPanel121.setOpaque(false);
-        board_panel.add(jPanel121);
-        jPanel122.setOpaque(false);
-        board_panel.add(jPanel122);
+        orange_five.setBackground(new java.awt.Color(255, 153, 0));
+        orange_five.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        orange_five.setOpaque(true);
+		orange_five.setLayout(new java.awt.GridLayout(2, 2));
+        board_panel.add(orange_five);
+        
+		for (int x = 1; x <= 2; x++){
+			temp_panel = new JPanel();
+			temp_panel.setOpaque(false);
+			board_panel.add(temp_panel);
+		}
+
+		start_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 13)); // NOI18N
+        start_label.setHorizontalAlignment(SwingConstants.CENTER);
+        start_label.setText("Start");
+        start_label.setVerticalAlignment(SwingConstants.TOP);
+        start_label.setOpaque(false);
+        board_panel.add(start_label);
+        
+		for (int x = 1; x <= 8; x++){
+			temp_panel = new JPanel();
+			temp_panel.setOpaque(false);
+			board_panel.add(temp_panel);
+		}
 
         game_container_panel.add(board_panel);
 
@@ -503,7 +413,8 @@ public class WorldOfSweets extends JFrame {
 
         CardPanel cards_panel = new CardPanel(dm, gameState);
         non_board_panel.add(cards_panel.getCardsPanel());
-		
+
+
         instructions_panel.setPreferredSize(new java.awt.Dimension(250, 310));
 
         GroupLayout instructions_panelLayout = new GroupLayout(instructions_panel);
@@ -522,7 +433,6 @@ public class WorldOfSweets extends JFrame {
         game_container_panel.add(non_board_panel);
 
         getContentPane().add(game_container_panel, java.awt.BorderLayout.CENTER);
-		
 
         pack();
     }
@@ -567,119 +477,78 @@ public class WorldOfSweets extends JFrame {
                 new WorldOfSweets(gameState.getPlayers()).setVisible(true);
                 gameState.promptPlayers();
 				//JOptionPane.showMessageDialog(null, "Player 1's Turn!");
+		
             }
         });
 
 	
 
     }
+
+    public void mousePressed(MouseEvent e) {
+       
+    }
+     
+    public void mouseReleased(MouseEvent e) {
+
+    }
+     
+    public void mouseEntered(MouseEvent e) {
+    
+    }
+     
+    public void mouseExited(MouseEvent e) {
+    
+    }
+     
+    public void mouseClicked(MouseEvent e) {
+	JOptionPane.showMessageDialog(null, "Clicked");
+    }
+    
     private JPanel board_panel;
     private JPanel game_container_panel;
     private JLabel header_label;
     private JPanel instructions_panel;
-    private JPanel jPanel100;
-    private JPanel jPanel101;
-    private JPanel jPanel102;
-    private JPanel jPanel103;
+    private JPanel red_five;
     private static JPanel start_panel;
-    private JPanel jPanel105;
-    private JPanel jPanel106;
-    private JPanel jPanel107;
-    private JPanel jPanel108;
-    private JPanel jPanel109;
-    private JPanel jPanel11;
-    private JPanel jPanel110;
-    private JPanel jPanel111;
-    private JPanel jPanel112;
-    private JPanel jPanel113;
-    private JLabel jLabel114;
-    private JPanel jPanel115;
-    private JPanel jPanel116;
-    private JPanel jPanel117;
-    private JPanel jPanel118;
-    private JPanel jPanel119;
-    private JPanel jPanel120;
-    private JPanel jPanel121;
-    private JPanel jPanel122;
-    private JPanel jPanel24;
-    private JPanel jPanel25;
-    private JPanel jPanel26;
-    private JPanel jPanel27;
-    private JPanel jPanel28;
-    private JPanel jPanel29;
-    private JPanel jPanel30;
-    private JPanel jPanel31;
-    private JPanel jPanel32;
-    private JPanel jPanel33;
-    private JLabel jLabel34;
-    private JPanel jPanel35;
-    private JPanel jPanel36;
-    private JPanel jPanel37;
-    private JPanel jPanel38;
-    private JPanel jPanel39;
-    private JPanel jPanel40;
-    private JPanel jPanel41;
-    private JPanel jPanel42;
-    private JPanel jPanel43;
-    private JPanel jPanel44;
-    private JPanel jPanel45;
-    private JPanel jPanel46;
-    private JPanel jPanel47;
-    private JPanel jPanel48;
-    private JPanel jPanel49;
-    private JPanel jPanel50;
-    private JPanel jPanel51;
-    private JPanel jPanel52;
-    private JPanel jPanel53;
-    private JPanel jPanel54;
-    private JPanel jPanel55;
-    private JPanel jPanel56;
-    private JPanel jPanel57;
-    private JPanel jPanel58;
-    private JPanel jPanel59;
-    private JPanel jPanel60;
-    private JPanel jPanel61;
-    private JPanel jPanel62;
-    private JPanel jPanel63;
-    private JPanel jPanel64;
-    private JPanel jPanel65;
-    private JPanel jPanel66;
-    private JPanel jPanel67;
-    private JPanel jPanel68;
-    private JPanel jPanel69;
-    private JPanel jPanel70;
-    private JPanel jPanel71;
-    private JPanel jPanel72;
-    private JPanel jPanel73;
-    private JPanel jPanel74;
-    private JPanel jPanel75;
-    private JPanel jPanel76;
-    private JPanel jPanel77;
-    private JPanel jPanel78;
-    private JPanel jPanel79;
-    private JPanel jPanel80;
-    private JPanel jPanel81;
-    private JPanel jPanel82;
-    private JPanel jPanel83;
-    private JPanel jPanel84;
-    private JPanel jPanel85;
-    private JPanel jPanel86;
-    private JPanel jPanel87;
-    private JPanel jPanel88;
-    private JPanel jPanel89;
-    private JPanel jPanel90;
-    private JPanel jPanel91;
-    private JPanel jPanel92;
-    private JPanel jPanel93;
-    private JPanel jPanel94;
-    private JPanel jPanel95;
-    private JPanel jPanel96;
-    private JPanel jPanel97;
-    private JPanel jPanel98;
-    private JPanel jPanel99;
+    private JPanel green_five;
+    private JPanel red_six;
+    private JPanel yellow_six;
+    private JPanel blue_six;
+    private JPanel green_six;
+    private JPanel orange_five;
+    private JLabel start_label;
+    private JLabel grandmas_house;
+    private JPanel green;
+    private JPanel blue;
+    private JPanel yellow;
+    private JPanel red;
+    private JPanel orange;
+    private JPanel green_one;
+    private JPanel blue_one;
+    private JPanel yellow_one;
+    private JPanel red_one;
+    private JPanel green_two;
+    private JPanel orange_one;
+    private JPanel red_two;
+    private JPanel yellow_two;
+    private JPanel blue_two;
+    private JPanel green_three;
+    private JPanel orange_two;
+    private JPanel blue_three;
+    private JPanel yellow_three;
+    private JPanel red_three;
+    private JPanel yellow_four;
+    private JPanel blue_four;
+    private JPanel orange_three;
+    private JPanel green_four;
+    private JPanel blue_five;
+    private JPanel yellow_five;
+    private JPanel red_four;
+    private JPanel orange_four;
     private JPanel non_board_panel;
-	private JLabel turnNumber;
+    private JPanel temp_panel;
 
     private static DeckManager dm;
-	private static GameState gameState;
+    private static GameState gameState;
 }
