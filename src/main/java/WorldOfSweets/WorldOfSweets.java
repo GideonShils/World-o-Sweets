@@ -22,7 +22,7 @@ public class WorldOfSweets extends JFrame implements MouseListener{
 
         header_label = new JLabel();
         game_container_panel = new JPanel();
-	game_container_panel.addMouseListener(this);
+	      game_container_panel.addMouseListener(this);
         board_panel = new JPanel();
         grandmas_house = new JLabel();
         blue = new JPanel();
@@ -65,7 +65,8 @@ public class WorldOfSweets extends JFrame implements MouseListener{
         instructions_panel = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(872, 690));
+        //setPreferredSize(new java.awt.Dimension(872, 690));
+        setExtendedState(JFrame.MAXIMIZED_BOTH); 
 
         header_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 24));
         header_label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -344,6 +345,7 @@ public class WorldOfSweets extends JFrame implements MouseListener{
 			start_panel.add(label);	    
 		}
         board_panel.add(start_panel);
+
         
 		temp_panel = new JPanel();
 		temp_panel.setOpaque(false);
@@ -442,9 +444,9 @@ public class WorldOfSweets extends JFrame implements MouseListener{
         
         // Initialize game sate and bring up dialog 
         // asking for number of players
-	gameState = new GameState();
+	    gameState = new GameState();
 
-	// Create deck manager object
+	    // Create deck manager object
         dm = new DeckManager();
 
         // Create the deck itself
@@ -473,7 +475,9 @@ public class WorldOfSweets extends JFrame implements MouseListener{
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new WorldOfSweets(gameState.getPlayers()).setVisible(true);
-		JOptionPane.showMessageDialog(null, "Player 1's turn!");
+                gameState.promptPlayers();
+				//JOptionPane.showMessageDialog(null, "Player 1's Turn!");
+		
             }
         });
 
