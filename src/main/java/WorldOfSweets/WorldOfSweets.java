@@ -4,8 +4,10 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent; 
 
-public class WorldOfSweets extends JFrame {
+public class WorldOfSweets extends JFrame implements MouseListener{
 
     /**
      * Creates new form WorldOfSweets
@@ -20,6 +22,7 @@ public class WorldOfSweets extends JFrame {
 
         header_label = new JLabel();
         game_container_panel = new JPanel();
+	game_container_panel.addMouseListener(this);
         board_panel = new JPanel();
         grandmas_house = new JLabel();
         blue = new JPanel();
@@ -470,13 +473,34 @@ public class WorldOfSweets extends JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new WorldOfSweets(gameState.getPlayers()).setVisible(true);
-				JOptionPane.showMessageDialog(null, "Player 1's turn!"");
+		JOptionPane.showMessageDialog(null, "Player 1's turn!");
             }
         });
 
 	
 
     }
+
+    public void mousePressed(MouseEvent e) {
+       
+    }
+     
+    public void mouseReleased(MouseEvent e) {
+
+    }
+     
+    public void mouseEntered(MouseEvent e) {
+    
+    }
+     
+    public void mouseExited(MouseEvent e) {
+    
+    }
+     
+    public void mouseClicked(MouseEvent e) {
+	JOptionPane.showMessageDialog(null, "Clicked");
+    }
+    
     private JPanel board_panel;
     private JPanel game_container_panel;
     private JLabel header_label;
@@ -519,8 +543,8 @@ public class WorldOfSweets extends JFrame {
     private JPanel red_four;
     private JPanel orange_four;
     private JPanel non_board_panel;
-	private JPanel temp_panel;
+    private JPanel temp_panel;
 
     private static DeckManager dm;
-	private static GameState gameState;
+    private static GameState gameState;
 }
