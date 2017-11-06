@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent; 
+import java.awt.event.MouseEvent;
 
 public class WorldOfSweets extends JFrame{
 
@@ -24,7 +24,7 @@ public class WorldOfSweets extends JFrame{
 
         header_label = new JLabel();
         game_container_panel = new JPanel();
-        
+
         board_panel = new JPanel();
         grandmas_house = new JLabel();
         blue = new JPanel();
@@ -102,11 +102,11 @@ public class WorldOfSweets extends JFrame{
 	positions[pos++] = red;
 	positions[pos++] = yellow;
 	positions[pos++] = blue;
-	positions[pos++] = green;       
+	positions[pos++] = green;
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         //setPreferredSize(new java.awt.Dimension(872, 690));
-        setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         header_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 24));
         header_label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -121,7 +121,7 @@ public class WorldOfSweets extends JFrame{
         board_panel.setBackground(new java.awt.Color(181, 255, 143));
         board_panel.setPreferredSize(new java.awt.Dimension(600, 620));
         board_panel.setLayout(new java.awt.GridLayout(10, 10));
-		
+
 	for (int x = 1; x <= 11; x++){
 	    temp_panel = new JPanel();
 	    temp_panel.setOpaque(false);
@@ -156,7 +156,7 @@ public class WorldOfSweets extends JFrame{
 	red.setLayout(new java.awt.GridLayout(2, 2));
         red.setOpaque(true);
         board_panel.add(red);
-	
+
 	for (int x = 1; x <= 9; x++){
 	    temp_panel = new JPanel();
 	    temp_panel.setOpaque(false);
@@ -186,7 +186,7 @@ public class WorldOfSweets extends JFrame{
 	yellow_one.setLayout(new java.awt.GridLayout(2, 2));
         yellow_one.setOpaque(true);
         board_panel.add(yellow_one);
-		
+
 	for (int x = 1; x <= 9; x++){
 	    temp_panel = new JPanel();
 	    temp_panel.setOpaque(false);
@@ -199,7 +199,7 @@ public class WorldOfSweets extends JFrame{
         red_one.setOpaque(true);
 	red_one.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(red_one);
-	
+
 	for (int x = 1; x <= 2; x++){
 	    temp_panel = new JPanel();
 	    temp_panel.setOpaque(false);
@@ -223,7 +223,7 @@ public class WorldOfSweets extends JFrame{
         red_two.setOpaque(true);
 	red_two.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(red_two);
-	
+
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
 	board_panel.add(temp_panel);
@@ -251,7 +251,7 @@ public class WorldOfSweets extends JFrame{
         orange_two.setOpaque(true);
 	orange_two.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(orange_two);
-	
+
 	for (int x = 1; x <= 2; x++){
 	    temp_panel = new JPanel();
 	    temp_panel.setOpaque(false);
@@ -263,7 +263,7 @@ public class WorldOfSweets extends JFrame{
         blue_three.setOpaque(true);
 	blue_three.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(blue_three);
-        
+
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
 	board_panel.add(temp_panel);
@@ -273,7 +273,7 @@ public class WorldOfSweets extends JFrame{
         yellow_three.setOpaque(true);
 	yellow_three.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(yellow_three);
-        
+
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
 	board_panel.add(temp_panel);
@@ -283,7 +283,7 @@ public class WorldOfSweets extends JFrame{
 	red_three.setLayout(new java.awt.GridLayout(2, 2));
         red_three.setOpaque(true);
         board_panel.add(red_three);
-        
+
 	for (int x = 1; x <= 5; x++){
 	    temp_panel = new JPanel();
 	    temp_panel.setOpaque(false);
@@ -295,7 +295,7 @@ public class WorldOfSweets extends JFrame{
         yellow_four.setOpaque(true);
 	yellow_four.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(yellow_four);
-        
+
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
 	board_panel.add(temp_panel);
@@ -305,11 +305,11 @@ public class WorldOfSweets extends JFrame{
 	blue_four.setLayout(new java.awt.GridLayout(2, 2));
         blue_four.setOpaque(true);
         board_panel.add(blue_four);
-        
+
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
 	board_panel.add(temp_panel);
-		
+
 
         orange_three.setBackground(new java.awt.Color(255, 153, 0));
         orange_three.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -334,7 +334,7 @@ public class WorldOfSweets extends JFrame{
         yellow_five.setOpaque(true);
 	yellow_five.setLayout(new java.awt.GridLayout(2, 2));
 	board_panel.add(yellow_five);
-        
+
 	for (int x = 1; x <= 2; x++){
 	    temp_panel = new JPanel();
 	    temp_panel.setOpaque(false);
@@ -346,7 +346,7 @@ public class WorldOfSweets extends JFrame{
         red_four.setOpaque(true);
 	red_four.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(red_four);
-        
+
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
 	board_panel.add(temp_panel);
@@ -356,7 +356,7 @@ public class WorldOfSweets extends JFrame{
         orange_four.setOpaque(true);
 	orange_four.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(orange_four);
-        
+
 	for (int x = 1; x <= 4; x++){
 	    temp_panel = new JPanel();
 	    temp_panel.setOpaque(false);
@@ -367,7 +367,7 @@ public class WorldOfSweets extends JFrame{
         red_five.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         red_five.setOpaque(true);
 	red_five.setLayout(new java.awt.GridLayout(2, 2));
-        board_panel.add(red_five);        
+        board_panel.add(red_five);
 	for (int x = 1; x <= 2; x++){
 	    temp_panel = new JPanel();
 	    temp_panel.setOpaque(false);
@@ -377,17 +377,17 @@ public class WorldOfSweets extends JFrame{
         start_panel.setBackground(new java.awt.Color(255, 255, 255));
         start_panel.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 	start_panel.setLayout(new java.awt.GridLayout(2, 2));
-	tokens = new Token[num_players];			 
+	tokens = new Token[num_players];
 	for(int i = 0; i < num_players; i++){
 	    JLabel label = new JLabel();
 	    label.setIcon(new ImageIcon(getClass().getResource("/tokens/player" + (i+1) + ".png")));
 	    Token t = new Token(label);
-	    tokens[i] = t; 
-	    start_panel.add(label);	    
+	    tokens[i] = t;
+	    start_panel.add(label);
 	}
         board_panel.add(start_panel);
 
-        
+
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
 	board_panel.add(temp_panel);
@@ -427,7 +427,7 @@ public class WorldOfSweets extends JFrame{
         orange_five.setOpaque(true);
 	orange_five.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(orange_five);
-        
+
 	for (int x = 1; x <= 2; x++){
 	    temp_panel = new JPanel();
 	    temp_panel.setOpaque(false);
@@ -440,7 +440,7 @@ public class WorldOfSweets extends JFrame{
         start_label.setVerticalAlignment(SwingConstants.TOP);
         start_label.setOpaque(false);
         board_panel.add(start_label);
-        
+
 	for (int x = 1; x <= 8; x++){
 	    temp_panel = new JPanel();
 	    temp_panel.setOpaque(false);
@@ -451,9 +451,14 @@ public class WorldOfSweets extends JFrame{
 
         non_board_panel.setPreferredSize(new java.awt.Dimension(250, 620));
 
-
+        //Add turn panel + card panel to same panel
         card_panel = new CardPanel(dm, gameState);
-        non_board_panel.add(card_panel.getCardsPanel());
+        JPanel combinedPanel = new javax.swing.JPanel();
+      	combinedPanel.setLayout(new BoxLayout(combinedPanel, BoxLayout.Y_AXIS));
+        JPanel turn_panel = gameState.turnPanel();
+        combinedPanel.add(card_panel.getCardsPanel());
+        combinedPanel.add(turn_panel);
+        non_board_panel.add(combinedPanel);
 
 
         instructions_panel.setPreferredSize(new java.awt.Dimension(250, 310));
@@ -482,8 +487,8 @@ public class WorldOfSweets extends JFrame{
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-        // Initialize game sate and bring up dialog 
+
+        // Initialize game sate and bring up dialog
         // asking for number of players
 	    gameState = new GameState();
         gameState.promptPlayers();
@@ -496,7 +501,7 @@ public class WorldOfSweets extends JFrame{
 
         // Shuffle the deck
         dm.shuffle();
-        
+
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -517,15 +522,15 @@ public class WorldOfSweets extends JFrame{
         java.awt.EventQueue.invokeLater(new Runnable() {
 		public void run() {
 		    new WorldOfSweets(gameState.getPlayers()).setVisible(true);
-		    GameManager gm = new GameManager(positions, card_panel, tokens, grandmas_house);
+		    GameManager gm = new GameManager(positions, card_panel, tokens, grandmas_house, gameState);
 		    card_panel.setGameManager(gm);
 		}
 	    });
 
-	
 
-    }    
-    
+
+    }
+
     private JPanel board_panel;
     private JPanel game_container_panel;
     private JLabel header_label;
