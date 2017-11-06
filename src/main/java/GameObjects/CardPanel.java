@@ -8,35 +8,39 @@ import javax.swing.*;
 
 public class CardPanel{
 
-	private JPanel cards_panel;
-	private JPanel turnsPanel;
-	private JPanel combinedPanel;
-	private JButton _drawCardButton = new JButton("Draw Card");
+    private JPanel cards_panel;
+    private JPanel turnsPanel;
+    private JPanel combinedPanel;
+    private JButton _drawCardButton = new JButton("Draw Card");
     private JLabel cardLabel = new javax.swing.JLabel();
     private JLabel deckLabel = new javax.swing.JLabel();
     private JLabel deckText = new JLabel("Deck");
     private JLabel cardText = new JLabel("Card");
     private JLabel deckCount = new JLabel("0");
-    private JLabel cardValue = new JLabel("Single");
-	private JLabel turnNumber = new JLabel("Player");
-	private GameState gameState;
+    private JLabel cardValue = new JLabel();
+    private JLabel turnNumber = new JLabel();
+    private GameState gameState;
+    private GameManager gm;
+    private int current_player;
 
     public static DeckManager dm;
 	
-	//        cards_panel.setLayout(new GridLayout(2));
-	public CardPanel(DeckManager dm, GameState gs){
-		this.dm = dm;
+    //        cards_panel.setLayout(new GridLayout(2));
+    public CardPanel(DeckManager dm, GameState gs){
+	this.dm = dm;
+	this.gm = null;
+	current_player = 0; 
 
-		cards_panel = new javax.swing.JPanel();
+	cards_panel = new javax.swing.JPanel();
 
-		cards_panel.setPreferredSize(new java.awt.Dimension(250, 310));
+	cards_panel.setPreferredSize(new java.awt.Dimension(250, 310));
         
         cards_panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
 
-        Card currentCard = dm.draw();
-        cardLabel.setBackground(currentCard.getColor());
+        //Card currentCard = dm.draw();
+        cardLabel.setBackground(new java.awt.Color(0, 0, 0));
         cardLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         cardLabel.setOpaque(true);
 
@@ -86,24 +90,24 @@ public class CardPanel{
         c.weightx = 0.25;
         c.gridx = 1;
         c.gridy = 2;
-        cards_panel.add(cardValue, c);
-        cardValue.setText(currentCard.getCardText());
+	cards_panel.add(cardValue, c);
+
 
 		
-		//USED FOR TURNS
-		gameState = gs;
-		turnsPanel = new javax.swing.JPanel();
-		turnsPanel.setPreferredSize(new java.awt.Dimension(250, 310));
-		turnsPanel.add(turnNumber);
-		turnNumber.setText("Player " + gameState.getCurrentPlayer() + "'s turn!");
-		turnNumber.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
+	//USED FOR TURNS
+	gameState = gs;
+	turnsPanel = new javax.swing.JPanel();
+	turnsPanel.setPreferredSize(new java.awt.Dimension(250, 310));
+	turnsPanel.add(turnNumber);
+	//turnNumber.setText("Player " + gameState.getCurrentPlayer() + "'s turn!");
+	turnNumber.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
 		
-		//Combine card panel and turn panel
-		combinedPanel = new javax.swing.JPanel();
-		combinedPanel.setLayout(new BoxLayout(combinedPanel, BoxLayout.Y_AXIS));
+	//Combine card panel and turn panel
+	combinedPanel = new javax.swing.JPanel();
+	combinedPanel.setLayout(new BoxLayout(combinedPanel, BoxLayout.Y_AXIS));
 
-		combinedPanel.add(cards_panel);
-		combinedPanel.add(turnsPanel);
+	combinedPanel.add(cards_panel);
+	combinedPanel.add(turnsPanel);
 		
         //cards_panel.add(deckLabel);
         //cards_panel.add(cardLabel);
@@ -111,32 +115,64 @@ public class CardPanel{
         //javax.swing.GroupLayout cards_panelLayout = new javax.swing.GroupLayout(cards_panel);
         //cards_panel.setLayout(cards_panelLayout);
         /*cards_panelLayout.setHorizontalGroup(
-            cards_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(deckLabel)
-            .addGap(0, 250, Short.MAX_VALUE)
-        );
-        cards_panelLayout.setVerticalGroup(
-            cards_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 310, Short.MAX_VALUE)
-        );*/
+	  cards_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	  .addComponent(deckLabel)
+	  .addGap(0, 250, Short.MAX_VALUE)
+	  );
+	  cards_panelLayout.setVerticalGroup(
+	  cards_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	  .addGap(0, 310, Short.MAX_VALUE)
+	  );*/
 
 
-	}
+    }
 
-	public JPanel getCardsPanel(){
-		return combinedPanel;
-	}
+    public JPanel getCardsPanel(){
+	return combinedPanel;
+    }
 
     public void changeCard(Card card){
         cardLabel.setBackground(card.getColor());
         cardValue.setText(card.getCardText());
         deckCount.setText(Integer.toString(dm.getCount()));
-		turnNumber.setText("Player " + gameState.getCurrentPlayer() + "'s turn!");
+	current_player = gameState.getCurrentPlayer();
+	setTurnText();
+    }
+
+    public void setTurnText(){
+	turnNumber.setText("Player " + current_player + "'s turn!");
     }
 
     private class CardButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e){
             changeCard(dm.draw());
-		}
+	    gm.turn();
+	}
+    }
+    
+    public Color getCardColor(){
+	return cardLabel.getBackground();
+    }
+
+    public int getType(){
+	switch(cardValue.getText()){
+	    case "Single":
+		return 1;
+	    case "Double":
+		return 2;
+	    case "Skip":
+		return 3;
+	    case "Go to Middle":
+		return 4; 
+	}
+	return 0; 
+    }
+
+    public int getPlayer(){
+	return current_player;
+    }
+
+    public void setGameManager(GameManager gm){
+	this.gm = gm;
     }
 }
