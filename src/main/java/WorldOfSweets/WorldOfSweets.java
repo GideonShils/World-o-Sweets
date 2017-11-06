@@ -22,7 +22,7 @@ public class WorldOfSweets extends JFrame implements MouseListener{
 
         header_label = new JLabel();
         game_container_panel = new JPanel();
-	      game_container_panel.addMouseListener(this);
+        game_container_panel.addMouseListener(this);
         board_panel = new JPanel();
         grandmas_house = new JLabel();
         blue = new JPanel();
@@ -445,6 +445,7 @@ public class WorldOfSweets extends JFrame implements MouseListener{
         // Initialize game sate and bring up dialog 
         // asking for number of players
 	    gameState = new GameState();
+        gameState.promptPlayers();
 
 	    // Create deck manager object
         dm = new DeckManager();
@@ -475,9 +476,8 @@ public class WorldOfSweets extends JFrame implements MouseListener{
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new WorldOfSweets(gameState.getPlayers()).setVisible(true);
-                gameState.promptPlayers();
+                
 				//JOptionPane.showMessageDialog(null, "Player 1's Turn!");
-		
             }
         });
 
