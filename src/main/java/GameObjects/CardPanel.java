@@ -8,10 +8,19 @@ import javax.swing.*;
 
 public class CardPanel{
 
+<<<<<<< HEAD
     private JPanel cards_panel;
     private JPanel turnsPanel;
     private JPanel combinedPanel;
     private JButton _drawCardButton = new JButton("Draw Card");
+=======
+    private JPanel deckPanel;
+	private JPanel cards_panel;
+    private JPanel buttonPanel;
+	private JPanel turnsPanel;
+	private JPanel combinedPanel;
+	private JButton _drawCardButton = new JButton("Draw Card");
+>>>>>>> f9d282d4467ee1c9851cce75d9b2bad7fe2cdab9
     private JLabel cardLabel = new javax.swing.JLabel();
     private JLabel deckLabel = new javax.swing.JLabel();
     private JLabel deckText = new JLabel("Deck");
@@ -23,6 +32,9 @@ public class CardPanel{
     private GameManager gm;
     private int current_player;
 
+    private int width = 250;
+    private int height = 620;
+
     public static DeckManager dm;
 	
     //        cards_panel.setLayout(new GridLayout(2));
@@ -31,9 +43,45 @@ public class CardPanel{
 	this.gm = null;
 	current_player = 0; 
 
+<<<<<<< HEAD
 	cards_panel = new javax.swing.JPanel();
 
 	cards_panel.setPreferredSize(new java.awt.Dimension(250, 310));
+=======
+        //-------------------------------------------------------
+        // set min, preferred, and max sizes in order to prevent JLabel from
+        // resizing when values change
+
+        deckText.setMinimumSize(new Dimension(width/2, height/12));
+        deckText.setPreferredSize(new Dimension(width/2, height/12));
+        deckText.setMaximumSize(new Dimension(width/2, height/12));
+
+        cardText.setMinimumSize(new Dimension(width/2, height/12));
+        cardText.setPreferredSize(new Dimension(width/2, height/12));
+        cardText.setMaximumSize(new Dimension(width/2, height/12));
+
+        deckLabel.setMinimumSize(new Dimension(width/2, height/6));
+        deckLabel.setPreferredSize(new Dimension(width/2, height/6));
+        deckLabel.setMaximumSize(new Dimension(width/2, height/6));
+
+        cardLabel.setMinimumSize(new Dimension(width/2, height/6));
+        cardLabel.setPreferredSize(new Dimension(width/2, height/6));
+        cardLabel.setMaximumSize(new Dimension(width/2, height/6));
+
+        deckCount.setMinimumSize(new Dimension(width/2, height/12));
+        deckCount.setPreferredSize(new Dimension(width/2, height/12));
+        deckCount.setMaximumSize(new Dimension(width/2, height/12));
+
+        cardValue.setMinimumSize(new Dimension(width/2, height/12));
+        cardValue.setPreferredSize(new Dimension(width/2, height/12));
+        cardValue.setMaximumSize(new Dimension(width/2, height/12));
+
+        //-----------------------------------------------------------
+
+		cards_panel = new javax.swing.JPanel();
+
+		cards_panel.setPreferredSize(new java.awt.Dimension(width, height/3));
+>>>>>>> f9d282d4467ee1c9851cce75d9b2bad7fe2cdab9
         
         cards_panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -49,51 +97,57 @@ public class CardPanel{
         deckLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         deckLabel.setOpaque(true);
 
-        c.weightx = 0.25;
+        // add component to display 'Deck'
         c.gridx = 0;
         c.gridy = 0;
+        c.anchor = GridBagConstraints.CENTER;
         cards_panel.add(deckText, c);
 
+        // add component to diplay 'Card'
         c.gridx = 1;
         c.gridy = 0;
+        c.anchor = GridBagConstraints.CENTER;
         cards_panel.add(cardText, c);
 
-
-        c.weightx = 0.5;
-        c.ipady = 100;
+        // add component to display the deck
         c.gridx = 0;
         c.gridy = 1;
         cards_panel.add(deckLabel, c);
 
-        c.weightx = 0.5;
+        // add component to display the current card
         c.gridx = 1;
         c.gridy = 1;
         cards_panel.add(cardLabel, c);
 
-        ActionListener cardButtonListener = new CardButtonListener();
-        _drawCardButton.addActionListener(cardButtonListener);
-
-
-        c.weightx = 0.25;
-        c.ipady = 0;
-        c.anchor = GridBagConstraints.PAGE_END;
+        // add component to display the card count
         c.gridx = 0;
         c.gridy = 2;
-        cards_panel.add(_drawCardButton);
-
-        c.weightx = 0.25;
-        c.gridx = 0;
-        c.gridy = 2;
+        c.anchor = GridBagConstraints.CENTER;
         cards_panel.add(deckCount, c);
         deckCount.setText(Integer.toString(dm.getCount()));
 
-        c.weightx = 0.25;
+        // add component to display the card type
         c.gridx = 1;
         c.gridy = 2;
+<<<<<<< HEAD
 	cards_panel.add(cardValue, c);
 
+=======
+        c.anchor = GridBagConstraints.CENTER;
+        cards_panel.add(cardValue, c);
+        cardValue.setText(currentCard.getCardText());
+>>>>>>> f9d282d4467ee1c9851cce75d9b2bad7fe2cdab9
+
+
+        buttonPanel = new JPanel();
+        buttonPanel.setPreferredSize(new Dimension(width, 100));
+        buttonPanel.add(_drawCardButton);
+
+        ActionListener cardButtonListener = new CardButtonListener();
+        _drawCardButton.addActionListener(cardButtonListener);
 
 		
+<<<<<<< HEAD
 	//USED FOR TURNS
 	gameState = gs;
 	turnsPanel = new javax.swing.JPanel();
@@ -101,13 +155,29 @@ public class CardPanel{
 	turnsPanel.add(turnNumber);
 	//turnNumber.setText("Player " + gameState.getCurrentPlayer() + "'s turn!");
 	turnNumber.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
+=======
+		//USED FOR TURNS
+		gameState = gs;
+		turnsPanel = new javax.swing.JPanel();
+		turnsPanel.setPreferredSize(new java.awt.Dimension(width, height/3));
+		turnsPanel.add(turnNumber);
+		turnNumber.setText("Player " + gameState.getCurrentPlayer() + "'s turn!");
+		turnNumber.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
+>>>>>>> f9d282d4467ee1c9851cce75d9b2bad7fe2cdab9
 		
 	//Combine card panel and turn panel
 	combinedPanel = new javax.swing.JPanel();
 	combinedPanel.setLayout(new BoxLayout(combinedPanel, BoxLayout.Y_AXIS));
 
+<<<<<<< HEAD
 	combinedPanel.add(cards_panel);
 	combinedPanel.add(turnsPanel);
+=======
+		combinedPanel.add(cards_panel);
+        combinedPanel.add(buttonPanel);
+		combinedPanel.add(turnsPanel);
+        
+>>>>>>> f9d282d4467ee1c9851cce75d9b2bad7fe2cdab9
 		
         //cards_panel.add(deckLabel);
         //cards_panel.add(cardLabel);
@@ -135,12 +205,26 @@ public class CardPanel{
         cardLabel.setBackground(card.getColor());
         cardValue.setText(card.getCardText());
         deckCount.setText(Integer.toString(dm.getCount()));
+<<<<<<< HEAD
 	current_player = gameState.getCurrentPlayer();
 	setTurnText();
     }
 
     public void setTurnText(){
 	turnNumber.setText("Player " + current_player + "'s turn!");
+=======
+
+        if (card.skip()){
+            String labelText = String.format("<html><div width=%d>Player " + gameState.skipPlayer() + "'s turn has been skipped! Player " + gameState.getCurrentPlayer() + "'s turn!</div></html>", 250);
+            turnNumber.setText(labelText);
+            //turnNumber.setText("<html>Player " + gameState.skipPlayer() + "'s turn has been skipped! Player " + gameState.getCurrentPlayer() + "'s turn!</html>");
+        }
+        else{
+            turnNumber.setText("Player " + gameState.getCurrentPlayer() + "'s turn!");
+        }
+
+		       
+>>>>>>> f9d282d4467ee1c9851cce75d9b2bad7fe2cdab9
     }
 
     private class CardButtonListener implements ActionListener {

@@ -24,6 +24,7 @@ public class WorldOfSweets extends JFrame{
 
         header_label = new JLabel();
         game_container_panel = new JPanel();
+        game_container_panel.addMouseListener(this);
         board_panel = new JPanel();
         grandmas_house = new JLabel();
         blue = new JPanel();
@@ -104,7 +105,8 @@ public class WorldOfSweets extends JFrame{
 	positions[pos++] = green;       
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(872, 690));
+        //setPreferredSize(new java.awt.Dimension(872, 690));
+        setExtendedState(JFrame.MAXIMIZED_BOTH); 
 
         header_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 24));
         header_label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -384,6 +386,7 @@ public class WorldOfSweets extends JFrame{
 	    start_panel.add(label);	    
 	}
         board_panel.add(start_panel);
+
         
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
@@ -482,9 +485,10 @@ public class WorldOfSweets extends JFrame{
         
         // Initialize game sate and bring up dialog 
         // asking for number of players
-	gameState = new GameState();
+	    gameState = new GameState();
+        gameState.promptPlayers();
 
-	// Create deck manager object
+	    // Create deck manager object
         dm = new DeckManager();
 
         // Create the deck itself
