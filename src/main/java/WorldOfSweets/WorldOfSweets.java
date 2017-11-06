@@ -24,7 +24,7 @@ public class WorldOfSweets extends JFrame{
 
         header_label = new JLabel();
         game_container_panel = new JPanel();
-        game_container_panel.addMouseListener(this);
+        
         board_panel = new JPanel();
         grandmas_house = new JLabel();
         blue = new JPanel();
