@@ -11,7 +11,6 @@ public class CardPanel{
     private JPanel deckPanel;
     private JPanel cards_panel;
     private JPanel buttonPanel;
-    private JPanel turnsPanel;
     private JPanel combinedPanel;
     private JButton _drawCardButton = new JButton("Draw Card");
     private JLabel cardLabel = new javax.swing.JLabel();
@@ -20,21 +19,19 @@ public class CardPanel{
     private JLabel cardText = new JLabel("Card");
     private JLabel deckCount = new JLabel("0");
     private JLabel cardValue = new JLabel();
-    private JLabel turnNumber = new JLabel();
     private GameState gameState;
     private GameManager gm;
-    private int current_player;
 
     private int width = 250;
     private int height = 620;
 
     public static DeckManager dm;
-	
-    
+
+
     public CardPanel(DeckManager dm, GameState gs){
     	this.dm = dm;
     	this.gm = null;
-    	current_player = 0; 
+      gameState = gs;
 
         //-------------------------------------------------------
         // set min, preferred, and max sizes in order to prevent JLabel from
@@ -69,7 +66,7 @@ public class CardPanel{
 	cards_panel = new javax.swing.JPanel();
 
 	cards_panel.setPreferredSize(new java.awt.Dimension(width, height/3));
-        
+
         cards_panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -128,25 +125,15 @@ public class CardPanel{
         ActionListener cardButtonListener = new CardButtonListener();
         _drawCardButton.addActionListener(cardButtonListener);
 
-		
-	//USED FOR TURNS
-	gameState = gs;
-	turnsPanel = new javax.swing.JPanel();
-	turnsPanel.setPreferredSize(new java.awt.Dimension(width, height/3));
-	turnsPanel.add(turnNumber);
-	//turnNumber.setText("Player " + gameState.getCurrentPlayer() + "'s turn!");
-	turnNumber.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
-		
     	//Combine card panel and turn panel
     	combinedPanel = new javax.swing.JPanel();
     	combinedPanel.setLayout(new BoxLayout(combinedPanel, BoxLayout.Y_AXIS));
 
 	combinedPanel.add(cards_panel);
         combinedPanel.add(buttonPanel);
-	combinedPanel.add(turnsPanel);
-        
 
-		
+
+
         //cards_panel.add(deckLabel);
         //cards_panel.add(cardLabel);
 
@@ -170,17 +157,17 @@ public class CardPanel{
     }
 
     public void changeCard(Card card){
+
         cardLabel.setBackground(card.getColor());
         cardValue.setText(card.getCardText());
         deckCount.setText(Integer.toString(dm.getCount()));
-	current_player = gameState.getCurrentPlayer();
+
+        //Change the state of the game
         if (card.skip()){
-            String labelText = String.format("<html><div width=%d>Player " + gameState.skipPlayer() + "'s turn has been skipped! Player " + current_player + "'s turn!</div></html>", 250);
-            turnNumber.setText(labelText);
-            //turnNumber.setText("<html>Player " + gameState.skipPlayer() + "'s turn has been skipped! Player " + gameState.getCurrentPlayer() + "'s turn!</html>");
+            gameState.changeTxt(2);
         }
         else{
-            turnNumber.setText("Player " + current_player + "'s turn!");
+          gameState.changeTxt(1);
         }
 
     }
@@ -191,7 +178,7 @@ public class CardPanel{
             gm.turn();
         }
     }
-    
+
     public Color getCardColor(){
 	return cardLabel.getBackground();
     }
@@ -205,13 +192,9 @@ public class CardPanel{
     	    case "Skip":
 		return 3;
     	    case "Go to Middle":
-		return 4; 
+		return 4;
     	}
-	return 0; 
-    }
-
-    public int getPlayer(){
-	return current_player;
+	return 0;
     }
 
     public void setGameManager(GameManager gm){
