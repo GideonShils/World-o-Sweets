@@ -257,7 +257,7 @@ public class WorldOfSweets extends JFrame{
 	    temp_panel.setOpaque(false);
 	    board_panel.add(temp_panel);
 	}
-
+        
         blue_three.setBackground(new java.awt.Color(0, 0, 255));
         blue_three.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         blue_three.setOpaque(true);
@@ -300,6 +300,7 @@ public class WorldOfSweets extends JFrame{
 	temp_panel.setOpaque(false);
 	board_panel.add(temp_panel);
 
+        
         blue_four.setBackground(new java.awt.Color(0, 0, 255));
         blue_four.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 	blue_four.setLayout(new java.awt.GridLayout(2, 2));
@@ -323,7 +324,8 @@ public class WorldOfSweets extends JFrame{
 	green_four.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(green_four);
 
-        blue_five.setBackground(new java.awt.Color(0, 0, 255));
+        // This is the middle square so setting to white to make visually distinct
+        blue_five.setBackground(new java.awt.Color(255, 255, 255));
         blue_five.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         blue_five.setOpaque(true);
 	blue_five.setLayout(new java.awt.GridLayout(2, 2));
