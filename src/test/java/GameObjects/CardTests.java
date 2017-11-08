@@ -1,7 +1,6 @@
 import static org.junit.Assert.*;
 import org.junit.*;
 
-
 import GameObjects.Card;
 
 public class CardTests {
