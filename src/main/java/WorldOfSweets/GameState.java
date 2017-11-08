@@ -10,6 +10,8 @@ public class GameState{
     int response = 0;
     int totalPlayers = 0;	// Number of total players
     int currentPlayer = 0;
+    int curr_player = 1;
+    JLabel temp_label;
 
 	public GameState(){
 
@@ -42,7 +44,7 @@ public class GameState{
     }
 
     // Used for turns
-    public int getCurrentPlayer(){
+    public int getNextPlayer(){
       if (currentPlayer == totalPlayers){
           currentPlayer = 1;
           return 1;
@@ -53,13 +55,18 @@ public class GameState{
     }
 
 		public int returnCurrPlayer(){
-			return currentPlayer;
+      if (curr_player == totalPlayers){
+        curr_player = 1;
+        return totalPlayers;
+      } else {
+        return curr_player++;
+      }
+
 		}
 
-JLabel temp_label;
 public JPanel turnPanel(){
 	//Create the label and set the font + size
-	temp_label = new JLabel("Player "+getCurrentPlayer()+"'s Turn!");
+	temp_label = new JLabel("Player "+getNextPlayer()+"'s Turn!");
 	temp_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
 
 	//Add label to panel
@@ -73,9 +80,9 @@ public JPanel turnPanel(){
 public void changeTxt(int num){
 	if (num == 1){
 		//change player number
-		temp_label.setText("Player " + getCurrentPlayer() + "'s turn!");
+		temp_label.setText("Player " + getNextPlayer() + "'s turn!");
 	} else if (num == 2){
-		String labelText = String.format("<html><div width=%d>Player " + currentPlayer + "'s turn has been skipped! Player " + getCurrentPlayer() + "'s turn!</div></html>", 250);
+		String labelText = String.format("<html><div width=%d>Player " + currentPlayer + "'s turn has been skipped! Player " + getNextPlayer() + "'s turn!</div></html>", 250);
 		temp_label.setText(labelText);
 	}
 

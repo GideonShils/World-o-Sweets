@@ -63,7 +63,7 @@ public class GameManager{
     }
 
     public void turn(){
-	current_player = gameState.returnCurrPlayer()-1;
+	current_player = gameState.returnCurrPlayer() - 1;
 	findNext(card_panel.getCardColor(), tokens[current_player].getPosition(), card_panel.getType());
     }
 
