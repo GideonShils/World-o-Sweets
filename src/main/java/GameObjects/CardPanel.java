@@ -169,7 +169,10 @@ public class CardPanel {
             // Update gamestate to hold the current card
             gameState.setCurrCard(newCard);
 
-            gm.turn();
+            // Reenable clicking on board
+            gameState.setTargetClicked(false);
+
+            gm.turn(newCard);
         }
     }
 
@@ -199,10 +202,8 @@ public class CardPanel {
     public void toggleButton() {
         if (_drawCardButton.isEnabled()) {
             _drawCardButton.setEnabled(false);
-            System.out.println("disable");
         } else {
             _drawCardButton.setEnabled(true);
-            System.out.println("enable");
         }
     }
 }

@@ -17,6 +17,7 @@ public class GameState {
 	JLabel instruction_label;
 
 	Card currCard;
+	Boolean target = false;
 
 	public GameState() {
 
@@ -117,5 +118,13 @@ public class GameState {
 
 	public Card getCurrCard() {
 		return currCard;
+	}
+
+	public Boolean targetClicked() {
+		return target;
+	}
+
+	public void setTargetClicked(Boolean bool) {
+		target = bool;
 	}
 }
