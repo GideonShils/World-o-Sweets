@@ -2,7 +2,7 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 
-import GameObjects.DeckManager;
+import WorldOfSweets.DeckManager;
 import GameObjects.Card;
 
 public class DeckManagerTests {

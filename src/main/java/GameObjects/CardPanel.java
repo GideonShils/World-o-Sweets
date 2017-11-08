@@ -1,14 +1,13 @@
-package WorldOfSweets;
-import GameObjects.*;
+package GameObjects;
+import WorldOfSweets.*;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 
-public class CardPanel{
+public class CardPanel {
 
-    private JPanel deckPanel;
     private JPanel cards_panel;
     private JPanel buttonPanel;
     private JPanel combinedPanel;
@@ -27,14 +26,13 @@ public class CardPanel{
 
     public static DeckManager dm;
 
-
-    public CardPanel(DeckManager dm, GameState gs){
+    public CardPanel(DeckManager dm, GameState gs) {
     	this.dm = dm;
     	this.gm = null;
-      gameState = gs;
+        gameState = gs;
 
         //-------------------------------------------------------
-        // set min, preferred, and max sizes in order to prevent JLabel from
+        // set min, preferred, and max sizes in order to prevent JLabels from
         // resizing when values change
 
         deckText.setMinimumSize(new Dimension(width/2, height/12));
@@ -63,15 +61,15 @@ public class CardPanel{
 
         //-----------------------------------------------------------
 
-	cards_panel = new javax.swing.JPanel();
+	    cards_panel = new javax.swing.JPanel();
 
-	cards_panel.setPreferredSize(new java.awt.Dimension(width, height/3));
+	    cards_panel.setPreferredSize(new java.awt.Dimension(width, height/3));
 
         cards_panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
 
-        //Card currentCard = dm.draw();
+        // Card currentCard = dm.draw();
         cardLabel.setBackground(new java.awt.Color(0, 0, 0));
         cardLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         cardLabel.setOpaque(true);
@@ -81,7 +79,7 @@ public class CardPanel{
         deckLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         deckLabel.setOpaque(true);
 
-        // add component to display 'Deck'
+        // Add component to display 'Deck'
         c.gridx = 0;
         c.gridy = 0;
         c.anchor = GridBagConstraints.CENTER;
@@ -129,9 +127,8 @@ public class CardPanel{
     	combinedPanel = new javax.swing.JPanel();
     	combinedPanel.setLayout(new BoxLayout(combinedPanel, BoxLayout.Y_AXIS));
 
-	combinedPanel.add(cards_panel);
+	    combinedPanel.add(cards_panel);
         combinedPanel.add(buttonPanel);
-
 
 
         //cards_panel.add(deckLabel);
@@ -140,64 +137,61 @@ public class CardPanel{
         //javax.swing.GroupLayout cards_panelLayout = new javax.swing.GroupLayout(cards_panel);
         //cards_panel.setLayout(cards_panelLayout);
         /*cards_panelLayout.setHorizontalGroup(
-	  cards_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	  .addComponent(deckLabel)
-	  .addGap(0, 250, Short.MAX_VALUE)
-	  );
-	  cards_panelLayout.setVerticalGroup(
-	  cards_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	  .addGap(0, 310, Short.MAX_VALUE)
-	  );*/
-
-
+        cards_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(deckLabel)
+        .addGap(0, 250, Short.MAX_VALUE)
+        );
+        cards_panelLayout.setVerticalGroup(
+        cards_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 310, Short.MAX_VALUE)
+        );*/
     }
 
-    public JPanel getCardsPanel(){
-	return combinedPanel;
+    public JPanel getCardsPanel() {
+	    return combinedPanel;
     }
 
-    public void changeCard(Card card){
-
+    public void changeCard(Card card) {
         cardLabel.setBackground(card.getColor());
         cardValue.setText(card.getCardText());
         deckCount.setText(Integer.toString(dm.getCount()));
 
-        //Change the state of the game
-        if (card.skip()){
+        // Change the state of the game
+        if (card.skip()) {
             gameState.changeTxt(2);
         }
-        else{
+        else {
           gameState.changeTxt(1);
         }
-
     }
 
     private class CardButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent e){
+        public void actionPerformed(ActionEvent e) {
             changeCard(dm.draw());
             gm.turn();
         }
     }
 
-    public Color getCardColor(){
-	return cardLabel.getBackground();
+    public Color getCardColor() {
+	    return cardLabel.getBackground();
     }
 
-    public int getType(){
-    	switch(cardValue.getText()){
+    public int getType() {
+    	switch(cardValue.getText()) {
     	    case "Single":
-		return 1;
+		        return 1;
     	    case "Double":
-		return 2;
+		        return 2;
     	    case "Skip":
-		return 3;
+		        return 3;
     	    case "Go to Middle":
-		return 4;
-    	}
-	return 0;
+		        return 4;
+        }
+        
+	    return 0;
     }
 
-    public void setGameManager(GameManager gm){
-	this.gm = gm;
+    public void setGameManager(GameManager gm) {
+	    this.gm = gm;
     }
 }
