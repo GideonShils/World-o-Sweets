@@ -155,20 +155,24 @@ public class CardPanel {
         cardLabel.setBackground(card.getColor());
         cardValue.setText(card.getCardText());
         deckCount.setText(Integer.toString(dm.getCount()));
-
-        // Change the state of the game
-        if (card.skip()) {
-            gameState.changeTxt(2);
-        }
-        else {
-          gameState.changeTxt(1);
-        }
     }
 
     private class CardButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            changeCard(dm.draw());
-            gm.turn();
+            // Disable the button
+            toggleButton();
+
+            // Draw a new card
+            Card newCard = dm.draw();
+            changeCard(newCard);
+
+            // Update gamestate to hold the current card
+            gameState.setCurrCard(newCard);
+
+            // Reenable clicking on board
+            gameState.setTargetClicked(false);
+
+            gm.turn(newCard);
         }
     }
 
@@ -193,5 +197,13 @@ public class CardPanel {
 
     public void setGameManager(GameManager gm) {
 	    this.gm = gm;
+    }
+
+    public void toggleButton() {
+        if (_drawCardButton.isEnabled()) {
+            _drawCardButton.setEnabled(false);
+        } else {
+            _drawCardButton.setEnabled(true);
+        }
     }
 }

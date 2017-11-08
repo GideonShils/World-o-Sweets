@@ -65,7 +65,17 @@ public class GameManager{
 
     }
 
-    public void turn() {
+    public void turn(Card card) {
+		if (card.skip()) {
+			// Renable the button
+			card_panel.toggleButton();
+			
+			gameState.changeTxt(2);
+							
+		} else {
+			gameState.changeInstruction(2);
+		}
+
 		current_player = gameState.returnCurrPlayer() - 1;
 		findNext(card_panel.getCardColor(), tokens[current_player].getPosition(), card_panel.getType());
     }
@@ -95,13 +105,26 @@ public class GameManager{
 		}
 
 		public void mouseClicked(MouseEvent e) {
-			if (e.getSource().getClass().equals(array[0].getClass())) {
+			if (e.getSource().getClass().equals(array[0].getClass()) && gameState.targetClicked() == false) {
+				// Show that the target spot has been clicked
+				gameState.setTargetClicked(true);
+
+
 				((JPanel) e.getSource()).setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 				Container parent = tokens[current_player].getLabel().getParent();
 				parent.remove(tokens[current_player].getLabel());
 				parent.validate();
 				parent.repaint();
 				array[next].add(tokens[current_player].getLabel());
+
+				// Renable the button
+				card_panel.toggleButton();
+
+				gameState.changeTxt(1);
+
+				// Update the instruction to draw card
+				gameState.changeInstruction(1);
+
 			}
 
 			if (e.getSource().getClass().equals(end.getClass())) {
