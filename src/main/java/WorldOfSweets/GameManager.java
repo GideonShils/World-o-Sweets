@@ -66,6 +66,9 @@ public class GameManager{
     }
 
     public void turn() {
+		// Update instruction to move token
+		gameState.changeInstruction(2);
+
 		current_player = gameState.returnCurrPlayer() - 1;
 		findNext(card_panel.getCardColor(), tokens[current_player].getPosition(), card_panel.getType());
     }
@@ -102,6 +105,21 @@ public class GameManager{
 				parent.validate();
 				parent.repaint();
 				array[next].add(tokens[current_player].getLabel());
+
+				// Renable the button
+				card_panel.toggleButton();
+
+				// Change the current player text
+				if (gameState.getCurrCard().skip()) {
+					gameState.changeTxt(2);
+				}
+				else {
+				  gameState.changeTxt(1);
+				}
+
+				// Update the instruction to draw card
+				gameState.changeInstruction(1);
+
 			}
 
 			if (e.getSource().getClass().equals(end.getClass())) {

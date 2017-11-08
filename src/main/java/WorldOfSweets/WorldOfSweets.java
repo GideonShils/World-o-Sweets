@@ -460,7 +460,10 @@ public class WorldOfSweets extends JFrame{
         combinedPanel.add(turn_panel);
         non_board_panel.add(combinedPanel);
 
+        JPanel current_instruction = gameState.currentInstruction();
+        non_board_panel.add(current_instruction);
 
+        /*
         instructions_panel.setPreferredSize(new java.awt.Dimension(250, 310));
 
         GroupLayout instructions_panelLayout = new GroupLayout(instructions_panel);
@@ -473,8 +476,10 @@ public class WorldOfSweets extends JFrame{
 						  instructions_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 						  .addGap(0, 310, Short.MAX_VALUE)
 						  );
+        
 
         non_board_panel.add(instructions_panel);
+        */
 
         game_container_panel.add(non_board_panel);
 

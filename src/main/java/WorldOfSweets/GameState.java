@@ -1,5 +1,7 @@
 package WorldOfSweets;
 
+import GameObjects.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -11,7 +13,10 @@ public class GameState {
     int totalPlayers = 0;	// Number of total players
     int currentPlayer = 0;
     int curr_player = 1;
-    JLabel temp_label;
+	JLabel temp_label;
+	JLabel instruction_label;
+
+	Card currCard;
 
 	public GameState() {
 
@@ -72,7 +77,6 @@ public class GameState {
 		JPanel tp = new JPanel();
 		tp.add(temp_label);
 
-
 		return tp;
 	}
 
@@ -85,5 +89,33 @@ public class GameState {
 			temp_label.setText(labelText);
 		}
 
+	}
+
+	public JPanel currentInstruction() {
+		instruction_label = new JLabel("Please draw a card.");
+
+		instruction_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
+
+		//Add label to panel
+		JPanel tp = new JPanel();
+		tp.add(instruction_label);
+
+		return tp;
+	}
+
+	public void changeInstruction(int num) {
+		if (num == 1) {
+			instruction_label.setText("Please draw a card.");
+		} else {
+			instruction_label.setText("Click the highlighted box");
+		}
+	}
+
+	public void setCurrCard(Card newCard) {
+		currCard = newCard;
+	}
+
+	public Card getCurrCard() {
+		return currCard;
 	}
 }
