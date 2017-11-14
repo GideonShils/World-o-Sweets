@@ -6,6 +6,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import java.awt.BorderLayout;
 
 public class WorldOfSweets extends JFrame{
 
@@ -257,7 +258,7 @@ public class WorldOfSweets extends JFrame{
 	    temp_panel.setOpaque(false);
 	    board_panel.add(temp_panel);
 	}
-        
+
         blue_three.setBackground(new java.awt.Color(0, 0, 255));
         blue_three.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         blue_three.setOpaque(true);
@@ -300,7 +301,7 @@ public class WorldOfSweets extends JFrame{
 	temp_panel.setOpaque(false);
 	board_panel.add(temp_panel);
 
-        
+
         blue_four.setBackground(new java.awt.Color(0, 0, 255));
         blue_four.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 	blue_four.setLayout(new java.awt.GridLayout(2, 2));
@@ -462,6 +463,8 @@ public class WorldOfSweets extends JFrame{
         combinedPanel.add(turn_panel);
         non_board_panel.add(combinedPanel);
 
+
+
         JPanel current_instruction = gameState.currentInstruction();
         non_board_panel.add(current_instruction);
 
@@ -478,12 +481,17 @@ public class WorldOfSweets extends JFrame{
 						  instructions_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 						  .addGap(0, 310, Short.MAX_VALUE)
 						  );
-        
+
 
         non_board_panel.add(instructions_panel);
         */
 
         game_container_panel.add(non_board_panel);
+
+        JPanel loadSavePanel = gameState.getLoadSavePanel();
+        setLayout(new BorderLayout());
+        game_container_panel.add(loadSavePanel);
+        add(loadSavePanel, BorderLayout.SOUTH);
 
         getContentPane().add(game_container_panel, java.awt.BorderLayout.CENTER);
 

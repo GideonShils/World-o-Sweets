@@ -1,7 +1,7 @@
 package WorldOfSweets;
 
 import GameObjects.*;
-
+import java.io.File;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -91,6 +91,41 @@ public class GameState {
 		}
 
 	}
+
+  public JPanel getLoadSavePanel(){
+    JButton saveGame = new JButton("Save Game");
+    JButton loadGame = new JButton("Load Game");
+    JPanel bottomPanel = new JPanel();
+    ActionListener saveListener = new SaveListener();
+    saveGame.addActionListener(saveListener);
+    ActionListener loadListener = new LoadListener();
+    loadGame.addActionListener(loadListener);
+    bottomPanel.add(loadGame);
+    bottomPanel.add(saveGame);
+    return bottomPanel;
+  }
+
+  private class LoadListener implements ActionListener {
+      public void actionPerformed(ActionEvent e) {
+        JFileChooser fileChooser = new JFileChooser();
+        if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+          File file = fileChooser.getSelectedFile();
+          
+          // save to file
+        }
+      }
+  }
+
+  private class SaveListener implements ActionListener {
+      public void actionPerformed(ActionEvent e) {
+        JFileChooser fileChooser = new JFileChooser();
+        if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+          File file = fileChooser.getSelectedFile();
+          // save to file
+        }
+      }
+  }
+
 
 	public JPanel currentInstruction() {
 		instruction_label = new JLabel("Please draw a card.");
