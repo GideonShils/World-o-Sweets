@@ -19,8 +19,10 @@ public class GameState {
 	Card currCard;
 	Boolean target = false;
 
-	public GameState() {
+    TimeCounter time_counter;
 
+	public GameState(TimeCounter tc) {
+        time_counter = tc;
 	}
 
 	public void promptPlayers() {
@@ -42,7 +44,8 @@ public class GameState {
 	        System.exit(0);
 	    } else {
 	        totalPlayers = Integer.parseInt(selection.getSelectedItem().toString());
-	    }
+            time_counter.action();  //Start the timer
+        }
   	}
 
     public int getPlayers() {
