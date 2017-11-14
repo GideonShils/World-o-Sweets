@@ -87,12 +87,8 @@ public class DeckManager {
 	    Card middle = new Card("pink", false, false, true, i);
 	    deck.add(middle);
 	}
-	for (int i = 0; i < 10; i++){
-	    Card middle = new Card("pink", false, false, true, 4);
-	    deck.add(middle);
-	}
 	        
-	numGoTo = 15; 
+	numGoTo = 5; 
 	totalCardCount = numSingles + numDoubles + numSkips + numGoTo;
 
 	// Subtract 1 from totalCardCount to make currentIndex 0-index
