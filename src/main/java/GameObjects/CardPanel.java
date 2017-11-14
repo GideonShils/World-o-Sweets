@@ -183,16 +183,25 @@ public class CardPanel {
     public int getType() {
     	switch(cardValue.getText()) {
     	    case "Single":
-		        return 1;
+		return 6;
     	    case "Double":
-		        return 2;
+		return 7;
     	    case "Skip":
-		        return 3;
-    	    case "Go to Middle":
-		        return 4;
+		return 5;
+    	    case "Ice Cream":
+		return 0;
+	    case "Cake":
+		return 1;
+	    case "Cookie":
+		return 2;
+	    case "Cupcake":
+		return 3;
+	    case "Pie":
+		return 4; 
+			
         }
         
-	    return 0;
+	    return -1;
     }
 
     public void setGameManager(GameManager gm) {

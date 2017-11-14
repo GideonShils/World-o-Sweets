@@ -20,14 +20,14 @@ public class DeckManagerTests {
 	@Test
 	public void deckCountTest60(){
 		dm.createDeck(10, 2);
-		assertEquals(60, dm.getTotalCardCount());
+		assertEquals(65, dm.getTotalCardCount());
 	}
 
 	// test that passing parameters of 1 single and 1 double generates a deck of 10 cards
 	@Test
 	public void deckCountTest10(){
 		dm.createDeck(1, 1);
-		assertEquals(10, dm.getTotalCardCount());
+		assertEquals(15, dm.getTotalCardCount());
 	}
 
 	// test that deck is rejected when 0 is passed as parameter for singles
@@ -57,14 +57,14 @@ public class DeckManagerTests {
 	// test that 50 singles were added to deck
 	@Test
 	public void deckContains50Singles(){
-		dm.createDeck(10, 2, 5, 3);
+		dm.createDeck(10, 2, 5);
 		assertEquals(50, dm.getSinglesCount());
 	}
 
 	// test that 50 singles were added to deck by checking entire deck
 	@Test
 	public void deckContains50SinglesTest2(){
-		dm.createDeck(10, 2, 5, 3);
+		dm.createDeck(10, 2, 5);
 		int singleCount = 0;
 
 		for (int i = 0; i < dm.getTotalCardCount(); i++){
@@ -80,14 +80,14 @@ public class DeckManagerTests {
 	// test that 10 doubles were added to deck
 	@Test
 	public void deckContains10Doubles(){
-		dm.createDeck(10, 2, 5, 3);
+		dm.createDeck(10, 2, 5);
 		assertEquals(10, dm.getDoublesCount());
 	}
 
 	// test that 10 doubles were added to deck by checking entire deck
 	@Test
 	public void deckContains10DoublesTest2(){
-		dm.createDeck(10, 2, 5, 3);
+		dm.createDeck(10, 2, 5);
 		int doubleCount = 0;
 
 		for (int i = 0; i < dm.getTotalCardCount(); i++){
@@ -103,14 +103,14 @@ public class DeckManagerTests {
 	// test that 5 skips were added to deck
 	@Test
 	public void deckContains5Skips(){
-		dm.createDeck(10, 2, 5, 3);
+		dm.createDeck(10, 2, 5);
 		assertEquals(5, dm.getSkipsCount());
 	}
 
 	// test that 5 skips were added to deck by checking entire deck
 	@Test
 	public void deckContains5SKipTest2(){
-		dm.createDeck(10, 2, 5, 3);
+		dm.createDeck(10, 2, 5);
 		int skipCount = 0;
 
 		for (int i = 0; i < dm.getTotalCardCount(); i++){
@@ -126,24 +126,24 @@ public class DeckManagerTests {
 	// test that 3 Go To Middles were added to deck
 	@Test
 	public void deckContains3GoToMiddle(){
-		dm.createDeck(10, 2, 5, 3);
-		assertEquals(3, dm.getGoToMiddleCount());
+		dm.createDeck(10, 2, 5);
+		assertEquals(5, dm.getGoToCount());
 	}
 
 	// test that 3 Go To Middle cards were added by checking entire deck
 	@Test
 	public void deckContains3GoToMiddleTest2(){
-		dm.createDeck(10, 2, 5, 3);
-		int goToMiddleCount = 0;
+		dm.createDeck(10, 2, 5);
+		int goToCount = 0;
 
 		for (int i = 0; i < dm.getTotalCardCount(); i++){
 			Card c = dm.draw();
 
-			if (c.goToMiddle())
-				goToMiddleCount++;
+			if (c.goTo())
+				goToCount++;
 		}
 
-		assertEquals(3, goToMiddleCount);
+		assertEquals(5, goToCount);
 	}
 
 
