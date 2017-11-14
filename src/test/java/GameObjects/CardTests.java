@@ -174,7 +174,7 @@ public class CardTests {
 	public void createGoToMiddleCard(){
 		Card c = new Card("red", false, false, true);
 
-		assertEquals(true, c.goToMiddle());
+		assertEquals(true, c.goTo());
 	}
 
 	//check to make sure correct text is returned for Go To Middle card
