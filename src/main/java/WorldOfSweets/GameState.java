@@ -19,9 +19,12 @@ public class GameState {
     Card currCard;
     Boolean target = false;
 
-    public GameState() {
+    TimeCounter time_counter;
 
-    }
+	public GameState(TimeCounter tc) {
+        time_counter = tc;
+	}
+
 
     public void promptPlayers() {
 	// Initialize panel and combo box
@@ -38,12 +41,15 @@ public class GameState {
 	panel.add(selection);
 	response = JOptionPane.showConfirmDialog(null, selection, "Number of Players", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-	if (response != JOptionPane.OK_OPTION) {
-	    System.exit(0);
-	} else {
-	    totalPlayers = Integer.parseInt(selection.getSelectedItem().toString());
-	}
-    }
+
+	    if (response != JOptionPane.OK_OPTION) {
+	        System.exit(0);
+	    } else {
+	        totalPlayers = Integer.parseInt(selection.getSelectedItem().toString());
+            time_counter.action();  //Start the timer
+        }
+  	}
+
 
     public int getPlayers() {
 	return totalPlayers;

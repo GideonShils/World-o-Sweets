@@ -269,11 +269,13 @@ public class WorldOfSweets extends JFrame{
 	    board_panel.add(temp_panel);
 	}
 
+
 	blue_two.setBackground(new java.awt.Color(0, 0, 255));
         blue_two.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         blue_two.setOpaque(true);
 	blue_two.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(blue_two);
+
 
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
@@ -311,11 +313,13 @@ public class WorldOfSweets extends JFrame{
 	temp_panel.setOpaque(false);
 	board_panel.add(temp_panel);
 
+
         yellow_three.setBackground(new java.awt.Color(255, 255, 0));
         yellow_three.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         yellow_three.setOpaque(true);
 	yellow_three.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(yellow_three);
+
 
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
@@ -468,10 +472,17 @@ public class WorldOfSweets extends JFrame{
         JPanel turn_panel = gameState.turnPanel();
         combinedPanel.add(card_panel.getCardsPanel());
         combinedPanel.add(turn_panel);
+
+
+
         non_board_panel.add(combinedPanel);
 
         JPanel current_instruction = gameState.currentInstruction();
         non_board_panel.add(current_instruction);
+
+        //Long.toString(System.currentTimeMillis())
+        JPanel timer_panel = timer.getTimerPanel();
+        non_board_panel.add(timer_panel);
 
         /*
         instructions_panel.setPreferredSize(new java.awt.Dimension(250, 310));
@@ -486,7 +497,7 @@ public class WorldOfSweets extends JFrame{
 						  instructions_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 						  .addGap(0, 310, Short.MAX_VALUE)
 						  );
-        
+
 
         non_board_panel.add(instructions_panel);
         */
@@ -503,9 +514,13 @@ public class WorldOfSweets extends JFrame{
      */
     public static void main(String args[]) {
 
+        //create and begin timer
+        timer = new TimeCounter();
+        timer.run();
+
         // Initialize game sate and bring up dialog
         // asking for number of players
-	    gameState = new GameState();
+	    gameState = new GameState(timer);
         gameState.promptPlayers();
 
 	    // Create deck manager object
@@ -533,6 +548,7 @@ public class WorldOfSweets extends JFrame{
         } catch (UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(WorldOfSweets.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
 		public void run() {
@@ -591,6 +607,7 @@ public class WorldOfSweets extends JFrame{
     private static JPanel non_board_panel;
     private static JPanel start_panel;
 
+    private static TimeCounter timer;
     private static DeckManager dm;
     private static GameState gameState;
     private static int num_players;
