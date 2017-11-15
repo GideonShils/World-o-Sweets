@@ -13,11 +13,11 @@ public class GameState {
     int totalPlayers = 0;	// Number of total players
     int currentPlayer = 0;
     int curr_player = 1;
-	JLabel temp_label;
-	JLabel instruction_label;
+    JLabel temp_label;
+    JLabel instruction_label;
 
-	Card currCard;
-	Boolean target = false;
+    Card currCard;
+    Boolean target = false;
 
     TimeCounter time_counter;
 
@@ -25,20 +25,22 @@ public class GameState {
         time_counter = tc;
 	}
 
-	public void promptPlayers() {
-		// Initialize panel and combo box
-		JPanel panel = new JPanel();
-		DefaultComboBoxModel model = new DefaultComboBoxModel();
 
-	    // Add number of player choices to the dropdown
-	    model.addElement("2");
-	    model.addElement("3");
-	    model.addElement("4");
+    public void promptPlayers() {
+	// Initialize panel and combo box
+	JPanel panel = new JPanel();
+	DefaultComboBoxModel model = new DefaultComboBoxModel();
 
-	    JComboBox selection = new JComboBox(model);
+	// Add number of player choices to the dropdown
+	model.addElement("2");
+	model.addElement("3");
+	model.addElement("4");
 
-	    panel.add(selection);
-	    response = JOptionPane.showConfirmDialog(null, selection, "Number of Players", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+	JComboBox selection = new JComboBox(model);
+
+	panel.add(selection);
+	response = JOptionPane.showConfirmDialog(null, selection, "Number of Players", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
 
 	    if (response != JOptionPane.OK_OPTION) {
 	        System.exit(0);
@@ -48,86 +50,89 @@ public class GameState {
         }
   	}
 
+
     public int getPlayers() {
-		  return totalPlayers;
+	return totalPlayers;
     }
 
     // Used for turns
     public int getNextPlayer() {
-      if (currentPlayer == totalPlayers) {
-          currentPlayer = 1;
-          return 1;
-      } else {
-          currentPlayer += 1;
-          return currentPlayer;
-      }
+	if (currentPlayer == totalPlayers) {
+	    currentPlayer = 1;
+	    return 1;
+	} else {
+	    currentPlayer += 1;
+	    return currentPlayer;
+	}
     }
 
-	public int returnCurrPlayer() {
-      if (curr_player == totalPlayers) {
-        curr_player = 1;
-        return totalPlayers;
-      } else {
-        return curr_player++;
-      }
+    public int returnCurrPlayer() {
+	if (curr_player == totalPlayers) {
+	    curr_player = 1;
+	    return totalPlayers;
+	} else {
+	    return curr_player++;
+	}
+    }
+
+    public JPanel turnPanel() {
+	//Create the label and set the font + size
+	temp_label = new JLabel("Player "+getNextPlayer()+"'s Turn!");
+	temp_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
+
+	//Add label to panel
+	JPanel tp = new JPanel();
+	tp.add(temp_label);
+
+	return tp;
+    }
+
+    public void changeTxt(int num) {
+	if (num == 1) {
+	    //change player number
+	    temp_label.setText("Player " + getNextPlayer() + "'s turn!");
+	} else if (num == 2) {
+	    String labelText = String.format("<html><div width=%d>Player " + currentPlayer + "'s turn has been skipped! Player " + getNextPlayer() + "'s turn!</div></html>", 250);
+	    temp_label.setText(labelText);
 	}
 
-	public JPanel turnPanel() {
-		//Create the label and set the font + size
-		temp_label = new JLabel("Player "+getNextPlayer()+"'s Turn!");
-		temp_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
+    }
 
-		//Add label to panel
-		JPanel tp = new JPanel();
-		tp.add(temp_label);
+    public JPanel currentInstruction() {
+	instruction_label = new JLabel("Please draw a card.");
 
-		return tp;
+	instruction_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
+
+	//Add label to panel
+	JPanel tp = new JPanel();
+	tp.add(instruction_label);
+
+	return tp;
+    }
+
+    public void changeInstruction(int num) {
+	if (num == 1) {
+	    instruction_label.setText("Please draw a card.");
+	} else if (num == 2) {
+	    instruction_label.setText("Click the highlighted box");
+	} else {
+	    instruction_label.setText("");
 	}
+    }
 
-	public void changeTxt(int num) {
-		if (num == 1) {
-			//change player number
-			temp_label.setText("Player " + getNextPlayer() + "'s turn!");
-		} else if (num == 2) {
-			String labelText = String.format("<html><div width=%d>Player " + currentPlayer + "'s turn has been skipped! Player " + getNextPlayer() + "'s turn!</div></html>", 250);
-			temp_label.setText(labelText);
-		}
+    public void setCurrCard(Card newCard) {
+	currCard = newCard;
+    }
 
-	}
+    public Card getCurrCard() {
+	return currCard;
+    }
 
-	public JPanel currentInstruction() {
-		instruction_label = new JLabel("Please draw a card.");
+    public Boolean targetClicked() {
+	return target;
+    }
 
-		instruction_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
-
-		//Add label to panel
-		JPanel tp = new JPanel();
-		tp.add(instruction_label);
-
-		return tp;
-	}
-
-	public void changeInstruction(int num) {
-		if (num == 1) {
-			instruction_label.setText("Please draw a card.");
-		} else {
-			instruction_label.setText("Click the highlighted box");
-		}
-	}
-
-	public void setCurrCard(Card newCard) {
-		currCard = newCard;
-	}
-
-	public Card getCurrCard() {
-		return currCard;
-	}
-
-	public Boolean targetClicked() {
-		return target;
-	}
-
-	public void setTargetClicked(Boolean bool) {
-		target = bool;
-	}
+    public void setTargetClicked(Boolean bool) {
+	target = bool;
+    }
 }
