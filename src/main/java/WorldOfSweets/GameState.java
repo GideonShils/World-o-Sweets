@@ -134,4 +134,16 @@ public class GameState implements Serializable {
     public void setTargetClicked(Boolean bool) {
 	target = bool;
     }
+
+    public void loadGameState(GameState gs){
+    	this.response = gs.response;
+    	this.totalPlayers = gs.totalPlayers;
+    	this.currentPlayer = gs.currentPlayer;
+    	this.curr_player = gs.curr_player;
+
+    	this.currCard = gs.currCard;
+    	this.target = gs.target;
+
+
+    }
 }

@@ -14,13 +14,13 @@ import java.io.Serializable;
 import GameObjects.*;
 
 public class GameManager implements Serializable{
-    private JPanel[] array;
-    private CardPanel card_panel;
-    private Token[] tokens;
-    private int current_player;
-    private JLabel end;
-    private GameState gameState;
-    private int[] sweets_spaces;
+    public JPanel[] array;
+    public CardPanel card_panel;
+    public Token[] tokens;
+    public int current_player;
+    public JLabel end;
+    public GameState gameState;
+    public int[] sweets_spaces;
 
     public GameManager(JPanel[] array, CardPanel card_panel, Token[] tokens, JLabel end, GameState gs, int[] sweets_spaces) {
 		gameState = gs;
@@ -171,5 +171,12 @@ public class GameManager implements Serializable{
     public void endGame() {
 	end.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
 	end.addMouseListener(new PositionListener(0, 0));
+    }
+
+
+    // loads the given Gamemanager
+    public void loadGameManager(GameManager gm){
+    	this.tokens = gm.tokens;
+    	this.current_player = gm.current_player;
     }
 }

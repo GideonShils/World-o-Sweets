@@ -594,21 +594,19 @@ public class WorldOfSweets extends JFrame implements Serializable{
         this.tokens = w.tokens;
         this.current_token = w.current_token;
 
+        // updates token locations
         for (int i = 0; i < num_players; i++){
             positions[tokens[i].getPosition()].add(tokens[i].getLabel());
         }
 
-        /*if (this.num_players < w.num_players){
+        // load gamestate
+        gameState.loadGameState(w.gs);
+        // loads gamemanager
+        gm.loadGameManager(w.gm);
 
-            for(int i = this.num_players; i < w.num_players; i++){
-                JLabel label = new JLabel();
-                label.setIcon(new ImageIcon(getClass().getResource("/tokens/player" + (i+1) + ".png")));
-                Token t = new Token(label);
-                tokens[i] = t;
-                start_panel.add(label);
-            }
-        }*/
-
+        // updates the instruction text
+        gameState.temp_label.setText("Player " + gameState.currentPlayer + "'s turn!");
+        gameState.changeInstruction(1);
 
         this.revalidate();
         this.repaint();

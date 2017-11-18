@@ -133,21 +133,6 @@ public class CardPanel implements Serializable {
 	    combinedPanel.add(cards_panel);
         combinedPanel.add(buttonPanel);
 
-
-        //cards_panel.add(deckLabel);
-        //cards_panel.add(cardLabel);
-
-        //javax.swing.GroupLayout cards_panelLayout = new javax.swing.GroupLayout(cards_panel);
-        //cards_panel.setLayout(cards_panelLayout);
-        /*cards_panelLayout.setHorizontalGroup(
-        cards_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(deckLabel)
-        .addGap(0, 250, Short.MAX_VALUE)
-        );
-        cards_panelLayout.setVerticalGroup(
-        cards_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGap(0, 310, Short.MAX_VALUE)
-        );*/
     }
 
     public JPanel getCardsPanel() {
@@ -164,14 +149,6 @@ public class CardPanel implements Serializable {
         return currentCard;
     }
 
-/*    public void update(){
-        combinedPanel.revalidate();
-        combinedPanel.repaint();
-        cards_panel.revalidate();
-        cards_panel.repaint();
-        buttonPanel.revalidate();
-        buttonPanel.repaint();
-    }*/
 
     private class CardButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {

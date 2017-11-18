@@ -58,6 +58,8 @@ public class LoadSaveHandler{
 		o.num_players = WorldOfSweets.num_players;
 		o.tokens = WorldOfSweets.tokens;
 		o.current_token = WorldOfSweets.current_token;
+		o.gm = WorldOfSweets.gm;
+		o.gs = WorldOfSweets.gameState;
 
 		try {
 			FileOutputStream fos = new FileOutputStream(file);
