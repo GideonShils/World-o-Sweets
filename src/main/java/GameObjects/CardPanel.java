@@ -4,9 +4,10 @@ import WorldOfSweets.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.io.Serializable;
 
 
-public class CardPanel {
+public class CardPanel implements Serializable {
 
     private JPanel cards_panel;
     private JPanel buttonPanel;

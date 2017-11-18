@@ -1,6 +1,8 @@
 package GameObjects;
 
-public class Card {
+import java.io.Serializable;
+
+public class Card implements Serializable {
     private final java.awt.Color green = new java.awt.Color(0, 255, 0);
     private final java.awt.Color blue = new java.awt.Color(0, 0, 255);
     private final java.awt.Color red = new java.awt.Color(255, 0, 0);

@@ -2,10 +2,11 @@ package WorldOfSweets;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.io.Serializable;
 
 import GameObjects.*;
 
-public class DeckManager {
+public class DeckManager implements Serializable{
 	
     /*
       Using ArrayList to act as a stack. Need to track the current index.
