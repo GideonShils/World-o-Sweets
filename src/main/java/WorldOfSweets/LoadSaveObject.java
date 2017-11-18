@@ -6,12 +6,12 @@ import javax.swing.*;
 
 public class LoadSaveObject implements Serializable{
 	
+
+    public CardPanel card_panel;
     public DeckManager dm;
-    public GameState gameState;
     public int num_players;
     public Token[] tokens;
     public Token current_token;
-    public JPanel[] positions;
 
 	public LoadSaveObject(){
 

@@ -9,10 +9,11 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Container;
+import java.io.Serializable;
 
 import GameObjects.*;
 
-public class GameManager{
+public class GameManager implements Serializable{
     private JPanel[] array;
     private CardPanel card_panel;
     private Token[] tokens;
@@ -22,13 +23,13 @@ public class GameManager{
     private int[] sweets_spaces;
 
     public GameManager(JPanel[] array, CardPanel card_panel, Token[] tokens, JLabel end, GameState gs, int[] sweets_spaces) {
-	gameState = gs;
-	this.array = array;
-	this.card_panel = card_panel;
-	this.tokens = tokens;
-	this.current_player = 0;
-	this.end = end;
-	this.sweets_spaces = sweets_spaces;
+		gameState = gs;
+		this.array = array;
+		this.card_panel = card_panel;
+		this.tokens = tokens;
+		this.current_player = 0;
+		this.end = end;
+		this.sweets_spaces = sweets_spaces;
     }    
 
     public void findNext(Color color, int current_pos, int card_type) {

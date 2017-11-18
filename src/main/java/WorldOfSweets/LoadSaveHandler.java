@@ -1,5 +1,6 @@
 package WorldOfSweets;
 
+import GameObjects.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -9,8 +10,10 @@ public class LoadSaveHandler{
 
 	private JMenuItem save;
 	private JMenuItem load;
+	private WorldOfSweets wos;
 
-	public LoadSaveHandler(){
+	public LoadSaveHandler(WorldOfSweets ws){
+		wos = ws;
 	}
 	
 
@@ -50,12 +53,11 @@ public class LoadSaveHandler{
 
 	private boolean saveObject(File file){
 		LoadSaveObject o = new LoadSaveObject();
+		o.card_panel = WorldOfSweets.card_panel;
 		o.dm = WorldOfSweets.dm;
-		o.gameState = WorldOfSweets.gameState;
 		o.num_players = WorldOfSweets.num_players;
 		o.tokens = WorldOfSweets.tokens;
 		o.current_token = WorldOfSweets.current_token;
-		o.positions = WorldOfSweets.positions;
 
 		try {
 			FileOutputStream fos = new FileOutputStream(file);
@@ -84,14 +86,11 @@ public class LoadSaveHandler{
 			FileInputStream fis = new FileInputStream(file);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			LoadSaveObject o = (LoadSaveObject) ois.readObject();
+
 			ois.close();
 
-			WorldOfSweets.dm = o.dm;
-			WorldOfSweets.gameState = o.gameState;
-			WorldOfSweets.num_players = o.num_players;
-			WorldOfSweets.tokens = o.tokens;
-			WorldOfSweets.current_token = o.current_token;
-			WorldOfSweets.positions = o.positions;
+			wos.loadGameBoard(o);
+
 		}
 		catch (FileNotFoundException e){
 			e.printStackTrace();

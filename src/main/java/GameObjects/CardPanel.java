@@ -22,6 +22,8 @@ public class CardPanel implements Serializable {
     private GameState gameState;
     private GameManager gm;
 
+    private Card currentCard;
+
     private int width = 250;
     private int height = 620;
 
@@ -158,22 +160,35 @@ public class CardPanel implements Serializable {
         deckCount.setText(Integer.toString(dm.getCount()));
     }
 
+    public Card getCurrentCard(){
+        return currentCard;
+    }
+
+/*    public void update(){
+        combinedPanel.revalidate();
+        combinedPanel.repaint();
+        cards_panel.revalidate();
+        cards_panel.repaint();
+        buttonPanel.revalidate();
+        buttonPanel.repaint();
+    }*/
+
     private class CardButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             // Disable the button
             toggleButton();
 
             // Draw a new card
-            Card newCard = dm.draw();
-            changeCard(newCard);
+            currentCard = dm.draw();
+            changeCard(currentCard);
 
             // Update gamestate to hold the current card
-            gameState.setCurrCard(newCard);
+            gameState.setCurrCard(currentCard);
 
             // Reenable clicking on board
             gameState.setTargetClicked(false);
 
-            gm.turn(newCard);
+            gm.turn(currentCard);
         }
     }
 
