@@ -78,6 +78,34 @@ public class LoadSaveHandler{
 
 	}
 
+	private boolean loadObject(File file){
+
+		try{
+			FileInputStream fis = new FileInputStream(file);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			LoadSaveObject o = (LoadSaveObject) ois.readObject();
+			ois.close();
+
+			WorldOfSweets.dm = o.dm;
+			WorldOfSweets.gameState = o.gameState;
+			WorldOfSweets.num_players = o.num_players;
+			WorldOfSweets.tokens = o.tokens;
+			WorldOfSweets.current_token = o.current_token;
+			WorldOfSweets.positions = o.positions;
+		}
+		catch (FileNotFoundException e){
+			e.printStackTrace();
+		}
+		catch (IOException e){
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e){
+			e.printStackTrace();
+		}
+
+		return true;
+	}
+
 	private class SaveListener implements ActionListener {
 		public void actionPerformed(ActionEvent e){
 			JFileChooser fileChooser = new JFileChooser();
@@ -94,7 +122,8 @@ public class LoadSaveHandler{
         	JFileChooser fileChooser = new JFileChooser();
         	if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 				File file = fileChooser.getSelectedFile();
-          
+          		
+          		loadObject(file);
           		// save to file
         	}
       	}
