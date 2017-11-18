@@ -608,6 +608,8 @@ public class WorldOfSweets extends JFrame implements Serializable{
         gameState.temp_label.setText("Player " + gameState.currentPlayer + "'s turn!");
         gameState.changeInstruction(1);
 
+        timer.timeAtStart = w.tstart;
+
         this.revalidate();
         this.repaint();
     

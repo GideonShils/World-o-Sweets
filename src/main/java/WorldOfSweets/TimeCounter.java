@@ -5,7 +5,7 @@ import java.awt.*;
 import java.lang.String.*;
 
 public class TimeCounter implements Runnable{
-    private long timeAtStart;
+    public long timeAtStart;
     private java.text.SimpleDateFormat timer_format;
     private Thread newThread;
     private boolean started = false;

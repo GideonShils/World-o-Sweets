@@ -14,6 +14,7 @@ public class LoadSaveObject implements Serializable{
     public Token current_token;
     public GameManager gm;
     public GameState gs;
+    public long tstart;
 
 	public LoadSaveObject(){
 
