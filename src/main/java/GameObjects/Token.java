@@ -1,8 +1,9 @@
 package GameObjects;
 
 import javax.swing.JLabel;
+import java.io.Serializable;
 
-public class Token {
+public class Token implements Serializable {
     int current_position;
     JLabel label; 
 

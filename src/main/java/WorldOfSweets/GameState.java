@@ -6,8 +6,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.lang.*;
+import java.io.Serializable;
 
-public class GameState {
+public class GameState implements Serializable {
 
     int response = 0;
     int totalPlayers = 0;	// Number of total players
@@ -19,10 +20,8 @@ public class GameState {
     Card currCard;
     Boolean target = false;
 
-    TimeCounter time_counter;
 
-	public GameState(TimeCounter tc) {
-        time_counter = tc;
+	public GameState() {
 	}
 
 
@@ -46,7 +45,7 @@ public class GameState {
 	        System.exit(0);
 	    } else {
 	        totalPlayers = Integer.parseInt(selection.getSelectedItem().toString());
-            time_counter.action();  //Start the timer
+            
         }
   	}
 
@@ -134,5 +133,17 @@ public class GameState {
 
     public void setTargetClicked(Boolean bool) {
 	target = bool;
+    }
+
+    public void loadGameState(GameState gs){
+    	this.response = gs.response;
+    	this.totalPlayers = gs.totalPlayers;
+    	this.currentPlayer = gs.currentPlayer;
+    	this.curr_player = gs.curr_player;
+
+    	this.currCard = gs.currCard;
+    	this.target = gs.target;
+
+
     }
 }

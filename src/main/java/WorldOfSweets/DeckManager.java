@@ -2,10 +2,11 @@ package WorldOfSweets;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.io.Serializable;
 
 import GameObjects.*;
 
-public class DeckManager {
+public class DeckManager implements Serializable{
 	
     /*
       Using ArrayList to act as a stack. Need to track the current index.
@@ -13,14 +14,14 @@ public class DeckManager {
       (totalCardCount - 1) will be the index of the card on top of the deck.
       0 will be the index of the card at the bottom of the deck.
     */
-    private ArrayList<Card> deck;
-    private int totalCardCount;
-    private int currentIndex;
+    public ArrayList<Card> deck;
+    public int totalCardCount;
+    public int currentIndex;
 
-    private int numSingles;
-    private int numDoubles;
-    private int numSkips;
-    private int numGoTo;
+    public int numSingles;
+    public int numDoubles;
+    public int numSkips;
+    public int numGoTo;
 
     public DeckManager() {
 	deck = new ArrayList<Card>();
@@ -139,8 +140,18 @@ public class DeckManager {
 
     // Shuffle and reset pointer for the stack
     public void shuffle() {
-	System.out.println("Shuffle!");
-	Collections.shuffle(deck);
-	currentIndex = totalCardCount - 1;
+		System.out.println("Shuffle!");
+		Collections.shuffle(deck);
+		currentIndex = totalCardCount - 1;
+    }
+
+    public void loadDeck(DeckManager newDeck){
+    	deck = newDeck.deck;
+    	totalCardCount = newDeck.totalCardCount;
+    	currentIndex = newDeck.currentIndex;
+    	numSingles = newDeck.numSingles;
+    	numDoubles = newDeck.numDoubles;
+    	numSkips = newDeck.numSkips;
+    	numGoTo = newDeck.numGoTo;
     }
 }

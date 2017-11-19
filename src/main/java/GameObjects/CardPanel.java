@@ -4,9 +4,10 @@ import WorldOfSweets.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.io.Serializable;
 
 
-public class CardPanel {
+public class CardPanel implements Serializable {
 
     private JPanel cards_panel;
     private JPanel buttonPanel;
@@ -20,6 +21,8 @@ public class CardPanel {
     private JLabel cardValue = new JLabel();
     private GameState gameState;
     private GameManager gm;
+
+    private Card currentCard;
 
     private int width = 250;
     private int height = 620;
@@ -130,21 +133,6 @@ public class CardPanel {
 	    combinedPanel.add(cards_panel);
         combinedPanel.add(buttonPanel);
 
-
-        //cards_panel.add(deckLabel);
-        //cards_panel.add(cardLabel);
-
-        //javax.swing.GroupLayout cards_panelLayout = new javax.swing.GroupLayout(cards_panel);
-        //cards_panel.setLayout(cards_panelLayout);
-        /*cards_panelLayout.setHorizontalGroup(
-        cards_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(deckLabel)
-        .addGap(0, 250, Short.MAX_VALUE)
-        );
-        cards_panelLayout.setVerticalGroup(
-        cards_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGap(0, 310, Short.MAX_VALUE)
-        );*/
     }
 
     public JPanel getCardsPanel() {
@@ -157,22 +145,27 @@ public class CardPanel {
         deckCount.setText(Integer.toString(dm.getCount()));
     }
 
+    public Card getCurrentCard(){
+        return currentCard;
+    }
+
+
     private class CardButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             // Disable the button
             toggleButton();
 
             // Draw a new card
-            Card newCard = dm.draw();
-            changeCard(newCard);
+            currentCard = dm.draw();
+            changeCard(currentCard);
 
             // Update gamestate to hold the current card
-            gameState.setCurrCard(newCard);
+            gameState.setCurrCard(currentCard);
 
             // Reenable clicking on board
             gameState.setTargetClicked(false);
 
-            gm.turn(newCard);
+            gm.turn(currentCard);
         }
     }
 
