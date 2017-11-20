@@ -60,7 +60,8 @@ public class LoadSaveHandler{
 		o.current_token = WorldOfSweets.current_token;
 		o.gm = WorldOfSweets.gm;
 		o.gs = WorldOfSweets.gameState;
-		o.tstart = WorldOfSweets.timer.timeAtStart;
+		o.time_elapsed = WorldOfSweets.timer.time_elapsed;
+		o.old_time_elapsed = WorldOfSweets.timer.time_elapsed;
 
 		try {
 			FileOutputStream fos = new FileOutputStream(file);
