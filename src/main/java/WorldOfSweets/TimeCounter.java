@@ -6,16 +6,33 @@ import java.lang.String.*;
 
 public class TimeCounter implements Runnable{
     public long timeAtStart;
+    public long time_elapsed;
+    public long old_time_elapsed;
+
+    // Intially tell timer this is the first time the game has been played
+    // This gets set to true if the game has been loaded
+    public Boolean loaded = false;
+
     private java.text.SimpleDateFormat timer_format;
     private Thread newThread;
     private boolean started = false;
     private JLabel timer_label;
     private JPanel timer_panel;
-    private int counter = 0;
+    
 
     private Runnable updateThreads= new Runnable(){
 		public void run(){
-            changeTime(System.currentTimeMillis() - TimeCounter.this.timeAtStart);
+
+            // If this is a loaded game, time = old elapsed time + (current time - new start time)
+            if (loaded) {
+                time_elapsed = old_time_elapsed + (System.currentTimeMillis() - TimeCounter.this.timeAtStart);
+            }
+            // If this is a new game, time = current time - start time
+            else {
+                time_elapsed = System.currentTimeMillis() - TimeCounter.this.timeAtStart;
+            }
+
+            changeTime(time_elapsed);
         }
     };
 
@@ -35,29 +52,39 @@ public class TimeCounter implements Runnable{
     }
 
     public void action(){
-		if(started == true){
-            long time_used = System.currentTimeMillis() - timeAtStart;
-            started= false;
-            try{
+		if (started == true){
+             // If this is a loaded game, time = old elapsed time + (current time - new start time)
+             if (loaded) {
+                time_elapsed = old_time_elapsed + (System.currentTimeMillis() - TimeCounter.this.timeAtStart);
+            }
+            // If this is a new game, time = current time - start time
+            else {
+                time_elapsed = System.currentTimeMillis() - TimeCounter.this.timeAtStart;
+            }
+            
+            started = false;
+            try {
                 newThread.join();
             } catch(InterruptedException e) {}
-				changeTime(time_used);
-         } else {
-             timeAtStart = System.currentTimeMillis();
-             started= true;
-             newThread= new Thread(this);
-             newThread.start();
+				changeTime(time_elapsed);
+        } else {
+            // Begin
+            timeAtStart = System.currentTimeMillis();
+            time_elapsed = 0;
+            started = true;
+            newThread= new Thread(this);
+            newThread.start();
         }
     }
 
-    public void run(){
-        try{
-            while(started == true){
-                 SwingUtilities.invokeAndWait(updateThreads);
-                 Thread.sleep(5);
+    public void run() {
+        try {
+            while (started == true) {
+                SwingUtilities.invokeAndWait(updateThreads);
+                Thread.sleep(5);
             }
         }
-        catch(java.lang.reflect.InvocationTargetException e){}
+        catch(java.lang.reflect.InvocationTargetException e) {}
         catch(InterruptedException e) {}
     }
 }

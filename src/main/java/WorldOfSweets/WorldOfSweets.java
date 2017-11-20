@@ -468,7 +468,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
 
         non_board_panel.setPreferredSize(new java.awt.Dimension(250, 620));
 
-        //Add turn panel + card panel to same panel
+        // Add turn panel + card panel to same panel
         card_panel = new CardPanel(dm, gameState);
         combinedPanel = new javax.swing.JPanel();
       	combinedPanel.setLayout(new BoxLayout(combinedPanel, BoxLayout.Y_AXIS));
@@ -476,20 +476,19 @@ public class WorldOfSweets extends JFrame implements Serializable{
         combinedPanel.add(card_panel.getCardsPanel());
         combinedPanel.add(turn_panel);
 
-
-
         non_board_panel.add(combinedPanel);
 
         JPanel current_instruction = gameState.currentInstruction();
         non_board_panel.add(current_instruction);
 
+
         //Long.toString(System.currentTimeMillis())
+
+        // Add timer to board
         JPanel timer_panel = timer.getTimerPanel();
         non_board_panel.add(timer_panel);
 
         game_container_panel.add(non_board_panel);
-
-        
 
         getContentPane().add(game_container_panel, java.awt.BorderLayout.CENTER);
 
@@ -501,21 +500,21 @@ public class WorldOfSweets extends JFrame implements Serializable{
      */
     public static void main(String args[]) {
 
-        
-
-        //create and begin timer
+        // Create and begin timer
         timer = new TimeCounter();
         timer.run();
 
         // Initialize game sate and bring up dialog
         // asking for number of players
-	    gameState = new GameState();
+	gameState = new GameState();
         gameState.promptPlayers();
 
-	    // Create deck manager object
+	// Create deck manager object
         dm = new DeckManager();
+
         // Create the deck itself
         dm.createDeck(10, 2, 5);
+
         // Shuffle the deck
         dm.shuffle();
 
@@ -538,19 +537,18 @@ public class WorldOfSweets extends JFrame implements Serializable{
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-		public void run() {
-            
-		    WorldOfSweets wos = new WorldOfSweets(gameState.getPlayers());
-            lsh = new LoadSaveHandler(wos);
-            wos.createMenuBar();
-            wos.setVisible(true);
+	        public void run() {
+		        WorldOfSweets wos = new WorldOfSweets(gameState.getPlayers());
+                        lsh = new LoadSaveHandler(wos);
+                        wos.createMenuBar();
+                        wos.setVisible(true);
 
             
-            timer.action();  //Start the timer
-		    gm = new GameManager(positions, card_panel, tokens, grandmas_house, gameState, sweets_spaces);
-		    card_panel.setGameManager(gm);
+                        timer.action();  // Start the timer
+                        gm = new GameManager(positions, card_panel, tokens, grandmas_house, gameState, sweets_spaces);
+                        card_panel.setGameManager(gm);
 		}
-	    });
+	});
 
 
 
@@ -608,7 +606,13 @@ public class WorldOfSweets extends JFrame implements Serializable{
         gameState.temp_label.setText("Player " + gameState.currentPlayer + "'s turn!");
         gameState.changeInstruction(1);
 
-        timer.timeAtStart = w.tstart;
+        timer.old_time_elapsed = w.old_time_elapsed;
+
+        // Tell timer that this is a loaded game
+        timer.loaded = true;
+
+        // Reset start time to current time
+        timer.timeAtStart = System.currentTimeMillis();
 
         this.revalidate();
         this.repaint();
