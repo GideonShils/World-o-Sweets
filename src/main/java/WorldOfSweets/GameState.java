@@ -29,7 +29,7 @@ public class GameState implements Serializable {
 
     public void promptPlayers() {
 	// Initialize panel and combo box
-	JPanel panel = new JPanel();
+	JPanel panel = new JPanel(new GridLayout(0, 1));
 	DefaultComboBoxModel model = new DefaultComboBoxModel();
     DefaultComboBoxModel typeOfGame = new DefaultComboBoxModel();
 
@@ -44,7 +44,9 @@ public class GameState implements Serializable {
 	JComboBox selection = new JComboBox(model);
     JComboBox selectionTwo = new JComboBox(typeOfGame);
 
+    panel.add(new JLabel("Number of Players"));
 	panel.add(selection);
+    panel.add(new JLabel("Type of Game"));
     panel.add(selectionTwo);
 	response = JOptionPane.showConfirmDialog(null, panel, "Number of Players + Type of Game", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
