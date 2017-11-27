@@ -12,7 +12,7 @@ public class CardTests {
 		java.awt.Color green = new java.awt.Color(0, 255, 0);
 
 		assertEquals(c.getColor(), green);
-		assertEquals(c.isDouble(), false);	
+		assertEquals(c.isDouble(), false);
 
 	}
 
@@ -23,7 +23,7 @@ public class CardTests {
 		java.awt.Color green = new java.awt.Color(0, 255, 0);
 
 		assertEquals(c.getColor(), green);
-		assertEquals(c.isDouble(), true);	
+		assertEquals(c.isDouble(), true);
 
 	}
 
@@ -34,7 +34,7 @@ public class CardTests {
 		java.awt.Color blue = new java.awt.Color(0, 0, 255);
 
 		assertEquals(c.getColor(), blue);
-		assertEquals(c.isDouble(), false);	
+		assertEquals(c.isDouble(), false);
 
 	}
 
@@ -45,7 +45,7 @@ public class CardTests {
 		java.awt.Color blue = new java.awt.Color(0, 0, 255);
 
 		assertEquals(c.getColor(), blue);
-		assertEquals(c.isDouble(), true);	
+		assertEquals(c.isDouble(), true);
 
 	}
 
@@ -55,7 +55,7 @@ public class CardTests {
 		Card c = new Card("red", false);
 		java.awt.Color red = new java.awt.Color(255, 0, 0);
 		assertEquals(c.getColor(), red);
-		assertEquals(c.isDouble(), false);	
+		assertEquals(c.isDouble(), false);
 
 	}
 
@@ -66,7 +66,7 @@ public class CardTests {
 		java.awt.Color red = new java.awt.Color(255, 0, 0);
 
 		assertEquals(c.getColor(), red);
-		assertEquals(c.isDouble(), true);	
+		assertEquals(c.isDouble(), true);
 
 	}
 
@@ -76,7 +76,7 @@ public class CardTests {
 		Card c = new Card("yellow", false);
 		java.awt.Color yellow = new java.awt.Color(255, 255, 0);
 		assertEquals(c.getColor(), yellow);
-		assertEquals(c.isDouble(), false);	
+		assertEquals(c.isDouble(), false);
 
 	}
 
@@ -87,7 +87,7 @@ public class CardTests {
 		java.awt.Color yellow = new java.awt.Color(255, 255, 0);
 
 		assertEquals(c.getColor(), yellow);
-		assertEquals(c.isDouble(), true);	
+		assertEquals(c.isDouble(), true);
 
 	}
 
@@ -97,7 +97,7 @@ public class CardTests {
 		Card c = new Card("orange", false);
 		java.awt.Color orange = new java.awt.Color(255, 153, 0);
 		assertEquals(c.getColor(), orange);
-		assertEquals(c.isDouble(), false);	
+		assertEquals(c.isDouble(), false);
 
 	}
 
@@ -108,7 +108,7 @@ public class CardTests {
 		java.awt.Color orange = new java.awt.Color(255, 153, 0);
 
 		assertEquals(c.getColor(), orange);
-		assertEquals(c.isDouble(), true);	
+		assertEquals(c.isDouble(), true);
 
 	}
 
@@ -175,14 +175,6 @@ public class CardTests {
 		Card c = new Card("red", false, false, true);
 
 		assertEquals(true, c.goTo());
-	}
-
-	//check to make sure correct text is returned for Go To Middle card
-	@Test
-	public void getGoToMiddleText(){
-		Card c = new Card("red", false, false, true);
-
-		assertEquals("Go to Middle", c.getCardText());
 	}
 
 }
