@@ -108,7 +108,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
 	positions[pos++] = green;
 	positions[pos++] = orange;
 	positions[pos++] = pie; //Go To Five, off map, Position 35
-	
+
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         //setPreferredSize(new java.awt.Dimension(872, 690));
@@ -139,7 +139,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
         pie.setOpaque(true);
 	pie.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(pie);
-	
+
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
 	board_panel.add(temp_panel);
@@ -153,7 +153,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
         orange.setOpaque(true);
 	orange.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(orange);
-	
+
         green.setBackground(new java.awt.Color(0, 255, 0));
         green.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         green.setOpaque(true);
@@ -171,7 +171,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
         yellow.setOpaque(true);
 	yellow.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(yellow);
-	
+
 	for (int x = 1; x <= 9; x++){
 	    temp_panel = new JPanel();
 	    temp_panel.setOpaque(false);
@@ -207,13 +207,13 @@ public class WorldOfSweets extends JFrame implements Serializable{
 	    temp_panel.setOpaque(false);
 	    board_panel.add(temp_panel);
 	}
-	
+
         blue_one.setBackground(new java.awt.Color(0, 0, 255));
         blue_one.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         blue_one.setOpaque(true);
 	blue_one.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(blue_one);
-	
+
 	for (int x = 1; x <= 2; x++){
 	    temp_panel = new JPanel();
 	    temp_panel.setOpaque(false);
@@ -259,7 +259,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
         red_one.setOpaque(true);
 	red_one.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(red_one);
-	
+
         yellow_one.setBackground(new java.awt.Color(255, 255, 0));
         yellow_one.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 	yellow_one.setLayout(new java.awt.GridLayout(2, 2));
@@ -283,7 +283,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
 	board_panel.add(temp_panel);
-	
+
         red_two.setBackground(new java.awt.Color(255, 0, 0));
         red_two.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         red_two.setOpaque(true);
@@ -305,7 +305,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
 	    temp_panel.setOpaque(false);
 	    board_panel.add(temp_panel);
 	}
-	
+
         yellow_two.setBackground(new java.awt.Color(255, 255, 0));
         yellow_two.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         yellow_two.setOpaque(true);
@@ -333,7 +333,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
         yellow_four.setOpaque(true);
 	yellow_four.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(yellow_four);
-	
+
         red_three.setBackground(new java.awt.Color(255, 0, 0));
         red_three.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 	red_three.setLayout(new java.awt.GridLayout(2, 2));
@@ -357,7 +357,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
 	    temp_panel.setOpaque(false);
 	    board_panel.add(temp_panel);
 	}
-	
+
         red_four.setBackground(new java.awt.Color(255, 0, 0));
         red_four.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         red_four.setOpaque(true);
@@ -367,7 +367,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
 	board_panel.add(temp_panel);
-        
+
         blue_four.setBackground(new java.awt.Color(0, 0, 255));
         blue_four.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 	blue_four.setLayout(new java.awt.GridLayout(2, 2));
@@ -407,7 +407,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
 
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
-	board_panel.add(temp_panel);        
+	board_panel.add(temp_panel);
 
 	green_five.setBackground(new java.awt.Color(0, 255, 0));
         green_five.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -432,12 +432,12 @@ public class WorldOfSweets extends JFrame implements Serializable{
         red_five.setOpaque(true);
 	red_five.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(red_five);
-	
+
         yellow_five.setBackground(new java.awt.Color(255, 255, 0));
         yellow_five.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         yellow_five.setOpaque(true);
 	yellow_five.setLayout(new java.awt.GridLayout(2, 2));
-	board_panel.add(yellow_five);      	
+	board_panel.add(yellow_five);
 
         blue_five.setBackground(new java.awt.Color(0, 0, 255));
         blue_five.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -489,7 +489,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
 
         game_container_panel.add(non_board_panel);
 
-        
+
 
         getContentPane().add(game_container_panel, java.awt.BorderLayout.CENTER);
 
@@ -501,7 +501,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
      */
     public static void main(String args[]) {
 
-        
+
 
         //create and begin timer
         timer = new TimeCounter();
@@ -539,13 +539,13 @@ public class WorldOfSweets extends JFrame implements Serializable{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
 		public void run() {
-            
+
 		    WorldOfSweets wos = new WorldOfSweets(gameState.getPlayers());
             lsh = new LoadSaveHandler(wos);
             wos.createMenuBar();
             wos.setVisible(true);
 
-            
+
             timer.action();  //Start the timer
 		    gm = new GameManager(positions, card_panel, tokens, grandmas_house, gameState, sweets_spaces);
 		    card_panel.setGameManager(gm);
@@ -591,7 +591,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
         //replaces deck with loaded deck
         dm.loadDeck(w.dm);
 
-        
+
         // removes tokens on start space
         for (int i = 0; i < num_players; i++){
             Container parent = tokens[i].getLabel().getParent();
@@ -615,11 +615,11 @@ public class WorldOfSweets extends JFrame implements Serializable{
         gm.loadGameManager(w.gm);
 
         // updates the instruction text
-        gameState.temp_label.setText("Player " + gameState.currentPlayer + "'s turn!");
+        gameState.temp_label.setText(gameState.getPlayerName(gameState.currentPlayer) + "'s turn!");
         gameState.changeInstruction(1);
 
         timer.old_time_elapsed = w.old_time_elapsed;
-        
+
         // Tell timer that this is a loaded game
         timer.loaded = true;
 
@@ -628,7 +628,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
 
         this.revalidate();
         this.repaint();
-    
+
     }
 
 
@@ -696,10 +696,10 @@ public class WorldOfSweets extends JFrame implements Serializable{
     public JPanel instructions_panel;
     public JPanel combinedPanel;
     public JPanel turn_panel;
-    
+
 
     public final static int[] sweets_spaces = new int[]{5, 12, 18, 27, 35};
     public final static String[] sweets = new String[]{"Ice Cream", "Cake", "Cookie", "Cupcake", "Pie"};
-    
+
 
 }
