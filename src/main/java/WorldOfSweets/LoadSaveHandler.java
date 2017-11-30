@@ -101,8 +101,7 @@ public class LoadSaveHandler{
 	private boolean loadObject(File file){
 
 		if (!MD5Checksum.compareChecksum(file)){
-			System.out.println("Tampered file");
-
+			errorBox("Cannot load the game due to the file being corrupted!", "Corrupted File");
 			return false;
 		}
 
@@ -129,6 +128,10 @@ public class LoadSaveHandler{
 
 
 		return true;
+	}
+
+	private void errorBox(String infoMessage, String titleBar){
+		JOptionPane.showMessageDialog(null, infoMessage, "Error: " + titleBar, JOptionPane.ERROR_MESSAGE);
 	}
 
 	private class SaveListener implements ActionListener {

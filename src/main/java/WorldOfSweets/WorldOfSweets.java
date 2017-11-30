@@ -586,7 +586,9 @@ public class WorldOfSweets extends JFrame implements Serializable{
 
         // updates card panel with correct color
         Card c = w.card_panel.getCurrentCard();
-        this.card_panel.changeCard(c);
+        
+        if (c != null)    
+            this.card_panel.changeCard(c);
 
         //replaces deck with loaded deck
         dm.loadDeck(w.dm);
