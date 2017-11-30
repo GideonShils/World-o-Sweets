@@ -68,6 +68,7 @@ public class LoadSaveHandler{
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(o);
 			oos.close();
+
 		}
 		catch(FileNotFoundException e){
 			//System.out.println("File not found exception!");
@@ -80,11 +81,29 @@ public class LoadSaveHandler{
 			return false;
 		}
 
+		try{
+			String checksum = MD5Checksum.getMD5Checksum(file.getPath());
+			PrintWriter out = new PrintWriter(file.getPath() + "_checksum.txt");
+
+			out.print(checksum);
+
+			out.close();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+
 		return true;
 
 	}
 
 	private boolean loadObject(File file){
+
+		if (!MD5Checksum.compareChecksum(file)){
+			errorBox("Cannot load the game due to the file being corrupted!", "Corrupted File");
+			return false;
+		}
 
 		try{
 			FileInputStream fis = new FileInputStream(file);
@@ -106,7 +125,13 @@ public class LoadSaveHandler{
 			e.printStackTrace();
 		}
 
+
+
 		return true;
+	}
+
+	private void errorBox(String infoMessage, String titleBar){
+		JOptionPane.showMessageDialog(null, infoMessage, "Error: " + titleBar, JOptionPane.ERROR_MESSAGE);
 	}
 
 	private class SaveListener implements ActionListener {
