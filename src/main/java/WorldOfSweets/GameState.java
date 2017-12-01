@@ -11,10 +11,10 @@ import java.io.Serializable;
 public class GameState implements Serializable {
 
     int response = 0;
-    String gameType = "";   //Type of game
+    public String gameType = "";   //Type of game
     int totalPlayers = 0;	// Number of total players
-    int currentPlayer = 0;
-    int curr_player = 1;
+    public int currentPlayer = 0;
+    public int curr_player = 1;
     JLabel temp_label;
     JLabel instruction_label;
     String[] namesArr;      //Used for names
@@ -124,15 +124,13 @@ public class GameState implements Serializable {
 	return totalPlayers;
     }
 
-    // Used for turns
+    // get next player without changing whose turn it is
     public int getNextPlayer() {
-	if (currentPlayer == totalPlayers) {
-	    currentPlayer = 1;
-	    return 1;
-	} else {
-	    currentPlayer += 1;
-	    return currentPlayer;
-	}
+    	if (currentPlayer == totalPlayers) {
+    	    return 1;
+    	} else {
+    	    return currentPlayer + 1;
+    	}
     }
 
     public int returnCurrPlayer() {
@@ -213,6 +211,8 @@ public class GameState implements Serializable {
 
     	this.currCard = gs.currCard;
     	this.target = gs.target;
+
+        this.namesArr = gs.namesArr;
 
 
     }

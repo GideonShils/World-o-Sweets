@@ -34,49 +34,88 @@ public class GameManager implements Serializable{
 
     public void findNext(Color color, int current_pos, int card_type) {
 
-	if (card_type > 5) {
-	    if(current_pos != sweets_spaces[4]){
-		int pos = -1;
-		int j = 0;
-		for (int i = 0; i < card_type - 5; i++) {
-		    for (j = current_pos+1; j < array.length; j++) {
-			if(array[j].getBackground().equals(color)) {
-			    pos = j;
-			    current_pos = j;
-			    break;
-			}
+		if (card_type > 5) {
+		    if(current_pos != sweets_spaces[4]){
+				int pos = -1;
+				int j = 0;
+				for (int i = 0; i < card_type - 5; i++) {
+				    for (j = current_pos+1; j < array.length; j++) {
+						if(array[j].getBackground().equals(color)) {
+						    pos = j;
+						    current_pos = j;
+						    break;
+						}
+				    }
+				    if (j == array.length) {
+						tokens[current_player].setPosition(pos);
+						endGame();
+				    }
+				}
+
+				if (j != array.length) {
+				    tokens[current_player].setPosition(pos);
+				    array[pos].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
+				    array[pos].addMouseListener(new PositionListener(current_pos, pos));
+				}
 		    }
-		    if (j == array.length) {
-			tokens[current_player].setPosition(pos);
-			endGame();
+		}
+		else if (card_type <= 4) {
+		    if(card_type == 4){
+				if(current_pos != sweets_spaces[4]){
+				    JOptionPane.showMessageDialog(null, "You have been sent to Pie Land, draw another sweets card to return","", JOptionPane.WARNING_MESSAGE);
+				}
+				else{
+				    return;
+				}
 		    }
+		    int location = sweets_spaces[card_type];
+			
+		    tokens[current_player].setPosition(location);
+		    array[location].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
+		    array[location].addMouseListener(new PositionListener(current_pos, location));
+		}
+		else {
+		    JOptionPane.showMessageDialog(null, "Your turn was skipped!","", JOptionPane.WARNING_MESSAGE);
 		}
 
-		if (j != array.length) {
-		    tokens[current_player].setPosition(pos);
-		    array[pos].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
-		    array[pos].addMouseListener(new PositionListener(current_pos, pos));
+    }
+
+    public int findNextDadMode(Color color, int current_pos, int card_type) {
+
+		if (card_type > 5) {
+		    if(current_pos != sweets_spaces[4]){
+				int pos = -1;
+				int j = 0;
+
+				// searches board array for color
+				for (j = current_pos+1; j < array.length; j++) {
+					if(array[j].getBackground().equals(color)) {
+						pos = j;
+						break;
+					}
+				}
+
+				if (card_type == 7){
+					for (j = pos+1; j < array.length; j++) {
+						if(array[j].getBackground().equals(color)) {
+							pos = j;
+							break;
+						}
+					}
+				}
+
+				return pos;
+		    }
 		}
-	    }
-	}
-	else if (card_type <= 4) {
-	    if(card_type == 4){
-		if(current_pos != sweets_spaces[4]){
-		    JOptionPane.showMessageDialog(null, "You have been sent to Pie Land, draw another sweets card to return","", JOptionPane.WARNING_MESSAGE);
+		else if (card_type <= 4) {
+		    if(card_type == 4){
+				return -1;
+		    }
+		    return sweets_spaces[card_type];
 		}
-		else{
-		    return;
-		}
-	    }
-	    int location = sweets_spaces[card_type];
+
+		return -2;
 		
-	    tokens[current_player].setPosition(location);
-	    array[location].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
-	    array[location].addMouseListener(new PositionListener(current_pos, location));
-	}
-	else {
-	    JOptionPane.showMessageDialog(null, "Your turn was skipped!","", JOptionPane.WARNING_MESSAGE);
-	}
 
     }
 
