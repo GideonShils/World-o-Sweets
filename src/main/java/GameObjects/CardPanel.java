@@ -156,7 +156,6 @@ public class CardPanel implements Serializable {
             // Disable the button
             toggleButton();
 
-            System.out.println();
 
             // Draw a new card
             if (gameState.getPlayerName(gameState.curr_player).toUpperCase().equals("DAD")){

@@ -124,13 +124,15 @@ public class GameState implements Serializable {
 	return totalPlayers;
     }
 
-    // get next player without changing whose turn it is
+    // Used for turns
     public int getNextPlayer() {
-    	if (currentPlayer == totalPlayers) {
-    	    return 1;
-    	} else {
-    	    return currentPlayer + 1;
-    	}
+        if (currentPlayer == totalPlayers) {
+            currentPlayer = 1;
+            return 1;
+        } else {
+            currentPlayer += 1;
+            return currentPlayer;
+        }
     }
 
     public int returnCurrPlayer() {

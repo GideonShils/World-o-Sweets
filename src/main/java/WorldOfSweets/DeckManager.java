@@ -155,7 +155,6 @@ public class DeckManager implements Serializable{
 
 		// current position of dad
     	int currPosition = gm.tokens[gm.gameState.curr_player - 1].getPosition();
-    	System.out.println("current pos: " +currPosition);
     	
     	// grab next card on deck
     	Card minCard = deck.get(currentIndex);
@@ -171,7 +170,7 @@ public class DeckManager implements Serializable{
     		Card currentCard = deck.get(i);
 
     		int pos = gm.findNextDadMode(currentCard.getColor(), currPosition, getType(currentCard));
-    		System.out.println("i: " + i + " pos: " + pos + " color: " + currentCard.getColor().toString() + " " + getType(currentCard));
+   
     		// if pie land is drawn, skip it. Dad would always draw pie land on first turn otherwise
     		if (pos == -1 && i == currentIndex){
     			currentIndex--;
@@ -197,11 +196,7 @@ public class DeckManager implements Serializable{
     		}
     	}
 
-    	System.out.println();
-    	System.out.println("minPos: " + minPos);
-    	System.out.println("color: " + minCard.getColor().toString());
-    	System.out.println("minCardPos " + minCardPos);
-
+    	// swap card out so that it isn't used again
     	if (found)
     		swapCards(currentIndex, minCardPos);
 
