@@ -1,13 +1,16 @@
 package WorldOfSweets;
 import GameObjects.*;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 
-public class WorldOfSweets extends JFrame{
+public class WorldOfSweets extends JFrame implements Serializable{
     /**
      * Creates new form WorldOfSweets
      */
@@ -16,10 +19,10 @@ public class WorldOfSweets extends JFrame{
     }
 
     @SuppressWarnings("unchecked")
-    private void initComponents(int num_players) {
-	this.num_players = num_players;
+    public void initComponents(int num_players) {
+        this.num_players = num_players;
         java.awt.GridBagConstraints gridBagConstraints;
-	positions = new JPanel[36];
+	   positions = new JPanel[36];
 
         header_label = new JLabel();
         game_container_panel = new JPanel();
@@ -31,7 +34,7 @@ public class WorldOfSweets extends JFrame{
         blue_two = new JPanel();
         blue_three = new JPanel();
         blue_four = new JPanel();
-	blue_five = new JPanel();
+	   blue_five = new JPanel();
         yellow = new JPanel();
         yellow_one = new JPanel();
         yellow_two = new JPanel();
@@ -105,7 +108,7 @@ public class WorldOfSweets extends JFrame{
 	positions[pos++] = green;
 	positions[pos++] = orange;
 	positions[pos++] = pie; //Go To Five, off map, Position 35
-	
+
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         //setPreferredSize(new java.awt.Dimension(872, 690));
@@ -136,7 +139,7 @@ public class WorldOfSweets extends JFrame{
         pie.setOpaque(true);
 	pie.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(pie);
-	
+
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
 	board_panel.add(temp_panel);
@@ -150,7 +153,7 @@ public class WorldOfSweets extends JFrame{
         orange.setOpaque(true);
 	orange.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(orange);
-	
+
         green.setBackground(new java.awt.Color(0, 255, 0));
         green.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         green.setOpaque(true);
@@ -168,7 +171,7 @@ public class WorldOfSweets extends JFrame{
         yellow.setOpaque(true);
 	yellow.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(yellow);
-	
+
 	for (int x = 1; x <= 9; x++){
 	    temp_panel = new JPanel();
 	    temp_panel.setOpaque(false);
@@ -204,13 +207,13 @@ public class WorldOfSweets extends JFrame{
 	    temp_panel.setOpaque(false);
 	    board_panel.add(temp_panel);
 	}
-	
+
         blue_one.setBackground(new java.awt.Color(0, 0, 255));
         blue_one.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         blue_one.setOpaque(true);
 	blue_one.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(blue_one);
-	
+
 	for (int x = 1; x <= 2; x++){
 	    temp_panel = new JPanel();
 	    temp_panel.setOpaque(false);
@@ -256,7 +259,7 @@ public class WorldOfSweets extends JFrame{
         red_one.setOpaque(true);
 	red_one.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(red_one);
-	
+
         yellow_one.setBackground(new java.awt.Color(255, 255, 0));
         yellow_one.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 	yellow_one.setLayout(new java.awt.GridLayout(2, 2));
@@ -269,16 +272,18 @@ public class WorldOfSweets extends JFrame{
 	    board_panel.add(temp_panel);
 	}
 
+
 	blue_two.setBackground(new java.awt.Color(0, 0, 255));
         blue_two.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         blue_two.setOpaque(true);
 	blue_two.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(blue_two);
 
+
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
 	board_panel.add(temp_panel);
-	
+
         red_two.setBackground(new java.awt.Color(255, 0, 0));
         red_two.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         red_two.setOpaque(true);
@@ -300,7 +305,7 @@ public class WorldOfSweets extends JFrame{
 	    temp_panel.setOpaque(false);
 	    board_panel.add(temp_panel);
 	}
-	
+
         yellow_two.setBackground(new java.awt.Color(255, 255, 0));
         yellow_two.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         yellow_two.setOpaque(true);
@@ -311,11 +316,13 @@ public class WorldOfSweets extends JFrame{
 	temp_panel.setOpaque(false);
 	board_panel.add(temp_panel);
 
+
         yellow_three.setBackground(new java.awt.Color(255, 255, 0));
         yellow_three.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         yellow_three.setOpaque(true);
 	yellow_three.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(yellow_three);
+
 
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
@@ -326,7 +333,7 @@ public class WorldOfSweets extends JFrame{
         yellow_four.setOpaque(true);
 	yellow_four.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(yellow_four);
-	
+
         red_three.setBackground(new java.awt.Color(255, 0, 0));
         red_three.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 	red_three.setLayout(new java.awt.GridLayout(2, 2));
@@ -350,7 +357,7 @@ public class WorldOfSweets extends JFrame{
 	    temp_panel.setOpaque(false);
 	    board_panel.add(temp_panel);
 	}
-	
+
         red_four.setBackground(new java.awt.Color(255, 0, 0));
         red_four.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         red_four.setOpaque(true);
@@ -360,7 +367,7 @@ public class WorldOfSweets extends JFrame{
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
 	board_panel.add(temp_panel);
-        
+
         blue_four.setBackground(new java.awt.Color(0, 0, 255));
         blue_four.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 	blue_four.setLayout(new java.awt.GridLayout(2, 2));
@@ -400,7 +407,7 @@ public class WorldOfSweets extends JFrame{
 
 	temp_panel = new JPanel();
 	temp_panel.setOpaque(false);
-	board_panel.add(temp_panel);        
+	board_panel.add(temp_panel);
 
 	green_five.setBackground(new java.awt.Color(0, 255, 0));
         green_five.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -425,12 +432,12 @@ public class WorldOfSweets extends JFrame{
         red_five.setOpaque(true);
 	red_five.setLayout(new java.awt.GridLayout(2, 2));
         board_panel.add(red_five);
-	
+
         yellow_five.setBackground(new java.awt.Color(255, 255, 0));
         yellow_five.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         yellow_five.setOpaque(true);
 	yellow_five.setLayout(new java.awt.GridLayout(2, 2));
-	board_panel.add(yellow_five);      	
+	board_panel.add(yellow_five);
 
         blue_five.setBackground(new java.awt.Color(0, 0, 255));
         blue_five.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -463,35 +470,26 @@ public class WorldOfSweets extends JFrame{
 
         //Add turn panel + card panel to same panel
         card_panel = new CardPanel(dm, gameState);
-        JPanel combinedPanel = new javax.swing.JPanel();
+        combinedPanel = new javax.swing.JPanel();
       	combinedPanel.setLayout(new BoxLayout(combinedPanel, BoxLayout.Y_AXIS));
-        JPanel turn_panel = gameState.turnPanel();
+        turn_panel = gameState.turnPanel();
         combinedPanel.add(card_panel.getCardsPanel());
         combinedPanel.add(turn_panel);
+
+
+
         non_board_panel.add(combinedPanel);
 
         JPanel current_instruction = gameState.currentInstruction();
         non_board_panel.add(current_instruction);
 
-        /*
-        instructions_panel.setPreferredSize(new java.awt.Dimension(250, 310));
-
-        GroupLayout instructions_panelLayout = new GroupLayout(instructions_panel);
-        instructions_panel.setLayout(instructions_panelLayout);
-        instructions_panelLayout.setHorizontalGroup(
-						    instructions_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						    .addGap(0, 250, Short.MAX_VALUE)
-						    );
-        instructions_panelLayout.setVerticalGroup(
-						  instructions_panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-						  .addGap(0, 310, Short.MAX_VALUE)
-						  );
-        
-
-        non_board_panel.add(instructions_panel);
-        */
+        //Long.toString(System.currentTimeMillis())
+        JPanel timer_panel = timer.getTimerPanel();
+        non_board_panel.add(timer_panel);
 
         game_container_panel.add(non_board_panel);
+
+
 
         getContentPane().add(game_container_panel, java.awt.BorderLayout.CENTER);
 
@@ -503,17 +501,21 @@ public class WorldOfSweets extends JFrame{
      */
     public static void main(String args[]) {
 
+
+
+        //create and begin timer
+        timer = new TimeCounter();
+        timer.run();
+
         // Initialize game sate and bring up dialog
         // asking for number of players
-	    gameState = new GameState();
+	gameState = new GameState();
         gameState.promptPlayers();
 
 	    // Create deck manager object
         dm = new DeckManager();
-
         // Create the deck itself
         dm.createDeck(10, 2, 5);
-
         // Shuffle the deck
         dm.shuffle();
 
@@ -533,11 +535,19 @@ public class WorldOfSweets extends JFrame{
         } catch (UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(WorldOfSweets.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
 		public void run() {
-		    new WorldOfSweets(gameState.getPlayers()).setVisible(true);
-		    GameManager gm = new GameManager(positions, card_panel, tokens, grandmas_house, gameState, sweets_spaces);
+
+		    WorldOfSweets wos = new WorldOfSweets(gameState.getPlayers());
+            lsh = new LoadSaveHandler(wos);
+            wos.createMenuBar();
+            wos.setVisible(true);
+
+
+            timer.action();  //Start the timer
+		    gm = new GameManager(positions, card_panel, tokens, grandmas_house, gameState, sweets_spaces);
 		    card_panel.setGameManager(gm);
 		}
 	    });
@@ -546,58 +556,152 @@ public class WorldOfSweets extends JFrame{
 
     }
 
-    private JLabel header_label;
-    private JLabel start_label;
-    private JPanel blue;
-    private JPanel blue_five;
-    private JPanel blue_four;
-    private JPanel blue_one;
-    private JPanel blue_three;
-    private JPanel blue_two;
-    private JPanel board_panel;
-    private JPanel cake;
-    private JPanel cookie;
-    private JPanel cupcake;
-    private JPanel game_container_panel;
-    private JPanel green;
-    private JPanel green_five;
-    private JPanel green_four;
-    private JPanel green_one;
-    private JPanel green_three;
-    private JPanel green_two;
-    private JPanel ice_cream;
-    private JPanel instructions_panel;
-    private JPanel orange;
-    private JPanel orange_five;
-    private JPanel orange_four;
-    private JPanel orange_one;
-    private JPanel orange_three;
-    private JPanel orange_two;
-    private JPanel pie;
-    private JPanel red;
-    private JPanel red_five;
-    private JPanel red_four;
-    private JPanel red_one;
-    private JPanel red_three;
-    private JPanel red_two;
-    private JPanel temp_panel;
-    private JPanel yellow;
-    private JPanel yellow_five;
-    private JPanel yellow_four;
-    private JPanel yellow_one;
-    private JPanel yellow_three;
-    private JPanel yellow_two;
-    private static JLabel grandmas_house;
-    private static JPanel non_board_panel;
-    private static JPanel start_panel;
+    public void createMenuBar(){
+        // creating and adding the menu bar
+        menuBar = new JMenuBar();
 
-    private static DeckManager dm;
-    private static GameState gameState;
-    private static int num_players;
-    private static Token[] tokens;
-    private static Token current_token;
-    private static JPanel[] positions;
-    private static CardPanel card_panel;
-    private final static int[] sweets_spaces = new int[]{5, 12, 18, 27, 35};
-    private final static String[] sweets = new String[]{"Ice Cream", "Cake", "Cookie", "Cupcake", "Pie"};
+        fileMenu = new JMenu("File");
+        fileMenu.setMnemonic(KeyEvent.VK_A);
+        fileMenu.getAccessibleContext().setAccessibleDescription("Used for Save/Load operations.");
+        menuBar.add(fileMenu);
+
+        fileMenu.add(lsh.createSaveMenuItem());
+        fileMenu.add(lsh.createLoadMenuItem());
+
+        backgroundMenu = new JMenu("Background");
+        backgroundMenu.getAccessibleContext().setAccessibleDescription("Used for changing the background color.");
+        menuBar.add(backgroundMenu);
+
+        color_handler = new BackgroundColorHandler(this);
+
+        backgroundMenu.add(color_handler.backgroundRed());
+        backgroundMenu.add(color_handler.backgroundBlue());
+        backgroundMenu.add(color_handler.backgroundGreen());
+
+        // adding menu bar to JFrame
+        this.setJMenuBar(menuBar);
+    }
+
+    public void loadGameBoard(LoadSaveObject w) {
+
+        // updates card panel with correct color
+        Card c = w.card_panel.getCurrentCard();
+        
+        if (c != null)    
+            this.card_panel.changeCard(c);
+
+        //replaces deck with loaded deck
+        dm.loadDeck(w.dm);
+
+
+        // removes tokens on start space
+        for (int i = 0; i < num_players; i++){
+            Container parent = tokens[i].getLabel().getParent();
+            parent.remove(tokens[i].getLabel());
+            parent.validate();
+            parent.repaint();
+        }
+
+        this.num_players = w.num_players;
+        this.tokens = w.tokens;
+        this.current_token = w.current_token;
+
+        // updates token locations
+        for (int i = 0; i < num_players; i++){
+            positions[tokens[i].getPosition()].add(tokens[i].getLabel());
+        }
+
+        // load gamestate
+        gameState.loadGameState(w.gs);
+        // loads gamemanager
+        gm.loadGameManager(w.gm);
+
+        // updates the instruction text
+        gameState.temp_label.setText(gameState.getPlayerName(gameState.currentPlayer) + "'s turn!");
+        gameState.changeInstruction(1);
+
+        timer.old_time_elapsed = w.old_time_elapsed;
+
+        // Tell timer that this is a loaded game
+        timer.loaded = true;
+
+        // Reset start time to current time
+        timer.timeAtStart = System.currentTimeMillis();
+
+        this.revalidate();
+        this.repaint();
+
+    }
+
+
+
+    public JLabel header_label;
+    public JLabel start_label;
+    public JPanel blue;
+    public JPanel blue_five;
+    public JPanel blue_four;
+    public JPanel blue_one;
+    public JPanel blue_three;
+    public JPanel blue_two;
+    public JPanel board_panel;
+    public JPanel cake;
+    public JPanel cookie;
+    public JPanel cupcake;
+    public JPanel game_container_panel;
+    public JPanel green;
+    public JPanel green_five;
+    public JPanel green_four;
+    public JPanel green_one;
+    public JPanel green_three;
+    public JPanel green_two;
+    public JPanel ice_cream;
+    public JPanel orange;
+    public JPanel orange_five;
+    public JPanel orange_four;
+    public JPanel orange_one;
+    public JPanel orange_three;
+    public JPanel orange_two;
+    public JPanel pie;
+    public JPanel red;
+    public JPanel red_five;
+    public JPanel red_four;
+    public JPanel red_one;
+    public JPanel red_three;
+    public JPanel red_two;
+    public JPanel temp_panel;
+    public JPanel yellow;
+    public JPanel yellow_five;
+    public JPanel yellow_four;
+    public JPanel yellow_one;
+    public JPanel yellow_three;
+    public JPanel yellow_two;
+    public static JLabel grandmas_house;
+    public static JPanel non_board_panel;
+    public static JPanel start_panel;
+    public static JMenuBar menuBar;
+    public static JMenu fileMenu;
+    public static JMenu backgroundMenu;
+    public JPanel current_instruction;
+    public JPanel timer_panel;
+
+    public static CardPanel card_panel;
+    public static LoadSaveHandler lsh;
+    public static TimeCounter timer;
+    public static DeckManager dm;
+    public static GameState gameState;
+    public static BackgroundColorHandler color_handler;
+    public static int num_players;
+    public static Token[] tokens;
+    public static Token current_token;
+    public static JPanel[] positions;
+    public static GameManager gm;
+    public JPanel instructions_panel;
+    public JPanel combinedPanel;
+    public JPanel turn_panel;
+
+
+    public final static int[] sweets_spaces = new int[]{5, 12, 18, 27, 35};
+    public final static String[] sweets = new String[]{"Ice Cream", "Cake", "Cookie", "Cupcake", "Pie"};
+
+
 }
