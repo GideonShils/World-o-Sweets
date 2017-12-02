@@ -15,6 +15,7 @@ public class GameState {
     int curr_player = 1;
     JLabel temp_label;
     JLabel instruction_label;
+    int game_mode = 0; //0 for classic, one for strategic 
 
     Card currCard;
     Boolean target = false;
@@ -42,6 +43,30 @@ public class GameState {
 	    System.exit(0);
 	} else {
 	    totalPlayers = Integer.parseInt(selection.getSelectedItem().toString());
+	}
+    }
+
+    public void gameMode() {
+	// Initialize panel and combo box
+	JPanel panel = new JPanel();
+	DefaultComboBoxModel model = new DefaultComboBoxModel();
+
+	// Add number of player choices to the dropdown
+	model.addElement("Classic");
+	model.addElement("Strategic");
+
+	JComboBox selection = new JComboBox(model);
+
+	panel.add(selection);
+	response = JOptionPane.showConfirmDialog(null, selection, "Game Mode", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+	if (response != JOptionPane.OK_OPTION) {
+	    System.exit(0);
+	} else {
+	    if(selection.getSelectedItem().toString().equals("Classic"))
+		game_mode = 0;
+	    else
+		game_mode = 1; 
 	}
     }
 
