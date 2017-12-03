@@ -13,14 +13,17 @@ public class CardPanel implements Serializable {
     private JPanel buttonPanel;
     private JPanel combinedPanel;
     private JButton _drawCardButton = new JButton("Draw Card");
-    private JLabel cardLabel = new javax.swing.JLabel();
-    private JLabel deckLabel = new javax.swing.JLabel();
+    private JButton _boomerangButton = new JButton("Boomerang");
+    private JLabel cardLabel = new JLabel();
+    private JLabel deckLabel = new JLabel();
     private JLabel deckText = new JLabel("Deck");
     private JLabel cardText = new JLabel("Card");
     private JLabel deckCount = new JLabel("0");
     private JLabel cardValue = new JLabel();
     private GameState gameState;
     private GameManager gm;
+    private Boomerang br;
+    private int togglestate;
 
     private Card currentCard;
 
@@ -29,9 +32,11 @@ public class CardPanel implements Serializable {
 
     public static DeckManager dm;
 
-    public CardPanel(DeckManager dm, GameState gs) {
+    public CardPanel(DeckManager dm, GameState gs, Boomerang br) {
+	togglestate = 0;
     	this.dm = dm;
     	this.gm = null;
+	this.br = br;
         gameState = gs;
 
         //-------------------------------------------------------
@@ -57,7 +62,7 @@ public class CardPanel implements Serializable {
         deckCount.setMinimumSize(new Dimension(width/2, height/12));
         deckCount.setPreferredSize(new Dimension(width/2, height/12));
         deckCount.setMaximumSize(new Dimension(width/2, height/12));
-
+	
         cardValue.setMinimumSize(new Dimension(width/2, height/12));
         cardValue.setPreferredSize(new Dimension(width/2, height/12));
         cardValue.setMaximumSize(new Dimension(width/2, height/12));
@@ -122,15 +127,21 @@ public class CardPanel implements Serializable {
         buttonPanel = new JPanel();
         buttonPanel.setPreferredSize(new Dimension(width, 100));
         buttonPanel.add(_drawCardButton);
+	if(gs.getMode() == 1){	   
+	    buttonPanel.add(_boomerangButton);
+	}
 
         ActionListener cardButtonListener = new CardButtonListener();
         _drawCardButton.addActionListener(cardButtonListener);
+
+	ActionListener boomerangListner = new BoomerangListener();
+	_boomerangButton.addActionListener(boomerangListner);
 
     	//Combine card panel and turn panel
     	combinedPanel = new javax.swing.JPanel();
     	combinedPanel.setLayout(new BoxLayout(combinedPanel, BoxLayout.Y_AXIS));
 
-	    combinedPanel.add(cards_panel);
+	combinedPanel.add(cards_panel);
         combinedPanel.add(buttonPanel);
 
     }
@@ -153,7 +164,8 @@ public class CardPanel implements Serializable {
     private class CardButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             // Disable the button
-            toggleButton();
+            toggleDrawButton();
+	    toggleBoomButton();
 
             // Draw a new card
             currentCard = dm.draw();
@@ -167,6 +179,57 @@ public class CardPanel implements Serializable {
 
             gm.turn(currentCard);
         }
+    }
+
+    private class BoomerangListener implements ActionListener {
+	public void actionPerformed(ActionEvent e){	    
+	    //Disable the button
+	    toggleDrawButton();
+	    toggleBoomButton();
+
+	    //Choose player
+	    int player = choosePlayer(); 
+	    if(player == -1)
+		return;
+
+	    currentCard = dm.draw();
+	    changeCard(currentCard);
+
+	     // Update gamestate to hold the current card
+            gameState.setCurrCard(currentCard);
+
+            // Reenable clicking on board
+            gameState.setTargetClicked(false);
+	    
+	    gm.boomerang(player);	    
+	    
+	}
+
+	private int choosePlayer(){
+	    // Initialize panel and combo box
+	    JPanel panel = new JPanel(new GridLayout(0, 1));
+	    DefaultComboBoxModel model = new DefaultComboBoxModel();
+
+	    int cur = gameState.returnCurrPlayer();
+	    br.useBoom(cur);
+	    for(int i = 1; i <= gameState.getPlayers(); i++){
+		if(i != cur)
+		    model.addElement(gameState.getPlayerName(i));
+	    }
+	    
+	    JComboBox selection = new JComboBox(model);
+
+	    panel.add(new JLabel("Choose a Player"));
+	    panel.add(selection);
+	    UIManager.put("OptionPane.minimumSize",new Dimension(300,100)); 
+	    int response = JOptionPane.showConfirmDialog(null, panel, "Boomerang", JOptionPane.DEFAULT_OPTION);
+	    if(response != JOptionPane.OK_OPTION){
+		return -1; 
+	    }
+	    else{
+		return gameState.getPlayerNumber(selection.getSelectedItem().toString());
+	    }
+	}
     }
 
     public Color getCardColor() {
@@ -201,11 +264,22 @@ public class CardPanel implements Serializable {
 	    this.gm = gm;
     }
 
-    public void toggleButton() {
+    public void toggleDrawButton() {
         if (_drawCardButton.isEnabled()) {
-            _drawCardButton.setEnabled(false);
+            _drawCardButton.setEnabled(false);	   
         } else {
-            _drawCardButton.setEnabled(true);
+            _drawCardButton.setEnabled(true);	   
+        }
+    }
+
+    public void toggleBoomButton() {
+        if (togglestate == 0) {
+            _boomerangButton.setEnabled(false);
+	    togglestate = 1; 
+        } else {
+	    if(br.getNumLeft(gameState.getPlayer()) != 0)
+		_boomerangButton.setEnabled(true);
+	    togglestate = 0;
         }
     }
 }
