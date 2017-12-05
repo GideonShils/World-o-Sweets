@@ -150,7 +150,7 @@ public class CardPanel implements Serializable {
         _boomerangButton.addActionListener(boomerangListner);
 
         ActionListener playForMeListener = new PlayForMeListener();
-        _boomerangButton.addActionListener(playForMeListener);
+        _playForMeButton.addActionListener(playForMeListener);
 
     	// Combine card panel and turn panel
     	combinedPanel = new javax.swing.JPanel();
@@ -178,21 +178,16 @@ public class CardPanel implements Serializable {
 
     private class CardButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            // Disable the button
+
+            // Disable the buttons
             toggleDrawButton();
 	        toggleBoomButton();
-            togglePlayForMeButton(false);
+            togglePlayForMeButton();
 
 
             // Draw a new card
             if (gameState.getPlayerName(gameState.curr_player).toUpperCase().equals("DAD")) {
-
-                // need to change IF statement to only occur if mode is stragetic and boomerang is used
-                if (gameState.gameType.equals("Strategic")){
-
-                } else {
-                    currentCard = dm.drawWorstCardForward();
-                }
+                currentCard = dm.drawWorstCardForward();
             } else {
                 currentCard = dm.draw();
             }
@@ -209,20 +204,18 @@ public class CardPanel implements Serializable {
         }
     }
 
-    public void togglePlayForMeButton(boolean bool){
-        _playForMeButton.setEnabled(bool);
-    }
-
     private class BoomerangListener implements ActionListener {
         public void actionPerformed(ActionEvent e){
-            //Disable the button
+            // Disable the buttons
             toggleDrawButton();
             toggleBoomButton();
+            togglePlayForMeButton();
 
             //Choose player
             int player = choosePlayer();
-            if(player == -1)
-            return;
+            if(player == -1) {
+                return;
+            }
 
             currentCard = dm.draw();
             changeCard(currentCard);
@@ -244,9 +237,11 @@ public class CardPanel implements Serializable {
 
             int cur = gameState.returnCurrPlayer();
             br.useBoom(cur);
+
             for(int i = 1; i <= gameState.getPlayers(); i++){
-            if(i != cur)
-                model.addElement(gameState.getPlayerName(i));
+                if(i != cur) {
+                    model.addElement(gameState.getPlayerName(i));
+                }
             }
 
             JComboBox selection = new JComboBox(model);
@@ -267,7 +262,21 @@ public class CardPanel implements Serializable {
 
     private class PlayForMeListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            // Implement play for me code later
+
+            
+            // Special case for dad mode
+            if (gameState.getPlayerName(gameState.curr_player).toUpperCase().equals("DAD")) {
+                currentCard = dm.drawWorstCardForward();
+            } else {
+                currentCard = dm.draw();
+            }
+
+            changeCard(currentCard);
+
+            // Update gamestate to hold the current card
+            gameState.setCurrCard(currentCard);
+
+            gm.aiTurn(currentCard);
         }
     }
 
@@ -314,11 +323,20 @@ public class CardPanel implements Serializable {
     public void toggleBoomButton() {
         if (togglestate == 0) {
             _boomerangButton.setEnabled(false);
-	    togglestate = 1;
+	        togglestate = 1;
         } else {
-	    if(br.getNumLeft(gameState.getPlayer()) != 0)
-		_boomerangButton.setEnabled(true);
-	    togglestate = 0;
+	        if(br.getNumLeft(gameState.getPlayer()) != 0) {
+		        _boomerangButton.setEnabled(true);
+                togglestate = 0;
+            }
+        }
+    }
+
+    public void togglePlayForMeButton(){
+        if (_playForMeButton.isEnabled()) {
+            _playForMeButton.setEnabled(false);
+        } else {
+            _playForMeButton.setEnabled(true);
         }
     }
 }

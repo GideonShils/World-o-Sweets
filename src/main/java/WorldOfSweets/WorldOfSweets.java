@@ -477,7 +477,9 @@ public class WorldOfSweets extends JFrame implements Serializable{
 	boom_panel = gameState.boomPanel();
         combinedPanel.add(card_panel.getCardsPanel());
         combinedPanel.add(turn_panel);
-	combinedPanel.add(boom_panel);
+        if (gameState.gameType == "Strategic") {
+                combinedPanel.add(boom_panel);
+        }
 
 
 
@@ -556,16 +558,9 @@ public class WorldOfSweets extends JFrame implements Serializable{
 
 		    card_panel.setGameManager(gm);
 
-            if (gameState.isAI(1)){
-                card_panel.togglePlayForMeButton(false);
-            }
-
-            dm.gm = gm;
+                    dm.gm = gm;
 		}
-	    });
-
-
-
+	});
     }
 
     public void createMenuBar(){
@@ -642,9 +637,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
 
         this.revalidate();
         this.repaint();
-
     }
-
 
 
     public JLabel header_label;
