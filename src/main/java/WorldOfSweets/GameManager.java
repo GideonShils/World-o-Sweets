@@ -24,99 +24,99 @@ public class GameManager implements Serializable{
     public Boomerang br;
 
     public GameManager(JPanel[] array, CardPanel card_panel, Token[] tokens, JLabel end, GameState gs, int[] sweets_spaces, Boomerang br) {
-		gameState = gs;
-		this.array = array;
-		this.card_panel = card_panel;
-		this.tokens = tokens;
-		this.current_player = 0;
-		this.end = end;
-		this.sweets_spaces = sweets_spaces;
-		this.br = br;
+	gameState = gs;
+	this.array = array;
+	this.card_panel = card_panel;
+	this.tokens = tokens;
+	this.current_player = 0;
+	this.end = end;
+	this.sweets_spaces = sweets_spaces;
+	this.br = br;
     }
 
     public void findNext(Color color, int current_pos, int card_type) {
 
-		if (card_type > 5) {
-		    if(current_pos != sweets_spaces[4]){
-				int pos = -1;
-				int j = 0;
-				for (int i = 0; i < card_type - 5; i++) {
-				    for (j = current_pos+1; j < array.length; j++) {
-						if(array[j].getBackground().equals(color)) {
-						    pos = j;
-						    current_pos = j;
-						    break;
-						}
-				    }
-				    if (j == array.length) {
-						tokens[current_player].setPosition(pos);
-						endGame();
-				    }
-				}
-
-				if (j != array.length) {
-				    tokens[current_player].setPosition(pos);
-				    array[pos].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
-				    array[pos].addMouseListener(new PositionListener(current_pos, pos));
-				}
+	if (card_type > 5) {
+	    if(current_pos != sweets_spaces[4]){
+		int pos = -1;
+		int j = 0;
+		for (int i = 0; i < card_type - 5; i++) {
+		    for (j = current_pos+1; j < array.length; j++) {
+			if(array[j].getBackground().equals(color)) {
+			    pos = j;
+			    current_pos = j;
+			    break;
+			}
+		    }
+		    if (j == array.length) {
+			tokens[current_player].setPosition(pos);
+			endGame();
 		    }
 		}
-		else if (card_type <= 4) {
-		    if(card_type == 4){
-				if(current_pos != sweets_spaces[4]){
-				    JOptionPane.showMessageDialog(null, "You have been sent to Pie Land, draw another sweets card to return","", JOptionPane.WARNING_MESSAGE);
-				}
-				else{
-				    return;
-				}
-		    }
-		    int location = sweets_spaces[card_type];
 
-		    tokens[current_player].setPosition(location);
-		    array[location].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
-		    array[location].addMouseListener(new PositionListener(current_pos, location));
+		if (j != array.length) {
+		    tokens[current_player].setPosition(pos);
+		    array[pos].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
+		    array[pos].addMouseListener(new PositionListener(current_pos, pos));
 		}
-		else {
-		    JOptionPane.showMessageDialog(null, "Your turn was skipped!","", JOptionPane.WARNING_MESSAGE);
+	    }
+	}
+	else if (card_type <= 4) {
+	    if(card_type == 4){
+		if(current_pos != sweets_spaces[4]){
+		    JOptionPane.showMessageDialog(null, "You have been sent to Pie Land, draw another sweets card to return","", JOptionPane.WARNING_MESSAGE);
 		}
+		else{
+		    return;
+		}
+	    }
+	    int location = sweets_spaces[card_type];
+
+	    tokens[current_player].setPosition(location);
+	    array[location].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
+	    array[location].addMouseListener(new PositionListener(current_pos, location));
+	}
+	else {
+	    JOptionPane.showMessageDialog(null, "Your turn was skipped!","", JOptionPane.WARNING_MESSAGE);
+	}
 
     }
 
     public int findNextDadMode(Color color, int current_pos, int card_type) {
 
-		if (card_type > 5) {
-		    if(current_pos != sweets_spaces[4]){
-				int pos = -1;
-				int j = 0;
+	if (card_type > 5) {
+	    if(current_pos != sweets_spaces[4]){
+		int pos = -1;
+		int j = 0;
 
-				// searches board array for color
-				for (j = current_pos+1; j < array.length; j++) {
-					if(array[j].getBackground().equals(color)) {
-						pos = j;
-						break;
-					}
-				}
-
-				if (card_type == 7){
-					for (j = pos+1; j < array.length; j++) {
-						if(array[j].getBackground().equals(color)) {
-							pos = j;
-							break;
-						}
-					}
-				}
-
-				return pos;
+		// searches board array for color
+		for (j = current_pos+1; j < array.length; j++) {
+		    if(array[j].getBackground().equals(color)) {
+			pos = j;
+			break;
 		    }
 		}
-		else if (card_type <= 4) {
-		    if(card_type == 4){
-				return -1;
+
+		if (card_type == 7){
+		    for (j = pos+1; j < array.length; j++) {
+			if(array[j].getBackground().equals(color)) {
+			    pos = j;
+			    break;
+			}
 		    }
-		    return sweets_spaces[card_type];
 		}
 
-		return -2;
+		return pos;
+	    }
+	}
+	else if (card_type <= 4) {
+	    if(card_type == 4){
+		return -1;
+	    }
+	    return sweets_spaces[card_type];
+	}
+
+	return -2;
 
 
     }
@@ -128,34 +128,34 @@ public class GameManager implements Serializable{
 	    card_panel.toggleDrawButton();
 	    card_panel.toggleBoomButton();
 
-        int current = gameState.curr_player;
+	    int current = gameState.curr_player;
 
-        if (gameState.isAI(current)){
-            card_panel.togglePlayForMeButton(false);
-        } else {
-            card_panel.togglePlayForMeButton(true);
-        }
+	    if (gameState.isAI(current)){
+		card_panel.togglePlayForMeButton(false);
+	    } else {
+		card_panel.togglePlayForMeButton(true);
+	    }
 
 	    gameState.changeTxt(2);
 	}
 	else if (tokens[current_player].getPosition() == sweets_spaces[4]){
 	    if(!card.goTo()){
-			card_panel.toggleDrawButton();
-			card_panel.toggleBoomButton();
+		card_panel.toggleDrawButton();
+		card_panel.toggleBoomButton();
 
-			JOptionPane.showMessageDialog(null, "You didn't draw another sweets card!","", JOptionPane.WARNING_MESSAGE);
+		JOptionPane.showMessageDialog(null, "You didn't draw another sweets card!","", JOptionPane.WARNING_MESSAGE);
 
-			gameState.changeTxt(1);
+		gameState.changeTxt(1);
 
-			// Update the instruction to draw card
-			gameState.changeInstruction(1);
+		// Update the instruction to draw card
+		gameState.changeInstruction(1);
 	    }
 	    else if(card.pie()){
-			card_panel.toggleDrawButton();
-			card_panel.toggleBoomButton();
+		card_panel.toggleDrawButton();
+		card_panel.toggleBoomButton();
 	    }
 	    else{
-			gameState.changeInstruction(2);
+		gameState.changeInstruction(2);
 	    }
 	}
 	else {
@@ -171,23 +171,23 @@ public class GameManager implements Serializable{
 	    // Renable the button
 	    card_panel.toggleDrawButton();
 	    card_panel.toggleBoomButton();
-        int current = gameState.curr_player;
+	    int current = gameState.curr_player;
 
-        if (gameState.isAI(current)){
-            card_panel.togglePlayForMeButton(false);
-        } else {
-            card_panel.togglePlayForMeButton(true);
-        }
+	    if (gameState.isAI(current)){
+		card_panel.togglePlayForMeButton(false);
+	    } else {
+		card_panel.togglePlayForMeButton(true);
+	    }
 
 	    gameState.changeTxt(2);
 	}
 	else{
 	    current_player = boom_player-1;
-
+	   
 	    Color color = card_panel.getCardColor();
 	    int current_pos = tokens[(boom_player-1)].getPosition();
 	    if(current_pos == sweets_spaces[4]){
-		current_pos = tokens[gameState.getPlayer()-1].getPosition();
+		current_pos = tokens[gameState.getPlayer() % tokens.length].getPosition();
 	    }
 	    int card_type = card_panel.getType();
 
@@ -230,7 +230,7 @@ public class GameManager implements Serializable{
 		array[location].addMouseListener(new PositionListener(current_pos, location));
 	    }
 	    else {
-			JOptionPane.showMessageDialog(null, "Your turn was skipped!","", JOptionPane.WARNING_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Your turn was skipped!","", JOptionPane.WARNING_MESSAGE);
 	    }
 	}
     }
@@ -260,15 +260,15 @@ public class GameManager implements Serializable{
 	}
 
 	public void mouseClicked(MouseEvent e) {
-        //Disable play for me
-        int current = gameState.curr_player;
+	    //Disable play for me
+	    int current = gameState.curr_player;
 
 
-        if (gameState.isAI(current)){
-            card_panel.togglePlayForMeButton(false);
-        } else {
-            card_panel.togglePlayForMeButton(true);
-        }
+	    if (gameState.isAI(current)){
+		card_panel.togglePlayForMeButton(false);
+	    } else {
+		card_panel.togglePlayForMeButton(true);
+	    }
 
 
 
@@ -303,8 +303,8 @@ public class GameManager implements Serializable{
     }
 
     public void endGame() {
-		end.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
-		end.addMouseListener(new PositionListener(0, 0));
+	end.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
+	end.addMouseListener(new PositionListener(0, 0));
     }
 
 
