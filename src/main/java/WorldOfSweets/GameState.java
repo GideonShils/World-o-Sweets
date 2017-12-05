@@ -18,10 +18,10 @@ public class GameState implements Serializable {
     JLabel temp_label;
     JLabel boom_label;
     JLabel instruction_label;
-    int game_mode = 0; //0 for classic, 1 for strategic 
+    int game_mode = 0; //0 for classic, 1 for strategic
     String[] namesArr;      //Used for names
 
-    Boomerang br; 
+    Boomerang br;
     Card currCard;
     Boolean target = false;
 
@@ -45,6 +45,11 @@ public class GameState implements Serializable {
 	typeOfGame.addElement("Classic");
 	typeOfGame.addElement("Strategic");
 
+    JCheckBox aiPlayer1 = new JCheckBox("AI");
+    JCheckBox aiPlayer2 = new JCheckBox("AI");
+    JCheckBox aiPlayer3 = new JCheckBox("AI");
+    JCheckBox aiPlayer4 = new JCheckBox("AI");
+
 	JComboBox selection = new JComboBox(model);
 	JComboBox selectionTwo = new JComboBox(typeOfGame);
 
@@ -52,15 +57,35 @@ public class GameState implements Serializable {
 	panel.add(selection);
 	panel.add(new JLabel("Type of Game"));
 	panel.add(selectionTwo);
-	UIManager.put("OptionPane.minimumSize",new Dimension(300,100)); 
+	UIManager.put("OptionPane.minimumSize",new Dimension(300,100));
 	response = JOptionPane.showConfirmDialog(null, panel, "Number of Players + Type of Game", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
 
 	JTextField player1 = new JTextField("Player 1");
+    JPanel player1_plus_options = new JPanel();
+    player1_plus_options.add(player1);
+    player1_plus_options.add(aiPlayer1);
+    player1_plus_options.setLayout(new javax.swing.BoxLayout(player1_plus_options, javax.swing.BoxLayout.X_AXIS));
+
 	JTextField player2 = new JTextField("Player 2");
-	JTextField player3 = new JTextField("Player 3");
-	JTextField player4 = new JTextField("Player 4");
-	JPanel namesPanel = new JPanel(new GridLayout(0, 1));
+    JPanel player2_plus_options = new JPanel();
+    player2_plus_options.add(player2);
+    player2_plus_options.add(aiPlayer2);
+    player2_plus_options.setLayout(new javax.swing.BoxLayout(player2_plus_options, javax.swing.BoxLayout.X_AXIS));
+
+    JTextField player3 = new JTextField("Player 3");
+    JPanel player3_plus_options = new JPanel();
+    player3_plus_options.add(player3);
+    player3_plus_options.add(aiPlayer3);
+    player3_plus_options.setLayout(new javax.swing.BoxLayout(player3_plus_options, javax.swing.BoxLayout.X_AXIS));
+
+    JTextField player4 = new JTextField("Player 4");
+    JPanel player4_plus_options = new JPanel();
+    player4_plus_options.add(player4);
+    player4_plus_options.add(aiPlayer4);
+    player4_plus_options.setLayout(new javax.swing.BoxLayout(player4_plus_options, javax.swing.BoxLayout.X_AXIS));
+
+    JPanel combinedPanel = new JPanel(new GridLayout(0, 1));
 
 	if (response != JOptionPane.OK_OPTION) {
 	    System.exit(0);
@@ -73,30 +98,30 @@ public class GameState implements Serializable {
             }
 
             if (totalPlayers == 2){
-                namesPanel.add(new JLabel("Player 1's Name"));
-                namesPanel.add(player1);
-                namesPanel.add(new JLabel("Player 2's Name"));
-                namesPanel.add(player2);
+                combinedPanel.add(new JLabel("Player 1's Name"));
+                combinedPanel.add(player1_plus_options);
+                combinedPanel.add(new JLabel("Player 2's Name"));
+                combinedPanel.add(player2_plus_options);
 
             } else if (totalPlayers == 3){
-                namesPanel.add(new JLabel("Player 1's Name"));
-                namesPanel.add(player1);
-                namesPanel.add(new JLabel("Player 2's Name"));
-                namesPanel.add(player2);
-                namesPanel.add(new JLabel("Player 3's Name"));
-                namesPanel.add(player3);
+                combinedPanel.add(new JLabel("Player 1's Name"));
+                combinedPanel.add(player1_plus_options);
+                combinedPanel.add(new JLabel("Player 2's Name"));
+                combinedPanel.add(player2_plus_options);
+                combinedPanel.add(new JLabel("Player 3's Name"));
+                combinedPanel.add(player3_plus_options);
             } else if (totalPlayers == 4){
-                namesPanel.add(new JLabel("Player 1's Name"));
-                namesPanel.add(player1);
-                namesPanel.add(new JLabel("Player 2's Name"));
-                namesPanel.add(player2);
-                namesPanel.add(new JLabel("Player 3's Name"));
-                namesPanel.add(player3);
-                namesPanel.add(new JLabel("Player 4's Name"));
-                namesPanel.add(player4);
+                combinedPanel.add(new JLabel("Player 1's Name"));
+                combinedPanel.add(player1_plus_options);
+                combinedPanel.add(new JLabel("Player 2's Name"));
+                combinedPanel.add(player2_plus_options);
+                combinedPanel.add(new JLabel("Player 3's Name"));
+                combinedPanel.add(player3_plus_options);
+                combinedPanel.add(new JLabel("Player 4's Name"));
+                combinedPanel.add(player4_plus_options);
             }
 
-            int result = JOptionPane.showConfirmDialog(null, namesPanel, "Player Names", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int result = JOptionPane.showConfirmDialog(null, combinedPanel, "Player Names", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
             namesArr = new String[totalPlayers+1];
 
             if (result != JOptionPane.OK_OPTION) {
@@ -128,10 +153,10 @@ public class GameState implements Serializable {
     public int getPlayerNumber(String name){
 	for(int i = 1; i < namesArr.length; i++){
 	    if(namesArr[i].equals(name)){
-		return i; 
+		return i;
 	    }
 	}
-	return -1; 
+	return -1;
     }
 
     public int getPlayers() {
@@ -169,7 +194,7 @@ public class GameState implements Serializable {
     public JPanel turnPanel() {
 	//Create the label and set the font + size
 	temp_label = new JLabel(getPlayerName(getNextPlayer())+"'s Turn!");
-	temp_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));       
+	temp_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
 
 	//Add label to panel
 	JPanel tp = new JPanel();
@@ -185,7 +210,7 @@ public class GameState implements Serializable {
 	JPanel tp = new JPanel();
 	tp.add(boom_label);
 
-	return tp; 
+	return tp;
     }
 
     public void changeTxt(int num) {
