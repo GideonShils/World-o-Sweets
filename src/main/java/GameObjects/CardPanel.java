@@ -35,7 +35,7 @@ public class CardPanel implements Serializable {
 
 
     public CardPanel(DeckManager dm, GameState gs, Boomerang br) {
-        
+
         togglestate = 0;
 
     	this.dm = dm;
@@ -66,7 +66,7 @@ public class CardPanel implements Serializable {
         deckCount.setMinimumSize(new Dimension(width/2, height/12));
         deckCount.setPreferredSize(new Dimension(width/2, height/12));
         deckCount.setMaximumSize(new Dimension(width/2, height/12));
-	
+
         cardValue.setMinimumSize(new Dimension(width/2, height/12));
         cardValue.setPreferredSize(new Dimension(width/2, height/12));
         cardValue.setMaximumSize(new Dimension(width/2, height/12));
@@ -135,7 +135,7 @@ public class CardPanel implements Serializable {
         buttonPanel.add(_drawCardButton);
 
         // Add boomerang button
-        if(gs.getMode() == 1){	   
+        if(gs.getMode() == 1){
             buttonPanel.add(_boomerangButton);
         }
 
@@ -182,6 +182,19 @@ public class CardPanel implements Serializable {
             toggleDrawButton();
 	        toggleBoomButton();
 
+            int current = gameState.curr_player;
+
+            if (current + 1 > gameState.getPlayers()){
+                current = 1;
+            } else {
+                current += 1;
+            }
+
+            if (gameState.isAI(current)){
+                _playForMeButton.setEnabled(false);
+            } else {
+                _playForMeButton.setEnabled(true);
+            }
 
             // Draw a new card
             if (gameState.getPlayerName(gameState.curr_player).toUpperCase().equals("DAD")){
@@ -197,7 +210,7 @@ public class CardPanel implements Serializable {
             else{
                 currentCard = dm.draw();
             }
-            
+
             changeCard(currentCard);
 
             // Update gamestate to hold the current card
@@ -211,13 +224,13 @@ public class CardPanel implements Serializable {
     }
 
     private class BoomerangListener implements ActionListener {
-        public void actionPerformed(ActionEvent e){	    
+        public void actionPerformed(ActionEvent e){
             //Disable the button
             toggleDrawButton();
             toggleBoomButton();
 
             //Choose player
-            int player = choosePlayer(); 
+            int player = choosePlayer();
             if(player == -1)
             return;
 
@@ -229,9 +242,9 @@ public class CardPanel implements Serializable {
 
             // Reenable clicking on board
             gameState.setTargetClicked(false);
-            
-            gm.boomerang(player);	    
-            
+
+            gm.boomerang(player);
+
         }
 
         private int choosePlayer() {
@@ -245,16 +258,16 @@ public class CardPanel implements Serializable {
             if(i != cur)
                 model.addElement(gameState.getPlayerName(i));
             }
-            
+
             JComboBox selection = new JComboBox(model);
 
             panel.add(new JLabel("Choose a Player"));
             panel.add(selection);
-            UIManager.put("OptionPane.minimumSize",new Dimension(300,100)); 
+            UIManager.put("OptionPane.minimumSize",new Dimension(300,100));
             int response = JOptionPane.showConfirmDialog(null, panel, "Boomerang", JOptionPane.DEFAULT_OPTION);
 
             if(response != JOptionPane.OK_OPTION){
-                return -1; 
+                return -1;
             }
             else{
                 return gameState.getPlayerNumber(selection.getSelectedItem().toString());
@@ -289,10 +302,10 @@ public class CardPanel implements Serializable {
     	    case "Cupcake":
     		  return 3;
     	    case "Pie":
-    		  return 4; 
-			
+    		  return 4;
+
         }
-        
+
 	    return -1;
     }
 
@@ -302,16 +315,16 @@ public class CardPanel implements Serializable {
 
     public void toggleDrawButton() {
         if (_drawCardButton.isEnabled()) {
-            _drawCardButton.setEnabled(false);	   
+            _drawCardButton.setEnabled(false);
         } else {
-            _drawCardButton.setEnabled(true);	   
+            _drawCardButton.setEnabled(true);
         }
     }
 
     public void toggleBoomButton() {
         if (togglestate == 0) {
             _boomerangButton.setEnabled(false);
-	    togglestate = 1; 
+	    togglestate = 1;
         } else {
 	    if(br.getNumLeft(gameState.getPlayer()) != 0)
 		_boomerangButton.setEnabled(true);

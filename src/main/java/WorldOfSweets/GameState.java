@@ -20,6 +20,7 @@ public class GameState implements Serializable {
     JLabel instruction_label;
     int game_mode = 0; //0 for classic, 1 for strategic
     String[] namesArr;      //Used for names
+    boolean[] isPlayerAI;
 
     Boomerang br;
     Card currCard;
@@ -123,6 +124,8 @@ public class GameState implements Serializable {
 
             int result = JOptionPane.showConfirmDialog(null, combinedPanel, "Player Names", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
             namesArr = new String[totalPlayers+1];
+            isPlayerAI = new boolean[totalPlayers+1];
+
 
             if (result != JOptionPane.OK_OPTION) {
     	        System.exit(0);
@@ -130,20 +133,55 @@ public class GameState implements Serializable {
                 if (totalPlayers == 2){
                     namesArr[1] = player1.getText();
                     namesArr[2] = player2.getText();
+                    if (aiPlayer1.isSelected()){
+                        isPlayerAI[1] = true;
+                    }
+                    if (aiPlayer2.isSelected()){
+                        isPlayerAI[2] = true;
+                    }
                 } else if (totalPlayers == 3){
                     namesArr[1] = player1.getText();
                     namesArr[2] = player2.getText();
                     namesArr[3] = player3.getText();
+                    if (aiPlayer1.isSelected()){
+                        isPlayerAI[1] = true;
+                    }
+                    if (aiPlayer2.isSelected()){
+                        isPlayerAI[2] = true;
+                    }
+                    if (aiPlayer3.isSelected()){
+                        isPlayerAI[3] = true;
+                    }
+
                 } else if (totalPlayers == 4){
                     namesArr[1] = player1.getText();
                     namesArr[2] = player2.getText();
                     namesArr[3] = player3.getText();
                     namesArr[4] = player4.getText();
+                    if (aiPlayer1.isSelected()){
+                        isPlayerAI[1] = true;
+                    }
+                    if (aiPlayer2.isSelected()){
+                        isPlayerAI[2] = true;
+                    }
+                    if (aiPlayer3.isSelected()){
+                        isPlayerAI[3] = true;
+                    }
+                    if (aiPlayer4.isSelected()){
+                        isPlayerAI[4] = true;
+                    }
+
                 }
+
+
             }
 
 
         }
+    }
+
+    public boolean isAI(int playerNum){
+        return isPlayerAI[playerNum];
     }
 
     public String getPlayerName(int tmp){
