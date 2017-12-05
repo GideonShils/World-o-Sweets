@@ -23,10 +23,12 @@ public class DeckManager implements Serializable{
     public int numSkips;
     public int numGoTo;
 
+    public GameManager gm;
+
     public DeckManager() {
-	deck = new ArrayList<Card>();
-	totalCardCount = 0;
-	currentIndex = 0;
+		deck = new ArrayList<Card>();
+		totalCardCount = 0;
+		currentIndex = 0;
     }
 
     public boolean createDeck(int singles, int doubles) {
@@ -121,21 +123,119 @@ public class DeckManager implements Serializable{
     // Returns current number of cards in deck
     // currentIndex is 0-indexed, so need to add 1
     public int getCount() {
-	return currentIndex + 1;
+		return currentIndex + 1;
     }
 
     // Return the card at the top of the deck
     // currentIndex designates which card is currently at the top
     public Card draw() {
 
-	// If the deck is empty, need to shuffle
-	if (currentIndex < 0) {
-	    shuffle();
-	}
+		// If the deck is empty, need to shuffle
+		if (currentIndex < 0) {
+		    shuffle();
+		}
 
-	Card top = deck.get(currentIndex);
-	currentIndex--;
-	return top;
+		Card top = deck.get(currentIndex);
+		currentIndex--;
+		return top;
+    }
+
+
+    /*
+    *	Grabs current positions for dad.
+    *	Searches through the whole deck for the card that sets player closest to start.
+    *	Swaps that card with the card that would've been next so that Dad draws it.
+    */
+    public Card drawWorstCardForward(){
+
+    	// If the deck is empty, need to shuffle
+		if (currentIndex < 0) {
+		    shuffle();
+		}
+
+		// current position of dad
+    	int currPosition = gm.tokens[gm.gameState.curr_player - 1].getPosition();
+    	
+    	// grab next card on deck
+    	Card minCard = deck.get(currentIndex);
+    	// find the position that this card will put dad at and set it as minimum
+    	int minPos = gm.findNextDadMode(minCard.getColor(), currPosition, getType(minCard));
+    	// keep track of which card in deck is minimum
+    	int minCardPos = currentIndex;
+    	// keep track of if we find another card smaller
+    	boolean found = false;
+
+    	// iterate through whole deck
+    	for (int i = currentIndex - 1; i >= 0; i--){
+    		Card currentCard = deck.get(i);
+
+    		int pos = gm.findNextDadMode(currentCard.getColor(), currPosition, getType(currentCard));
+   
+    		// if pie land is drawn, skip it. Dad would always draw pie land on first turn otherwise
+    		if (pos == -1 && i == currentIndex){
+    			currentIndex--;
+    			return currentCard;
+    		}
+    		else if (pos == -1 && i != currentIndex)
+    			continue;
+
+    		// only use skip card if it's the next card. Otherwise Dad will draw all skip cards while on START
+    		if (pos == -2 && i == currentIndex){
+    			currentIndex--;
+    			return currentCard;
+    		}
+    		else if (pos == -2 && i != currentIndex)
+    			continue;
+
+    		// if the ending position is less than the min, assign new card as min card
+    		if (pos < minPos && pos >= 0){
+    			minPos = pos;
+    			minCard = currentCard;
+    			minCardPos = i;
+    			found = true;
+    		}
+    	}
+
+    	// swap card out so that it isn't used again
+    	if (found)
+    		swapCards(currentIndex, minCardPos);
+
+    	currentIndex--;
+
+    	return minCard;
+    }
+
+    public void swapCards(int index, int index2){
+    	Card temp = deck.get(index);
+
+    	deck.set(index, deck.get(index2));
+    	deck.set(index2, temp);
+
+    }
+
+
+    // enter card and receive numeric representation of the card type
+    public int getType(Card card) {
+    	switch(card.getCardText()) {
+    	    case "Single":
+				return 6;
+    	    case "Double":
+				return 7;
+    	    case "Skip":
+				return 5;
+    	    case "Ice Cream":
+				return 0;
+	    	case "Cake":
+				return 1;
+	    	case "Cookie":
+				return 2;
+	    	case "Cupcake":
+				return 3;
+	    	case "Pie":
+				return 4; 	
+        }
+        
+	    return -1;
     }
 
     // Shuffle and reset pointer for the stack

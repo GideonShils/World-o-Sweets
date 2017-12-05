@@ -1,0 +1,23 @@
+Identifier: Player one Dad Test
+Summary: Testing that first player as Dad draws the worst card
+Preconditions: Start game with Dad entered as Player one
+Execution: 
+	Dad's turn will be first. 
+	Observe that the worst possible card would be to move one space forward onto the red block.
+	Pick Draw Card.
+	Observe whether a Single Red card was drawn.
+Postconditions: Observe that Dad draws a Single Red card and moves forward one space
+
+Identifier: Two Dads
+Summary: Testing that first player and second player as Dad draws the worst card
+Preconditions: Start game with Dad entered as Player one and Dad entered as Player two
+Execution: 
+	First Dad's turn will be first. 
+	Observe that the worst possible card would be to move one space forward onto the red block.
+	Pick Draw Card.
+	Observe whether a Single Red card was drawn.
+	Second Dad's turn now.
+	Observe that the worst possible card would be to also move one space forward onto the red block.
+	Pick Draw Card.
+	Observe whether a Single Red card was drawn.
+Postconditions: Observe that both of the Dads draw a Single Red card and moves forward one space
