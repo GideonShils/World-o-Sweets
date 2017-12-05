@@ -271,7 +271,7 @@ public class CardPanel implements Serializable {
             toggleDrawButton();
 	        toggleBoomButton();
             togglePlayForMeButton();
-
+            /*
             // Special case for dad mode
             if (gameState.getPlayerName(gameState.curr_player).toUpperCase().equals("DAD")) {
 
@@ -282,21 +282,18 @@ public class CardPanel implements Serializable {
                     currentCard = dm.drawWorstCardForward();
                 }
             } else {
-                System.out.println("drawing");
                 currentCard = dm.draw();
-            }
+            }*/
 
-            System.out.println("changing");
+            // Delete this when uncommenting the above
+            currentCard = dm.draw();
+
             changeCard(currentCard);
 
             // Update gamestate to hold the current card
             gameState.setCurrCard(currentCard);
 
-            // Get current player
-            int player = gameState.curr_player;
-
-            System.out.println("Starting turn for player: " + player);
-            gm.aiTurn(player, currentCard);
+            gm.aiTurn(currentCard);
         }
     }
 

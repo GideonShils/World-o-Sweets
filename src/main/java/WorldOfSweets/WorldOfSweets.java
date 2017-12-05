@@ -556,17 +556,9 @@ public class WorldOfSweets extends JFrame implements Serializable{
 
 		    card_panel.setGameManager(gm);
 
-        /*
-            if (gameState.isAI(1)){
-                card_panel.togglePlayForMeButton();
-            }
-        */
-            dm.gm = gm;
+                    dm.gm = gm;
 		}
-	    });
-
-
-
+	});
     }
 
     public void createMenuBar(){
@@ -643,9 +635,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
 
         this.revalidate();
         this.repaint();
-
     }
-
 
 
     public JLabel header_label;

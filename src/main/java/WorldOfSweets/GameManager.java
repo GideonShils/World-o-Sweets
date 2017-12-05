@@ -250,22 +250,29 @@ public class GameManager implements Serializable{
 	}
 	
 	// This method deals with the ai logic for a single turn
-	public void aiTurn(int player, Card currentCard) {
+	public void aiTurn(Card currentCard) {
+		current_player = gameState.returnCurrPlayer() - 1;
+
+		System.out.println("AI turn for p" + current_player);
 		Random rand = new Random();
 
 		// Check if the player has any boomerangs left
-		if (br.getNumLeft(player) >= 0) {
+		if (br.getNumLeft(current_player+1) >= 0) {
 			// If so, randomly choose whether to boomerang or play normally
 			int n = rand.nextInt(1);
 			
 			// If 0, move to spot
 			if (n == 0 || n == 1) {
-				aiStandard(currentCard);
+				aiStandard(currentCard, current_player);
 
 				// Find the correct space
 				int newPosition = findLocation(card_panel.getCardColor(), tokens[current_player].getPosition(), card_panel.getType());
-
-				aiMove(player, currentCard, newPosition);
+				System.out.println("location: " + newPosition);
+				
+				// Move the token if necessary
+				if (newPosition != -1) {
+					aiMove(current_player, currentCard, newPosition);
+				}
 			}
 			/*
 			// Otherwise, boomerang
@@ -287,19 +294,21 @@ public class GameManager implements Serializable{
 		}
 	}
 
-	public void aiStandard(Card currentCard) {
+	public void aiStandard(Card currentCard, int player) {
 		// If its a skip card
 		if (currentCard.skip()) {
+			System.out.println("skip!");
 			// Renable the buttons
 			card_panel.toggleDrawButton();
 			card_panel.toggleBoomButton();
 			card_panel.togglePlayForMeButton();
-
+			
 			// Display skip text
 			gameState.changeTxt(2);
 		}
 		// If player is on the pie card (seperate from rest of board)
-		else if (tokens[current_player].getPosition() == sweets_spaces[4]){
+		else if (tokens[player].getPosition() == sweets_spaces[4]){
+			System.out.println("On pie!");
 			// If new card isnt a goto card, they cant move (jail)
 			if(!currentCard.goTo()){
 				// Reenable buttons
@@ -316,6 +325,7 @@ public class GameManager implements Serializable{
 			}
 			// If its a pie card, they stay there
 			else if(currentCard.pie()){
+				System.out.println("Still on pie!");
 				// Reenable buttons
 				card_panel.toggleDrawButton();
 				card_panel.toggleBoomButton();
@@ -323,26 +333,31 @@ public class GameManager implements Serializable{
 			}
 			// Tell them to click highlighted box
 			else {
+				System.out.println("Clickity click");
 				gameState.changeInstruction(2);
 			}
 		}
 		// Tell to click the highlighted box
 		else {
+			System.out.println("Clickity click 2");
 			gameState.changeInstruction(2);
 		}
 	}
 
-	public void aiBoomerange() {
+	public void aiBoomerang() {
 
 	}
 
 	public void aiMove(int player, Card currentCard, int newPosition) {
 		// Move the token 
-		Container parent = tokens[current_player].getLabel().getParent();
-		parent.remove(tokens[current_player].getLabel());
+		Container parent = tokens[player].getLabel().getParent();
+		parent.remove(tokens[player].getLabel());
 		parent.validate();
 		parent.repaint();
-		array[newPosition].add(tokens[current_player].getLabel());
+
+		array[newPosition].setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+		array[newPosition].add(tokens[player].getLabel());
 
 		// Renable the buttons
 		card_panel.toggleDrawButton();
@@ -383,17 +398,6 @@ public class GameManager implements Serializable{
 		}
 
 		public void mouseClicked(MouseEvent e) {
-			/*
-			//Disable play for me
-			int current = gameState.curr_player;
-
-			if (gameState.isAI(current)){
-				card_panel.togglePlayForMeButton(false);
-			} else {
-				card_panel.togglePlayForMeButton(true);
-			}
-			*/
-
 
 			if (e.getSource().getClass().equals(array[0].getClass()) && gameState.targetClicked() == false) {
 				// Show that the target spot has been clicked
@@ -429,7 +433,12 @@ public class GameManager implements Serializable{
     public void endGame() {
 		end.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
 		end.addMouseListener(new PositionListener(0, 0));
-    }
+	}
+	
+	public void endGameAi() {
+		JOptionPane.showMessageDialog(null, "Player " + (current_player+1) + " won the game!");
+		System.exit(0);
+	}
 
 
     // loads the given Gamemanager
@@ -459,7 +468,7 @@ public class GameManager implements Serializable{
 					// If end of game
 					if (j == array.length) {
 						tokens[current_player].setPosition(pos);
-						endGame();
+						endGameAi();
 					}
 				}
 
@@ -475,7 +484,6 @@ public class GameManager implements Serializable{
 			if(card_type == 4){
 				if(current_pos != sweets_spaces[4]){
 					JOptionPane.showMessageDialog(null, "You have been sent to Pie Land, draw another sweets card to return","", JOptionPane.WARNING_MESSAGE);
-					pos = current_pos;
 				}
 			}
 
@@ -486,7 +494,6 @@ public class GameManager implements Serializable{
 		// Skip
 		else {
 			JOptionPane.showMessageDialog(null, "Your turn was skipped!","", JOptionPane.WARNING_MESSAGE);
-			pos = current_pos;
 		}
 
 		return pos;
