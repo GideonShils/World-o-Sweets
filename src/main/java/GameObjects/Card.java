@@ -18,44 +18,45 @@ public class Card implements Serializable {
     private int sweet;
 
     public Card(String color, boolean isDouble) {
-	this(color, isDouble, false, false, 0);
+		this(color, isDouble, false, false, 0);
     }
 
     public Card(String color, boolean isDouble, boolean skip, boolean goTo){
-	this(color, isDouble, skip, goTo, 0);
-    }
+		this(color, isDouble, skip, goTo, 0);
+	}
+	
     public Card(String color, boolean isDouble, boolean skip, boolean goTo, int sweet) {
-	this.isDouble = isDouble;
-	this.skip = skip;
-	this.goTo = goTo;
+		this.isDouble = isDouble;
+		this.skip = skip;
+		this.goTo = goTo;
 
-	switch (color) {
-	    case "green":
-		this.color = green;
-		break;
-	    case "blue":
-		this.color = blue;
-		break;
-	    case "red":
-		this.color = red;
-		break;
-	    case "yellow":
-		this.color = yellow;
-		break;
-	    case "orange":
-		this.color = orange;
-		break;
-	    case "pink":
-		this.color = pink;
-		break;
-	    default:
-		this.color = black;
-		break;
-	}
+		switch (color) {
+			case "green":
+			this.color = green;
+			break;
+			case "blue":
+			this.color = blue;
+			break;
+			case "red":
+			this.color = red;
+			break;
+			case "yellow":
+			this.color = yellow;
+			break;
+			case "orange":
+			this.color = orange;
+			break;
+			case "pink":
+			this.color = pink;
+			break;
+			default:
+			this.color = black;
+			break;
+		}
 
-	if(goTo){
-	    this.sweet = sweet;
-	}
+		if(goTo) {
+			this.sweet = sweet;
+		}
     }
 
     /*
@@ -63,53 +64,53 @@ public class Card implements Serializable {
       Return 1 for success, return -1 for failure.
     */
     public int setColor(String color) {
-	switch (color) {
-	    case "green":
-		this.color = green;
-		return 1;
-	    case "blue":
-		this.color = blue;
-		return 1;
-	    case "red":
-		this.color = red;
-		return 1;
-	    case "yellow":
-		this.color = yellow;
-		return 1;
-	    case "orange":
-		this.color = orange;
-		return 1;
-	    case "pink":
-		this.color = pink;
-		return 1; 
-	    default:
-		this.color = black;
-		return 1;
-	}
+		switch (color) {
+			case "green":
+			this.color = green;
+			return 1;
+			case "blue":
+			this.color = blue;
+			return 1;
+			case "red":
+			this.color = red;
+			return 1;
+			case "yellow":
+			this.color = yellow;
+			return 1;
+			case "orange":
+			this.color = orange;
+			return 1;
+			case "pink":
+			this.color = pink;
+			return 1; 
+			default:
+			this.color = black;
+			return 1;
+		}
     }
 
     public java.awt.Color getColor() {
-	return color;
+		return color;
     }
 
     public void setDouble(boolean isDouble) {
-	this.isDouble = isDouble;
+		this.isDouble = isDouble;
     }
 
     public boolean isDouble() {
-	return isDouble;
+		return isDouble;
     }
 
     public boolean skip() {
-	return skip;
+		return skip;
     }
 
     public boolean goTo() {
-	return goTo;
+		return goTo;
     }
 
     public boolean pie() {
-	return (sweet == 4);
+		return (sweet == 4);
     }
         // This method has been made obsolete due to skip and go to middle cards, but will keep so that I don't break anything
     public String isDoubleText() {

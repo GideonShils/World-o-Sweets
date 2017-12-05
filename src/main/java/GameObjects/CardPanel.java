@@ -156,7 +156,7 @@ public class CardPanel implements Serializable {
     	combinedPanel = new javax.swing.JPanel();
     	combinedPanel.setLayout(new BoxLayout(combinedPanel, BoxLayout.Y_AXIS));
 
-	combinedPanel.add(cards_panel);
+	    combinedPanel.add(cards_panel);
         combinedPanel.add(buttonPanel);
 
     }
@@ -185,17 +185,15 @@ public class CardPanel implements Serializable {
 
 
             // Draw a new card
-            if (gameState.getPlayerName(gameState.curr_player).toUpperCase().equals("DAD")){
+            if (gameState.getPlayerName(gameState.curr_player).toUpperCase().equals("DAD")) {
 
                 // need to change IF statement to only occur if mode is stragetic and boomerang is used
                 if (gameState.gameType.equals("Strategic")){
 
-                }
-                else{
+                } else {
                     currentCard = dm.drawWorstCardForward();
                 }
-            }
-            else{
+            } else {
                 currentCard = dm.draw();
             }
 

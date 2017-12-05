@@ -101,23 +101,23 @@ public class DeckManager implements Serializable{
     }
 
     public int getTotalCardCount() {
-	return totalCardCount;
+		return totalCardCount;
     }
 
     public int getSinglesCount() {
-	return numSingles;
+		return numSingles;
     }
 
     public int getDoublesCount() {
-	return numDoubles;
+		return numDoubles;
     }
 
     public int getSkipsCount() {
-	return numSkips;
+		return numSkips;
     }
 
     public int getGoToCount() {
-	return numGoTo;
+		return numGoTo;
     }
 
     // Returns current number of cards in deck

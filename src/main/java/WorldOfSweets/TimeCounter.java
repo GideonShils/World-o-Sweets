@@ -19,7 +19,6 @@ public class TimeCounter implements Runnable{
     private JLabel timer_label;
     private JPanel timer_panel;
     
-
     private Runnable updateThreads= new Runnable(){
 		public void run(){
 

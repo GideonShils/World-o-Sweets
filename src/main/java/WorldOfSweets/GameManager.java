@@ -140,22 +140,22 @@ public class GameManager implements Serializable{
 	}
 	else if (tokens[current_player].getPosition() == sweets_spaces[4]){
 	    if(!card.goTo()){
-		card_panel.toggleDrawButton();
-		card_panel.toggleBoomButton();
+			card_panel.toggleDrawButton();
+			card_panel.toggleBoomButton();
 
-		JOptionPane.showMessageDialog(null, "You didn't draw another sweets card!","", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "You didn't draw another sweets card!","", JOptionPane.WARNING_MESSAGE);
 
-		gameState.changeTxt(1);
+			gameState.changeTxt(1);
 
-		// Update the instruction to draw card
-		gameState.changeInstruction(1);
+			// Update the instruction to draw card
+			gameState.changeInstruction(1);
 	    }
 	    else if(card.pie()){
-		card_panel.toggleDrawButton();
-		card_panel.toggleBoomButton();
+			card_panel.toggleDrawButton();
+			card_panel.toggleBoomButton();
 	    }
 	    else{
-		gameState.changeInstruction(2);
+			gameState.changeInstruction(2);
 	    }
 	}
 	else {
@@ -208,7 +208,7 @@ public class GameManager implements Serializable{
 		    array[pos].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
 		    array[pos].addMouseListener(new PositionListener(current_pos, pos));
 		}
-		else{
+		else {
 		    tokens[current_player].setPosition(pos);
 		    array[pos].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
 		    array[pos].addMouseListener(new PositionListener(current_pos, pos));
@@ -230,7 +230,7 @@ public class GameManager implements Serializable{
 		array[location].addMouseListener(new PositionListener(current_pos, location));
 	    }
 	    else {
-		JOptionPane.showMessageDialog(null, "Your turn was skipped!","", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Your turn was skipped!","", JOptionPane.WARNING_MESSAGE);
 	    }
 	}
     }
@@ -303,8 +303,8 @@ public class GameManager implements Serializable{
     }
 
     public void endGame() {
-	end.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
-	end.addMouseListener(new PositionListener(0, 0));
+		end.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
+		end.addMouseListener(new PositionListener(0, 0));
     }
 
 

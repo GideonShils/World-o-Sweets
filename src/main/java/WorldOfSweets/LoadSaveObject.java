@@ -6,7 +6,6 @@ import javax.swing.*;
 
 public class LoadSaveObject implements Serializable{
 	
-
     public CardPanel card_panel;
     public DeckManager dm;
     public int num_players;

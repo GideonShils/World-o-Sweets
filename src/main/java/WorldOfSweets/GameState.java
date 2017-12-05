@@ -28,74 +28,74 @@ public class GameState implements Serializable {
 
 
     public GameState(Boomerang br) {
-	this.br = br;
+	    this.br = br;
     }
 
 
     public void promptPlayers() {
-	// Initialize panel and combo box
-	JPanel panel = new JPanel(new GridLayout(0, 1));
-	DefaultComboBoxModel model = new DefaultComboBoxModel();
-	DefaultComboBoxModel typeOfGame = new DefaultComboBoxModel();
+        // Initialize panel and combo box
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        DefaultComboBoxModel typeOfGame = new DefaultComboBoxModel();
 
-	// Add number of player choices to the dropdown
-	model.addElement("2");
-	model.addElement("3");
-	model.addElement("4");
+        // Add number of player choices to the dropdown
+        model.addElement("2");
+        model.addElement("3");
+        model.addElement("4");
 
-	typeOfGame.addElement("Classic");
-	typeOfGame.addElement("Strategic");
+        typeOfGame.addElement("Classic");
+        typeOfGame.addElement("Strategic");
 
-    JCheckBox aiPlayer1 = new JCheckBox("AI");
-    JCheckBox aiPlayer2 = new JCheckBox("AI");
-    JCheckBox aiPlayer3 = new JCheckBox("AI");
-    JCheckBox aiPlayer4 = new JCheckBox("AI");
+        JCheckBox aiPlayer1 = new JCheckBox("AI");
+        JCheckBox aiPlayer2 = new JCheckBox("AI");
+        JCheckBox aiPlayer3 = new JCheckBox("AI");
+        JCheckBox aiPlayer4 = new JCheckBox("AI");
 
-	JComboBox selection = new JComboBox(model);
-	JComboBox selectionTwo = new JComboBox(typeOfGame);
+        JComboBox selection = new JComboBox(model);
+        JComboBox selectionTwo = new JComboBox(typeOfGame);
 
-	panel.add(new JLabel("Number of Players"));
-	panel.add(selection);
-	panel.add(new JLabel("Type of Game"));
-	panel.add(selectionTwo);
-	UIManager.put("OptionPane.minimumSize",new Dimension(300,100));
-	response = JOptionPane.showConfirmDialog(null, panel, "Number of Players + Type of Game", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        panel.add(new JLabel("Number of Players"));
+        panel.add(selection);
+        panel.add(new JLabel("Type of Game"));
+        panel.add(selectionTwo);
+        UIManager.put("OptionPane.minimumSize",new Dimension(300,100));
+        response = JOptionPane.showConfirmDialog(null, panel, "Number of Players + Type of Game", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
 
-	JTextField player1 = new JTextField("Player 1");
-    JPanel player1_plus_options = new JPanel();
-    player1_plus_options.add(player1);
-    player1_plus_options.add(aiPlayer1);
-    player1_plus_options.setLayout(new javax.swing.BoxLayout(player1_plus_options, javax.swing.BoxLayout.X_AXIS));
+        JTextField player1 = new JTextField("Player 1");
+        JPanel player1_plus_options = new JPanel();
+        player1_plus_options.add(player1);
+        player1_plus_options.add(aiPlayer1);
+        player1_plus_options.setLayout(new javax.swing.BoxLayout(player1_plus_options, javax.swing.BoxLayout.X_AXIS));
 
-	JTextField player2 = new JTextField("Player 2");
-    JPanel player2_plus_options = new JPanel();
-    player2_plus_options.add(player2);
-    player2_plus_options.add(aiPlayer2);
-    player2_plus_options.setLayout(new javax.swing.BoxLayout(player2_plus_options, javax.swing.BoxLayout.X_AXIS));
+        JTextField player2 = new JTextField("Player 2");
+        JPanel player2_plus_options = new JPanel();
+        player2_plus_options.add(player2);
+        player2_plus_options.add(aiPlayer2);
+        player2_plus_options.setLayout(new javax.swing.BoxLayout(player2_plus_options, javax.swing.BoxLayout.X_AXIS));
 
-    JTextField player3 = new JTextField("Player 3");
-    JPanel player3_plus_options = new JPanel();
-    player3_plus_options.add(player3);
-    player3_plus_options.add(aiPlayer3);
-    player3_plus_options.setLayout(new javax.swing.BoxLayout(player3_plus_options, javax.swing.BoxLayout.X_AXIS));
+        JTextField player3 = new JTextField("Player 3");
+        JPanel player3_plus_options = new JPanel();
+        player3_plus_options.add(player3);
+        player3_plus_options.add(aiPlayer3);
+        player3_plus_options.setLayout(new javax.swing.BoxLayout(player3_plus_options, javax.swing.BoxLayout.X_AXIS));
 
-    JTextField player4 = new JTextField("Player 4");
-    JPanel player4_plus_options = new JPanel();
-    player4_plus_options.add(player4);
-    player4_plus_options.add(aiPlayer4);
-    player4_plus_options.setLayout(new javax.swing.BoxLayout(player4_plus_options, javax.swing.BoxLayout.X_AXIS));
+        JTextField player4 = new JTextField("Player 4");
+        JPanel player4_plus_options = new JPanel();
+        player4_plus_options.add(player4);
+        player4_plus_options.add(aiPlayer4);
+        player4_plus_options.setLayout(new javax.swing.BoxLayout(player4_plus_options, javax.swing.BoxLayout.X_AXIS));
 
-    JPanel combinedPanel = new JPanel(new GridLayout(0, 1));
+        JPanel combinedPanel = new JPanel(new GridLayout(0, 1));
 
-	if (response != JOptionPane.OK_OPTION) {
-	    System.exit(0);
-	} else {
-	    totalPlayers = Integer.parseInt(selection.getSelectedItem().toString());
+        if (response != JOptionPane.OK_OPTION) {
+            System.exit(0);
+        } else {
+            totalPlayers = Integer.parseInt(selection.getSelectedItem().toString());
             gameType = selectionTwo.getSelectedItem().toString();
 
             if (gameType.equals("Strategic")){
-		game_mode = 1;
+                game_mode = 1;
             }
 
             if (totalPlayers == 2){
@@ -128,8 +128,8 @@ public class GameState implements Serializable {
 
 
             if (result != JOptionPane.OK_OPTION) {
-    	        System.exit(0);
-    	    } else {
+                System.exit(0);
+            } else {
                 if (totalPlayers == 2){
                     namesArr[1] = player1.getText();
                     namesArr[2] = player2.getText();
@@ -170,13 +170,8 @@ public class GameState implements Serializable {
                     if (aiPlayer4.isSelected()){
                         isPlayerAI[4] = true;
                     }
-
                 }
-
-
             }
-
-
         }
     }
 
@@ -189,20 +184,20 @@ public class GameState implements Serializable {
     }
 
     public int getPlayerNumber(String name){
-	for(int i = 1; i < namesArr.length; i++){
-	    if(namesArr[i].equals(name)){
-		return i;
-	    }
-	}
-	return -1;
+        for(int i = 1; i < namesArr.length; i++){
+            if(namesArr[i].equals(name)){
+                return i;
+            }
+        }
+        return -1;
     }
 
     public int getPlayers() {
-	return totalPlayers;
+	    return totalPlayers;
     }
 
     public int getMode(){
-	return game_mode;
+	    return game_mode;
     }
 
     // Used for turns
@@ -226,83 +221,82 @@ public class GameState implements Serializable {
     }
 
     public int getPlayer(){
-	return curr_player;
+	    return curr_player;
     }
 
     public JPanel turnPanel() {
-	//Create the label and set the font + size
-	temp_label = new JLabel(getPlayerName(getNextPlayer())+"'s Turn!");
-	temp_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
+        //Create the label and set the font + size
+        temp_label = new JLabel(getPlayerName(getNextPlayer())+"'s Turn!");
+        temp_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
 
-	//Add label to panel
-	JPanel tp = new JPanel();
-	tp.add(temp_label);
+        //Add label to panel
+        JPanel tp = new JPanel();
+        tp.add(temp_label);
 
-	return tp;
+        return tp;
     }
 
     public JPanel boomPanel(){
-	boom_label = new JLabel(br.getNumLeft(currentPlayer) + " boomerangs left");
-	boom_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
+        boom_label = new JLabel(br.getNumLeft(currentPlayer) + " boomerangs left");
+        boom_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
 
-	JPanel tp = new JPanel();
-	tp.add(boom_label);
+        JPanel tp = new JPanel();
+        tp.add(boom_label);
 
-	return tp;
+        return tp;
     }
 
     public void changeTxt(int num) {
-	if (num == 1) {
-	    //change player number
-	    temp_label.setText(getPlayerName(getNextPlayer()) + "'s turn!");
+        if (num == 1) {
+            //change player number
+            temp_label.setText(getPlayerName(getNextPlayer()) + "'s turn!");
 
-	} else if (num == 2) {
-	    String labelText = String.format("<html><div width=%d>" + getPlayerName(currentPlayer) + "'s turn has been skipped! " + getNextPlayer() + "'s turn!</div></html>", 250);
-	    temp_label.setText(labelText);
-	}
+        } else if (num == 2) {
+            String labelText = String.format("<html><div width=%d>" + getPlayerName(currentPlayer) + "'s turn has been skipped! " + getNextPlayer() + "'s turn!</div></html>", 250);
+            temp_label.setText(labelText);
+        }
 
-    if (gameType == "Strategic"){
-        boom_label.setText(br.getNumLeft(currentPlayer) + " boomerangs left");
-    }
-
+        if (gameType == "Strategic"){
+            boom_label.setText(br.getNumLeft(currentPlayer) + " boomerangs left");
+        }
     }
 
     public JPanel currentInstruction() {
-	instruction_label = new JLabel("Please draw a card.");
+        instruction_label = new JLabel("Please draw a card.");
 
-	instruction_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
+        instruction_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
 
-	//Add label to panel
-	JPanel tp = new JPanel();
-	tp.add(instruction_label);
+        //Add label to panel
+        JPanel tp = new JPanel();
+        tp.add(instruction_label);
 
-	return tp;
+        return tp;
     }
 
     public void changeInstruction(int num) {
-	if (num == 1) {
-	    instruction_label.setText("Please draw a card.");
-	} else if (num == 2) {
-	    instruction_label.setText("Click the highlighted box");
-	} else {
-	    instruction_label.setText("");
-	}
+        if (num == 1) {
+            instruction_label.setText("Please draw a card.");
+        } else if (num == 2) {
+            instruction_label.setText("Click the highlighted box");
+        } else {
+            instruction_label.setText("");
+        }
     }
 
     public void setCurrCard(Card newCard) {
-	currCard = newCard;
+	    currCard = newCard;
     }
 
     public Card getCurrCard() {
-	return currCard;
+	    return currCard;
     }
 
     public Boolean targetClicked() {
-	return target;
+	    return target;
     }
 
     public void setTargetClicked(Boolean bool) {
-	target = bool;
+	    target = bool;
     }
 
     public void loadGameState(GameState gs){
