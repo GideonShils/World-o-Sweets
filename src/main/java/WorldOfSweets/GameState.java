@@ -179,7 +179,7 @@ public class GameState implements Serializable {
     }
 
     public JPanel boomPanel(){
-	boom_label = new JLabel("You have " + br.getNumLeft(currentPlayer) + " boomerangs left");
+	boom_label = new JLabel(br.getNumLeft(currentPlayer) + " boomerangs left");
 	boom_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
 
 	JPanel tp = new JPanel();
@@ -192,11 +192,11 @@ public class GameState implements Serializable {
 	if (num == 1) {
 	    //change player number
 	    temp_label.setText(getPlayerName(getNextPlayer()) + "'s turn!");
-	    boom_label.setText("You have " + br.getNumLeft(currentPlayer) + " boomerangs left");
+	    boom_label.setText(br.getNumLeft(currentPlayer) + " boomerangs left");
 	} else if (num == 2) {
 	    String labelText = String.format("<html><div width=%d>" + getPlayerName(currentPlayer) + "'s turn has been skipped! " + getNextPlayer() + "'s turn!</div></html>", 250);
 	    temp_label.setText(labelText);
-	    boom_label.setText("You have " + br.getNumLeft(currentPlayer) + " boomerangs left");
+	    boom_label.setText(br.getNumLeft(currentPlayer) + " boomerangs left");
 	}
 
     }
