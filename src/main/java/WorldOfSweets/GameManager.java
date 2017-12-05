@@ -237,15 +237,12 @@ public class GameManager implements Serializable{
 
 		current_player = gameState.returnCurrPlayer() - 1;
 
-		System.out.println("AI turn for p " + (current_player + 1));
 		Random rand = new Random();
 
 		// For strategic mode, check if boomerangs left
 		if (gameState.gameType == "Strategic" && br.getNumLeft(current_player+1) > 0) {
-			System.out.println("We're playing strategic and there are boomerangs left!");
 			// If so, randomly choose whether to boomerang or play normally
 			int n = rand.nextInt(2);
-			System.out.println("Randomly chose " + n);
 			// If 0, move to spot
 			if (n == 0) {
 				aiStandard(currentCard, current_player);
@@ -256,8 +253,6 @@ public class GameManager implements Serializable{
 				// Move the token if necessary
 				if (newPosition != -1) {
 					aiMove(current_player, newPosition);
-					System.out.println("Moved to " + newPosition);
-
 					JOptionPane.showMessageDialog(null, "You drew a card and moved!","", JOptionPane.WARNING_MESSAGE);
 				}
 			}
@@ -274,37 +269,31 @@ public class GameManager implements Serializable{
 						break;
 					}
 				}
-				System.out.println("Chose player " + (boom_player + 1));
 
 				br.useBoom(current_player+1);
 
 				// Uses plus 1 for weird indexing reasons
 				int newPosition = findBoomLocation(boom_player);
-				System.out.println("location: " + newPosition);
 
 				// Move the token if necessary
 				if (newPosition != -1) {
 					// Uses plus 1 for weird indexing reasons
 					aiMove(boom_player, newPosition);
-					System.out.println("Moved player " + (boom_player + 1) + "to " + newPosition);
 				}
 
 				JOptionPane.showMessageDialog(null, "You used a boomerang on player " + gameState.getPlayerName(boom_player+1) + "!","", JOptionPane.WARNING_MESSAGE);
 			}
 
 		} else {
-			System.out.println("playing classic");
 			// If no boomerangs, just move to spot normally (as above)
 			aiStandard(currentCard, current_player);
 			
 			// Find the correct space
 			int newPosition = findLocation(card_panel.getCardColor(), tokens[current_player].getPosition(), card_panel.getType());
-			System.out.println("location: " + newPosition);
 			
 			// Move the token if necessary
 			if (newPosition != -1) {
 				aiMove(current_player, newPosition);
-				System.out.println("Moving to " + newPosition);
 				JOptionPane.showMessageDialog(null, "You drew a card and moved!","", JOptionPane.WARNING_MESSAGE);
 			}
 		}
@@ -342,7 +331,6 @@ public class GameManager implements Serializable{
 		
 		Color color = card_panel.getCardColor();
 		int current_pos = tokens[(boom_player)].getPosition();
-		System.out.println(current_pos);
 		if(current_pos == sweets_spaces[4]){
 			current_pos = tokens[gameState.getPlayer() % tokens.length].getPosition();
 		}
@@ -361,7 +349,6 @@ public class GameManager implements Serializable{
 			
 			// Send to beginning
 			if (j == -1) {
-				System.out.println("Sending to start");
 				pos = 0;
 				tokens[boom_player].setPosition(0);
 			} else {
@@ -483,14 +470,12 @@ public class GameManager implements Serializable{
 	}
 	
 	public int findLocation(Color color, int current_pos, int card_type) {
-		System.out.println("Position: " + current_pos);
 		int pos = -1;
 
 		// Regular single / double
 		if (card_type > 5) {
 			// Make sure not in jail
 			if(current_pos != sweets_spaces[4]) {
-				System.out.println("not in jail");
 				pos = -1;
 				int j = 0;
 				for (int i = 0; i < card_type - 5; i++) {
