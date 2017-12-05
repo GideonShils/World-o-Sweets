@@ -21,8 +21,9 @@ public class GameManager implements Serializable{
     public JLabel end;
     public GameState gameState;
     public int[] sweets_spaces;
+    public Boomerang br;
 
-    public GameManager(JPanel[] array, CardPanel card_panel, Token[] tokens, JLabel end, GameState gs, int[] sweets_spaces) {
+    public GameManager(JPanel[] array, CardPanel card_panel, Token[] tokens, JLabel end, GameState gs, int[] sweets_spaces, Boomerang br) {
 		gameState = gs;
 		this.array = array;
 		this.card_panel = card_panel;
@@ -30,6 +31,7 @@ public class GameManager implements Serializable{
 		this.current_player = 0;
 		this.end = end;
 		this.sweets_spaces = sweets_spaces;
+		this.br = br; 
     }    
 
     public void findNext(Color color, int current_pos, int card_type) {
@@ -123,13 +125,15 @@ public class GameManager implements Serializable{
 	current_player = gameState.returnCurrPlayer() - 1;
 	if (card.skip()) {
 	    // Renable the button
-	    card_panel.toggleButton();
+	    card_panel.toggleDrawButton();
+	    card_panel.toggleBoomButton();
 			
 	    gameState.changeTxt(2);							
 	}
 	else if (tokens[current_player].getPosition() == sweets_spaces[4]){
 	    if(!card.goTo()){
-		card_panel.toggleButton();
+		card_panel.toggleDrawButton();
+		card_panel.toggleBoomButton();
 
 		JOptionPane.showMessageDialog(null, "You didn't draw another sweets card!","", JOptionPane.WARNING_MESSAGE);
 		
@@ -139,7 +143,8 @@ public class GameManager implements Serializable{
 		gameState.changeInstruction(1);
 	    }
 	    else if(card.pie()){
-		card_panel.toggleButton();
+		card_panel.toggleDrawButton();
+		card_panel.toggleBoomButton();
 	    }
 	    else{
 		gameState.changeInstruction(2);
@@ -153,6 +158,68 @@ public class GameManager implements Serializable{
 	findNext(card_panel.getCardColor(), tokens[current_player].getPosition(), card_panel.getType());
     }
 
+    public void boomerang(int boom_player){
+	if (card_panel.getType() == 5) {
+	    // Renable the button
+	    card_panel.toggleDrawButton();
+	    card_panel.toggleBoomButton();
+			
+	    gameState.changeTxt(2);							
+	}
+	else{
+	    current_player = boom_player-1;
+
+	    Color color = card_panel.getCardColor();	
+	    int current_pos = tokens[(boom_player-1)].getPosition();
+	    if(current_pos == sweets_spaces[4]){
+		current_pos = tokens[gameState.getPlayer()-1].getPosition();
+	    }
+	    int card_type = card_panel.getType();
+
+	    if (card_type > 5) {	    
+		int pos = -1;
+		int j = 0;
+		for (j = current_pos-1; j > -1; j--) {
+		    if(array[j].getBackground().equals(color)) {
+			pos = j;
+			current_pos = j;
+			break;
+		    }
+		}
+	    
+		if (j == -1) {
+		    pos = 0;
+		    tokens[current_player].setPosition(0);
+		    array[pos].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
+		    array[pos].addMouseListener(new PositionListener(current_pos, pos));	   
+		}
+		else{
+		    tokens[current_player].setPosition(pos);
+		    array[pos].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
+		    array[pos].addMouseListener(new PositionListener(current_pos, pos));
+		}
+	    }
+	    else if (card_type <= 4) {
+		if(card_type == 4){
+		    if(current_pos != sweets_spaces[4]){
+			JOptionPane.showMessageDialog(null, gameState.getPlayerName(boom_player) + " has been sent to Pie Land, draw another sweets card to return","", JOptionPane.WARNING_MESSAGE);
+		    }
+		    else{
+			return;
+		    }
+		}
+		int location = sweets_spaces[card_type];
+		
+		tokens[current_player].setPosition(location);
+		array[location].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
+		array[location].addMouseListener(new PositionListener(current_pos, location));
+	    }
+	    else {
+		JOptionPane.showMessageDialog(null, "Your turn was skipped!","", JOptionPane.WARNING_MESSAGE);
+	    }
+	}
+    }
+    
     private class PositionListener implements MouseListener {
 	private int previous, next;
 
@@ -191,7 +258,8 @@ public class GameManager implements Serializable{
 		array[next].add(tokens[current_player].getLabel());
 
 		// Renable the button
-		card_panel.toggleButton();
+		card_panel.toggleDrawButton();
+		card_panel.toggleBoomButton();
 
 		gameState.changeTxt(1);
 

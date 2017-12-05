@@ -16,55 +16,60 @@ public class GameState implements Serializable {
     public int currentPlayer = 0;
     public int curr_player = 1;
     JLabel temp_label;
+    JLabel boom_label;
     JLabel instruction_label;
+    int game_mode = 0; //0 for classic, 1 for strategic 
     String[] namesArr;      //Used for names
 
+    Boomerang br; 
     Card currCard;
     Boolean target = false;
 
 
-	public GameState() {
-	}
+    public GameState(Boomerang br) {
+	this.br = br;
+    }
 
 
     public void promptPlayers() {
 	// Initialize panel and combo box
 	JPanel panel = new JPanel(new GridLayout(0, 1));
 	DefaultComboBoxModel model = new DefaultComboBoxModel();
-    DefaultComboBoxModel typeOfGame = new DefaultComboBoxModel();
+	DefaultComboBoxModel typeOfGame = new DefaultComboBoxModel();
 
 	// Add number of player choices to the dropdown
 	model.addElement("2");
 	model.addElement("3");
 	model.addElement("4");
 
-    typeOfGame.addElement("Classic");
-    typeOfGame.addElement("Strategic");
+	typeOfGame.addElement("Classic");
+	typeOfGame.addElement("Strategic");
 
 	JComboBox selection = new JComboBox(model);
-    JComboBox selectionTwo = new JComboBox(typeOfGame);
+	JComboBox selectionTwo = new JComboBox(typeOfGame);
 
-    panel.add(new JLabel("Number of Players"));
+	panel.add(new JLabel("Number of Players"));
 	panel.add(selection);
-    panel.add(new JLabel("Type of Game"));
-    panel.add(selectionTwo);
+	panel.add(new JLabel("Type of Game"));
+	panel.add(selectionTwo);
+	UIManager.put("OptionPane.minimumSize",new Dimension(300,100)); 
 	response = JOptionPane.showConfirmDialog(null, panel, "Number of Players + Type of Game", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 
 
-    JTextField player1 = new JTextField("Player 1");
-    JTextField player2 = new JTextField("Player 2");
-    JTextField player3 = new JTextField("Player 3");
-    JTextField player4 = new JTextField("Player 4");
-    JPanel namesPanel = new JPanel(new GridLayout(0, 1));
+	JTextField player1 = new JTextField("Player 1");
+	JTextField player2 = new JTextField("Player 2");
+	JTextField player3 = new JTextField("Player 3");
+	JTextField player4 = new JTextField("Player 4");
+	JPanel namesPanel = new JPanel(new GridLayout(0, 1));
 
-	    if (response != JOptionPane.OK_OPTION) {
-	        System.exit(0);
-	    } else {
-	        totalPlayers = Integer.parseInt(selection.getSelectedItem().toString());
+	if (response != JOptionPane.OK_OPTION) {
+	    System.exit(0);
+	} else {
+	    totalPlayers = Integer.parseInt(selection.getSelectedItem().toString());
             gameType = selectionTwo.getSelectedItem().toString();
 
             if (gameType.equals("Strategic")){
-                //SPECIAL GAME
+		game_mode = 1;
             }
 
             if (totalPlayers == 2){
@@ -92,7 +97,7 @@ public class GameState implements Serializable {
             }
 
             int result = JOptionPane.showConfirmDialog(null, namesPanel, "Player Names", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-            namesArr = new String[totalPlayers + 1];
+            namesArr = new String[totalPlayers+1];
 
             if (result != JOptionPane.OK_OPTION) {
     	        System.exit(0);
@@ -114,14 +119,27 @@ public class GameState implements Serializable {
 
 
         }
-  	}
+    }
 
     public String getPlayerName(int tmp){
         return namesArr[tmp];
     }
 
+    public int getPlayerNumber(String name){
+	for(int i = 1; i < namesArr.length; i++){
+	    if(namesArr[i].equals(name)){
+		return i; 
+	    }
+	}
+	return -1; 
+    }
+
     public int getPlayers() {
 	return totalPlayers;
+    }
+
+    public int getMode(){
+	return game_mode;
     }
 
     // Used for turns
@@ -144,10 +162,14 @@ public class GameState implements Serializable {
 	}
     }
 
+    public int getPlayer(){
+	return curr_player;
+    }
+
     public JPanel turnPanel() {
 	//Create the label and set the font + size
 	temp_label = new JLabel(getPlayerName(getNextPlayer())+"'s Turn!");
-	temp_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
+	temp_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));       
 
 	//Add label to panel
 	JPanel tp = new JPanel();
@@ -156,13 +178,25 @@ public class GameState implements Serializable {
 	return tp;
     }
 
+    public JPanel boomPanel(){
+	boom_label = new JLabel("You have " + br.getNumLeft(currentPlayer) + " boomerangs left");
+	boom_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
+
+	JPanel tp = new JPanel();
+	tp.add(boom_label);
+
+	return tp; 
+    }
+
     public void changeTxt(int num) {
 	if (num == 1) {
 	    //change player number
 	    temp_label.setText(getPlayerName(getNextPlayer()) + "'s turn!");
+	    boom_label.setText("You have " + br.getNumLeft(currentPlayer) + " boomerangs left");
 	} else if (num == 2) {
 	    String labelText = String.format("<html><div width=%d>" + getPlayerName(currentPlayer) + "'s turn has been skipped! " + getNextPlayer() + "'s turn!</div></html>", 250);
 	    temp_label.setText(labelText);
+	    boom_label.setText("You have " + br.getNumLeft(currentPlayer) + " boomerangs left");
 	}
 
     }
