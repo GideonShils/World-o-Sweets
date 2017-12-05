@@ -5,11 +5,15 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.BorderFactory;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Container;
 import java.io.Serializable;
 import java.util.Random;
+import javax.swing.Timer;
 
 import GameObjects.*;
 
@@ -401,7 +405,7 @@ public class GameManager implements Serializable{
 
 		// Check if current player is AI
 		if (gameState.isAI(player)) {
-			System.out.println(player + " is AI");
+			Timer timer;
 
 			// Disable the buttons
 			card_panel.toggleBoomButton();
@@ -410,19 +414,19 @@ public class GameManager implements Serializable{
 
 			gameState.changeInstruction(3);
 
-			// Fake a play for me click
-			System.out.println("clicking...");
-			card_panel._playForMeButton.doClick();
+			timer = new Timer(1000, new ActionListener() {
+            	public void actionPerformed(ActionEvent evt) {
+					// Reenable buttons
+					card_panel.togglePlayForMeButton();
+					card_panel.toggleBoomButton();
+					card_panel.toggleDrawButton();
 
-			// Sleep for 2 seconds
-			try {
-				System.out.println("SLEEP");
-				Thread.sleep(2000);
-				System.out.println("WAKE")
-			} catch(InterruptedException ex) {
-				Thread.currentThread().interrupt();
-			}
-
+					// Fake a play for me click
+					card_panel._playForMeButton.doClick();
+            	}
+        	});
+			timer.setRepeats(false);
+			timer.start();
 		}
 	}
 
