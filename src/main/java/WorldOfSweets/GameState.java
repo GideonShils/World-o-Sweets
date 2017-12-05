@@ -18,9 +18,9 @@ public class GameState implements Serializable {
     JLabel temp_label;
     JLabel boom_label;
     JLabel instruction_label;
-    int game_mode = 0; //0 for classic, 1 for strategic
-    String[] namesArr;      //Used for names
-    boolean[] isPlayerAI;
+    int game_mode = 0;      // 0 for classic, 1 for strategic
+    String[] namesArr;      // Used for names
+    boolean[] isPlayerAI;   // Indicates if player is AI
 
     Boomerang br;
     Card currCard;
@@ -124,8 +124,9 @@ public class GameState implements Serializable {
 
             int result = JOptionPane.showConfirmDialog(null, combinedPanel, "Player Names", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
             namesArr = new String[totalPlayers+1];
-            isPlayerAI = new boolean[totalPlayers+1];
 
+            // Create bool array where 1 indicates that player is AI
+            isPlayerAI = new boolean[totalPlayers+1];
 
             if (result != JOptionPane.OK_OPTION) {
                 System.exit(0);
@@ -179,8 +180,8 @@ public class GameState implements Serializable {
         return isPlayerAI[playerNum];
     }
 
-    public String getPlayerName(int tmp){
-        return namesArr[tmp];
+    public String getPlayerName(int playerNum){
+        return namesArr[playerNum];
     }
 
     public int getPlayerNumber(String name){
@@ -212,12 +213,12 @@ public class GameState implements Serializable {
     }
 
     public int returnCurrPlayer() {
-	if (curr_player == totalPlayers) {
-	    curr_player = 1;
-	    return totalPlayers;
-	} else {
-	    return curr_player++;
-	}
+        if (curr_player == totalPlayers) {
+            curr_player = 1;
+            return totalPlayers;
+        } else {
+            return curr_player++;
+        }
     }
 
     public int getPlayer(){
