@@ -181,20 +181,8 @@ public class CardPanel implements Serializable {
             // Disable the button
             toggleDrawButton();
 	        toggleBoomButton();
+            togglePlayForMeButton(false);
 
-            int current = gameState.curr_player;
-
-            if (current + 1 > gameState.getPlayers()){
-                current = 1;
-            } else {
-                current += 1;
-            }
-
-            if (gameState.isAI(current)){
-                _playForMeButton.setEnabled(false);
-            } else {
-                _playForMeButton.setEnabled(true);
-            }
 
             // Draw a new card
             if (gameState.getPlayerName(gameState.curr_player).toUpperCase().equals("DAD")){
@@ -221,6 +209,10 @@ public class CardPanel implements Serializable {
 
             gm.turn(currentCard);
         }
+    }
+
+    public void togglePlayForMeButton(boolean bool){
+        _playForMeButton.setEnabled(bool);
     }
 
     private class BoomerangListener implements ActionListener {

@@ -255,12 +255,15 @@ public class GameState implements Serializable {
 	if (num == 1) {
 	    //change player number
 	    temp_label.setText(getPlayerName(getNextPlayer()) + "'s turn!");
-	    boom_label.setText(br.getNumLeft(currentPlayer) + " boomerangs left");
+
 	} else if (num == 2) {
 	    String labelText = String.format("<html><div width=%d>" + getPlayerName(currentPlayer) + "'s turn has been skipped! " + getNextPlayer() + "'s turn!</div></html>", 250);
 	    temp_label.setText(labelText);
-	    boom_label.setText(br.getNumLeft(currentPlayer) + " boomerangs left");
 	}
+
+    if (gameType == "Strategic"){
+        boom_label.setText(br.getNumLeft(currentPlayer) + " boomerangs left");
+    }
 
     }
 

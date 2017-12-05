@@ -31,8 +31,8 @@ public class GameManager implements Serializable{
 		this.current_player = 0;
 		this.end = end;
 		this.sweets_spaces = sweets_spaces;
-		this.br = br; 
-    }    
+		this.br = br;
+    }
 
     public void findNext(Color color, int current_pos, int card_type) {
 
@@ -71,7 +71,7 @@ public class GameManager implements Serializable{
 				}
 		    }
 		    int location = sweets_spaces[card_type];
-			
+
 		    tokens[current_player].setPosition(location);
 		    array[location].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
 		    array[location].addMouseListener(new PositionListener(current_pos, location));
@@ -117,7 +117,7 @@ public class GameManager implements Serializable{
 		}
 
 		return -2;
-		
+
 
     }
 
@@ -127,8 +127,16 @@ public class GameManager implements Serializable{
 	    // Renable the button
 	    card_panel.toggleDrawButton();
 	    card_panel.toggleBoomButton();
-			
-	    gameState.changeTxt(2);							
+
+        int current = gameState.curr_player;
+
+        if (gameState.isAI(current)){
+            card_panel.togglePlayForMeButton(false);
+        } else {
+            card_panel.togglePlayForMeButton(true);
+        }
+
+	    gameState.changeTxt(2);
 	}
 	else if (tokens[current_player].getPosition() == sweets_spaces[4]){
 	    if(!card.goTo()){
@@ -136,7 +144,7 @@ public class GameManager implements Serializable{
 		card_panel.toggleBoomButton();
 
 		JOptionPane.showMessageDialog(null, "You didn't draw another sweets card!","", JOptionPane.WARNING_MESSAGE);
-		
+
 		gameState.changeTxt(1);
 
 		// Update the instruction to draw card
@@ -163,20 +171,27 @@ public class GameManager implements Serializable{
 	    // Renable the button
 	    card_panel.toggleDrawButton();
 	    card_panel.toggleBoomButton();
-			
-	    gameState.changeTxt(2);							
+        int current = gameState.curr_player;
+
+        if (gameState.isAI(current)){
+            card_panel.togglePlayForMeButton(false);
+        } else {
+            card_panel.togglePlayForMeButton(true);
+        }
+
+	    gameState.changeTxt(2);
 	}
 	else{
 	    current_player = boom_player-1;
 
-	    Color color = card_panel.getCardColor();	
+	    Color color = card_panel.getCardColor();
 	    int current_pos = tokens[(boom_player-1)].getPosition();
 	    if(current_pos == sweets_spaces[4]){
 		current_pos = tokens[gameState.getPlayer()-1].getPosition();
 	    }
 	    int card_type = card_panel.getType();
 
-	    if (card_type > 5) {	    
+	    if (card_type > 5) {
 		int pos = -1;
 		int j = 0;
 		for (j = current_pos-1; j > -1; j--) {
@@ -186,12 +201,12 @@ public class GameManager implements Serializable{
 			break;
 		    }
 		}
-	    
+
 		if (j == -1) {
 		    pos = 0;
 		    tokens[current_player].setPosition(0);
 		    array[pos].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
-		    array[pos].addMouseListener(new PositionListener(current_pos, pos));	   
+		    array[pos].addMouseListener(new PositionListener(current_pos, pos));
 		}
 		else{
 		    tokens[current_player].setPosition(pos);
@@ -209,7 +224,7 @@ public class GameManager implements Serializable{
 		    }
 		}
 		int location = sweets_spaces[card_type];
-		
+
 		tokens[current_player].setPosition(location);
 		array[location].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0,0,0)));
 		array[location].addMouseListener(new PositionListener(current_pos, location));
@@ -219,7 +234,7 @@ public class GameManager implements Serializable{
 	    }
 	}
     }
-    
+
     private class PositionListener implements MouseListener {
 	private int previous, next;
 
@@ -245,6 +260,18 @@ public class GameManager implements Serializable{
 	}
 
 	public void mouseClicked(MouseEvent e) {
+        //Disable play for me
+        int current = gameState.curr_player;
+
+
+        if (gameState.isAI(current)){
+            card_panel.togglePlayForMeButton(false);
+        } else {
+            card_panel.togglePlayForMeButton(true);
+        }
+
+
+
 	    if (e.getSource().getClass().equals(array[0].getClass()) && gameState.targetClicked() == false) {
 		// Show that the target spot has been clicked
 		gameState.setTargetClicked(true);

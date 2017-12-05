@@ -553,7 +553,13 @@ public class WorldOfSweets extends JFrame implements Serializable{
 
 		    timer.action();  //Start the timer
 		    gm = new GameManager(positions, card_panel, tokens, grandmas_house, gameState, sweets_spaces, br);
+
 		    card_panel.setGameManager(gm);
+
+            if (gameState.isAI(1)){
+                card_panel.togglePlayForMeButton(false);
+            }
+
             dm.gm = gm;
 		}
 	    });
@@ -592,8 +598,8 @@ public class WorldOfSweets extends JFrame implements Serializable{
 
         // updates card panel with correct color
         Card c = w.card_panel.getCurrentCard();
-        
-        if (c != null)    
+
+        if (c != null)
             this.card_panel.changeCard(c);
 
         //replaces deck with loaded deck
@@ -701,7 +707,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
     public static Token current_token;
     public static JPanel[] positions;
     public static GameManager gm;
-    public static Boomerang br = new Boomerang(); 
+    public static Boomerang br = new Boomerang();
     public JPanel instructions_panel;
     public JPanel combinedPanel;
     public JPanel turn_panel;
