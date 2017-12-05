@@ -2,7 +2,6 @@ package WorldOfSweets;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.BorderFactory;
 import java.awt.Color;
@@ -161,7 +160,6 @@ public class GameManager implements Serializable{
 			gameState.changeInstruction(2);
 		}
 
-
 		findNext(card_panel.getCardColor(), tokens[current_player].getPosition(), card_panel.getType());
     }
 
@@ -297,6 +295,9 @@ public class GameManager implements Serializable{
 				JOptionPane.showMessageDialog(null, "You drew a card and moved!","", JOptionPane.WARNING_MESSAGE);
 			}
 		}
+
+		// Check if next player is AI (This is for when previous move WAS AI)
+		checkAi();
 	}
 
 	public void aiStandard(Card currentCard, int player) {
@@ -395,6 +396,36 @@ public class GameManager implements Serializable{
 
 	}
 
+	public void checkAi() {
+		int player = gameState.getPlayer();
+
+		// Check if current player is AI
+		if (gameState.isAI(player)) {
+			System.out.println(player + " is AI");
+
+			// Disable the buttons
+			card_panel.toggleBoomButton();
+			card_panel.toggleDrawButton();
+			card_panel.togglePlayForMeButton();
+
+			gameState.changeInstruction(3);
+
+			// Fake a play for me click
+			System.out.println("clicking...");
+			card_panel._playForMeButton.doClick();
+
+			// Sleep for 2 seconds
+			try {
+				System.out.println("SLEEP");
+				Thread.sleep(2000);
+				System.out.println("WAKE")
+			} catch(InterruptedException ex) {
+				Thread.currentThread().interrupt();
+			}
+
+		}
+	}
+
     private class PositionListener implements MouseListener {
 		private int previous, next;
 
@@ -443,6 +474,8 @@ public class GameManager implements Serializable{
 				// Update the instruction to draw card
 				gameState.changeInstruction(1);
 
+				// Check if next player is AI (This is for when previous move WASNT AI)
+				checkAi();
 			}
 
 			if (e.getSource().getClass().equals(end.getClass())) {

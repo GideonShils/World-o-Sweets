@@ -279,7 +279,10 @@ public class GameState implements Serializable {
             instruction_label.setText("Please draw a card.");
         } else if (num == 2) {
             instruction_label.setText("Click the highlighted box");
-        } else {
+        } else if (num == 3) {
+            instruction_label.setText("AI is thinking.....");
+        }
+        else {
             instruction_label.setText("");
         }
     }
