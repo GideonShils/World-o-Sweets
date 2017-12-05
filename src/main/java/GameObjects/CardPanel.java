@@ -32,8 +32,10 @@ public class CardPanel implements Serializable {
 
     public static DeckManager dm;
 
+
     public CardPanel(DeckManager dm, GameState gs, Boomerang br) {
 	togglestate = 0;
+
     	this.dm = dm;
     	this.gm = null;
 	this.br = br;
@@ -167,8 +169,22 @@ public class CardPanel implements Serializable {
             toggleDrawButton();
 	    toggleBoomButton();
 
+
             // Draw a new card
-            currentCard = dm.draw();
+            if (gameState.getPlayerName(gameState.curr_player).toUpperCase().equals("DAD")){
+
+                // need to change IF statement to only occur if mode is stragetic and boomerang is used
+                if (gameState.gameType.equals("Strategic")){
+
+                }
+                else{
+                    currentCard = dm.drawWorstCardForward();
+                }
+            }
+            else{
+                currentCard = dm.draw();
+            }
+            
             changeCard(currentCard);
 
             // Update gamestate to hold the current card
@@ -238,22 +254,22 @@ public class CardPanel implements Serializable {
 
     public int getType() {
     	switch(cardValue.getText()) {
-    	    case "Single":
-		return 6;
-    	    case "Double":
-		return 7;
-    	    case "Skip":
-		return 5;
-    	    case "Ice Cream":
-		return 0;
-	    case "Cake":
-		return 1;
-	    case "Cookie":
-		return 2;
-	    case "Cupcake":
-		return 3;
-	    case "Pie":
-		return 4; 
+        	case "Single":
+    		  return 6;
+        	case "Double":
+    		  return 7;
+        	case "Skip":
+    		  return 5;
+        	case "Ice Cream":
+    		  return 0;
+    	    case "Cake":
+    		  return 1;
+    	    case "Cookie":
+    		  return 2;
+    	    case "Cupcake":
+    		  return 3;
+    	    case "Pie":
+    		  return 4; 
 			
         }
         

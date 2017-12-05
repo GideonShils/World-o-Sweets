@@ -400,6 +400,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
 	    JLabel label = new JLabel();
 	    label.setIcon(new ImageIcon(getClass().getResource("/tokens/player" + (i+1) + ".png")));
 	    Token t = new Token(label);
+        t.setPosition(0);
 	    tokens[i] = t;
 	    start_panel.add(label);
 	}
@@ -511,7 +512,9 @@ public class WorldOfSweets extends JFrame implements Serializable{
 
         // Initialize game sate and bring up dialog
         // asking for number of players
+
 	gameState = new GameState(br);
+
         gameState.promptPlayers();
 
 	// Create deck manager object
@@ -551,6 +554,7 @@ public class WorldOfSweets extends JFrame implements Serializable{
 		    timer.action();  //Start the timer
 		    gm = new GameManager(positions, card_panel, tokens, grandmas_house, gameState, sweets_spaces, br);
 		    card_panel.setGameManager(gm);
+            dm.gm = gm;
 		}
 	    });
 
