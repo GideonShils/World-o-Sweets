@@ -477,7 +477,9 @@ public class WorldOfSweets extends JFrame implements Serializable{
 	boom_panel = gameState.boomPanel();
         combinedPanel.add(card_panel.getCardsPanel());
         combinedPanel.add(turn_panel);
-	combinedPanel.add(boom_panel);
+        if (gameState.gameType == "Strategic") {
+                combinedPanel.add(boom_panel);
+        }
 
 
 

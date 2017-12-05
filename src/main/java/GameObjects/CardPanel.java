@@ -187,13 +187,7 @@ public class CardPanel implements Serializable {
 
             // Draw a new card
             if (gameState.getPlayerName(gameState.curr_player).toUpperCase().equals("DAD")) {
-
-                // need to change IF statement to only occur if mode is stragetic and boomerang is used
-                if (gameState.gameType.equals("Strategic")){
-
-                } else {
-                    currentCard = dm.drawWorstCardForward();
-                }
+                currentCard = dm.drawWorstCardForward();
             } else {
                 currentCard = dm.draw();
             }
@@ -219,8 +213,9 @@ public class CardPanel implements Serializable {
 
             //Choose player
             int player = choosePlayer();
-            if(player == -1)
-            return;
+            if(player == -1) {
+                return;
+            }
 
             currentCard = dm.draw();
             changeCard(currentCard);
@@ -267,26 +262,14 @@ public class CardPanel implements Serializable {
 
     private class PlayForMeListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            // Disable the buttons
-            toggleDrawButton();
-	        toggleBoomButton();
-            togglePlayForMeButton();
-            /*
+
+            
             // Special case for dad mode
             if (gameState.getPlayerName(gameState.curr_player).toUpperCase().equals("DAD")) {
-
-                // need to change IF statement to only occur if mode is stragetic and boomerang is used
-                if (gameState.gameType.equals("Strategic")){
-
-                } else {
-                    currentCard = dm.drawWorstCardForward();
-                }
+                currentCard = dm.drawWorstCardForward();
             } else {
                 currentCard = dm.draw();
-            }*/
-
-            // Delete this when uncommenting the above
-            currentCard = dm.draw();
+            }
 
             changeCard(currentCard);
 
