@@ -14,6 +14,7 @@ public class CardPanel implements Serializable {
     private JPanel combinedPanel;
     private JButton _drawCardButton = new JButton("Draw Card");
     private JButton _boomerangButton = new JButton("Boomerang");
+    private JButton _playForMeButton = new JButton("Play For Me");
     private JLabel cardLabel = new JLabel();
     private JLabel deckLabel = new JLabel();
     private JLabel deckText = new JLabel("Deck");
@@ -34,11 +35,12 @@ public class CardPanel implements Serializable {
 
 
     public CardPanel(DeckManager dm, GameState gs, Boomerang br) {
-	togglestate = 0;
+        
+        togglestate = 0;
 
     	this.dm = dm;
     	this.gm = null;
-	this.br = br;
+	    this.br = br;
         gameState = gs;
 
         //-------------------------------------------------------
@@ -125,21 +127,32 @@ public class CardPanel implements Serializable {
         cards_panel.add(cardValue, c);
         //cardValue.setText(currentCard.getCardText());
 
-
+        // Create button panel
         buttonPanel = new JPanel();
         buttonPanel.setPreferredSize(new Dimension(width, 100));
-        buttonPanel.add(_drawCardButton);
-	if(gs.getMode() == 1){	   
-	    buttonPanel.add(_boomerangButton);
-	}
 
+        // Add draw button
+        buttonPanel.add(_drawCardButton);
+
+        // Add boomerang button
+        if(gs.getMode() == 1){	   
+            buttonPanel.add(_boomerangButton);
+        }
+
+        // Add AI button
+        buttonPanel.add(_playForMeButton);
+
+        // Create & set action listeners
         ActionListener cardButtonListener = new CardButtonListener();
         _drawCardButton.addActionListener(cardButtonListener);
 
-	ActionListener boomerangListner = new BoomerangListener();
-	_boomerangButton.addActionListener(boomerangListner);
+        ActionListener boomerangListner = new BoomerangListener();
+        _boomerangButton.addActionListener(boomerangListner);
 
-    	//Combine card panel and turn panel
+        ActionListener playForMeListener = new PlayForMeListener();
+        _boomerangButton.addActionListener(playForMeListener);
+
+    	// Combine card panel and turn panel
     	combinedPanel = new javax.swing.JPanel();
     	combinedPanel.setLayout(new BoxLayout(combinedPanel, BoxLayout.Y_AXIS));
 
@@ -167,7 +180,7 @@ public class CardPanel implements Serializable {
         public void actionPerformed(ActionEvent e) {
             // Disable the button
             toggleDrawButton();
-	    toggleBoomButton();
+	        toggleBoomButton();
 
 
             // Draw a new card
@@ -198,54 +211,61 @@ public class CardPanel implements Serializable {
     }
 
     private class BoomerangListener implements ActionListener {
-	public void actionPerformed(ActionEvent e){	    
-	    //Disable the button
-	    toggleDrawButton();
-	    toggleBoomButton();
+        public void actionPerformed(ActionEvent e){	    
+            //Disable the button
+            toggleDrawButton();
+            toggleBoomButton();
 
-	    //Choose player
-	    int player = choosePlayer(); 
-	    if(player == -1)
-		return;
+            //Choose player
+            int player = choosePlayer(); 
+            if(player == -1)
+            return;
 
-	    currentCard = dm.draw();
-	    changeCard(currentCard);
+            currentCard = dm.draw();
+            changeCard(currentCard);
 
-	     // Update gamestate to hold the current card
+            // Update gamestate to hold the current card
             gameState.setCurrCard(currentCard);
 
             // Reenable clicking on board
             gameState.setTargetClicked(false);
-	    
-	    gm.boomerang(player);	    
-	    
-	}
+            
+            gm.boomerang(player);	    
+            
+        }
 
-	private int choosePlayer(){
-	    // Initialize panel and combo box
-	    JPanel panel = new JPanel(new GridLayout(0, 1));
-	    DefaultComboBoxModel model = new DefaultComboBoxModel();
+        private int choosePlayer() {
+            // Initialize panel and combo box
+            JPanel panel = new JPanel(new GridLayout(0, 1));
+            DefaultComboBoxModel model = new DefaultComboBoxModel();
 
-	    int cur = gameState.returnCurrPlayer();
-	    br.useBoom(cur);
-	    for(int i = 1; i <= gameState.getPlayers(); i++){
-		if(i != cur)
-		    model.addElement(gameState.getPlayerName(i));
-	    }
-	    
-	    JComboBox selection = new JComboBox(model);
+            int cur = gameState.returnCurrPlayer();
+            br.useBoom(cur);
+            for(int i = 1; i <= gameState.getPlayers(); i++){
+            if(i != cur)
+                model.addElement(gameState.getPlayerName(i));
+            }
+            
+            JComboBox selection = new JComboBox(model);
 
-	    panel.add(new JLabel("Choose a Player"));
-	    panel.add(selection);
-	    UIManager.put("OptionPane.minimumSize",new Dimension(300,100)); 
-	    int response = JOptionPane.showConfirmDialog(null, panel, "Boomerang", JOptionPane.DEFAULT_OPTION);
-	    if(response != JOptionPane.OK_OPTION){
-		return -1; 
-	    }
-	    else{
-		return gameState.getPlayerNumber(selection.getSelectedItem().toString());
-	    }
-	}
+            panel.add(new JLabel("Choose a Player"));
+            panel.add(selection);
+            UIManager.put("OptionPane.minimumSize",new Dimension(300,100)); 
+            int response = JOptionPane.showConfirmDialog(null, panel, "Boomerang", JOptionPane.DEFAULT_OPTION);
+
+            if(response != JOptionPane.OK_OPTION){
+                return -1; 
+            }
+            else{
+                return gameState.getPlayerNumber(selection.getSelectedItem().toString());
+            }
+        }
+    }
+
+    private class PlayForMeListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            // Implement play for me code later
+        }
     }
 
     public Color getCardColor() {
