@@ -14,7 +14,7 @@ public class CardPanel implements Serializable {
     private JPanel combinedPanel;
     private JButton _drawCardButton = new JButton("Draw Card");
     private JButton _boomerangButton = new JButton("Boomerang");
-    private JButton _playForMeButton = new JButton("Play For Me");
+    public JButton _playForMeButton = new JButton("Play For Me");
     private JLabel cardLabel = new JLabel();
     private JLabel deckLabel = new JLabel();
     private JLabel deckText = new JLabel("Deck");
@@ -184,7 +184,6 @@ public class CardPanel implements Serializable {
 	        toggleBoomButton();
             togglePlayForMeButton();
 
-
             // Draw a new card
             if (gameState.getPlayerName(gameState.curr_player).toUpperCase().equals("DAD")) {
                 currentCard = dm.drawWorstCardForward();
@@ -263,7 +262,6 @@ public class CardPanel implements Serializable {
     private class PlayForMeListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-            
             // Special case for dad mode
             if (gameState.getPlayerName(gameState.curr_player).toUpperCase().equals("DAD")) {
                 currentCard = dm.drawWorstCardForward();

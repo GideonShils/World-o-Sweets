@@ -1,0 +1,21 @@
+Identifier: Player one AI
+Summary: Testing that first player as AI automatically plays the turn when the game opens
+Preconditions: Start game with AI checked for player 1
+Execution: 
+	Player 1s turn will be first. 
+	Observe whether the "AI is thinking..." message appears and then after a short delay a turn popup appears
+	Click ok
+	Observe that the players piece has moved appropriately and it is the next players turn
+Postconditions: Observe that player 1 moved according to the drawn card
+
+Identifier: Play for me button
+Summary: Testing that the play for me button works for individual turns
+Preconditions: Start the game with no AI buttons checked, in strategic mode
+Execution: 
+	Play a normal draw card 
+	Observe that you must click to move
+	Pick the play for me button
+	Observe that a choice is randomly made on whether to boomerang
+	Press ok on the pop up
+	Observe that the piece was moved automatically and it is the next players turn
+Postconditions: Observe that the player moved according to the drawn card and randomly selected button choice

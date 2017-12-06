@@ -2,15 +2,18 @@ package WorldOfSweets;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.BorderFactory;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Container;
 import java.io.Serializable;
 import java.util.Random;
+import javax.swing.Timer;
 
 import GameObjects.*;
 
@@ -161,7 +164,6 @@ public class GameManager implements Serializable{
 			gameState.changeInstruction(2);
 		}
 
-
 		findNext(card_panel.getCardColor(), tokens[current_player].getPosition(), card_panel.getType());
     }
 
@@ -297,6 +299,9 @@ public class GameManager implements Serializable{
 				JOptionPane.showMessageDialog(null, "You drew a card and moved!","", JOptionPane.WARNING_MESSAGE);
 			}
 		}
+
+		// Check if next player is AI (This is for when previous move WAS AI)
+		checkAi();
 	}
 
 	public void aiStandard(Card currentCard, int player) {
@@ -395,6 +400,36 @@ public class GameManager implements Serializable{
 
 	}
 
+	public void checkAi() {
+		int player = gameState.getPlayer();
+
+		// Check if current player is AI
+		if (gameState.isAI(player)) {
+			Timer timer;
+
+			// Disable the buttons
+			card_panel.toggleBoomButton();
+			card_panel.toggleDrawButton();
+			card_panel.togglePlayForMeButton();
+
+			gameState.changeInstruction(3);
+
+			timer = new Timer(1000, new ActionListener() {
+            	public void actionPerformed(ActionEvent evt) {
+					// Reenable buttons
+					card_panel.togglePlayForMeButton();
+					card_panel.toggleBoomButton();
+					card_panel.toggleDrawButton();
+
+					// Fake a play for me click
+					card_panel._playForMeButton.doClick();
+            	}
+        	});
+			timer.setRepeats(false);
+			timer.start();
+		}
+	}
+
     private class PositionListener implements MouseListener {
 		private int previous, next;
 
@@ -443,6 +478,8 @@ public class GameManager implements Serializable{
 				// Update the instruction to draw card
 				gameState.changeInstruction(1);
 
+				// Check if next player is AI (This is for when previous move WASNT AI)
+				checkAi();
 			}
 
 			if (e.getSource().getClass().equals(end.getClass())) {

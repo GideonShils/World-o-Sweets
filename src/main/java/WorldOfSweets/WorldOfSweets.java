@@ -559,8 +559,10 @@ public class WorldOfSweets extends JFrame implements Serializable{
 		    card_panel.setGameManager(gm);
 
                     dm.gm = gm;
+
+                    gm.checkAi();
 		}
-	});
+        });
     }
 
     public void createMenuBar(){
