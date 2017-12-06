@@ -255,7 +255,7 @@ public class GameManager implements Serializable{
 				// Move the token if necessary
 				if (newPosition != -1) {
 					aiMove(current_player, newPosition);
-					JOptionPane.showMessageDialog(null, "You drew a card and moved!","", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, gameState.getPlayerName(current_player+1) + " drew a card and moved!","", JOptionPane.WARNING_MESSAGE);
 				}
 			}
 			
@@ -283,7 +283,7 @@ public class GameManager implements Serializable{
 					aiMove(boom_player, newPosition);
 				}
 
-				JOptionPane.showMessageDialog(null, "You used a boomerang on player " + gameState.getPlayerName(boom_player+1) + "!","", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, gameState.getPlayerName(current_player+1) + " used a boomerang on player " + gameState.getPlayerName(boom_player+1) + "!","", JOptionPane.WARNING_MESSAGE);
 			}
 
 		} else {
@@ -296,7 +296,7 @@ public class GameManager implements Serializable{
 			// Move the token if necessary
 			if (newPosition != -1) {
 				aiMove(current_player, newPosition);
-				JOptionPane.showMessageDialog(null, "You drew a card and moved!","", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, gameState.getPlayerName(current_player+1) + " drew a card and moved!","", JOptionPane.WARNING_MESSAGE);
 			}
 		}
 
@@ -375,7 +375,7 @@ public class GameManager implements Serializable{
 			tokens[current_player].setPosition(pos);
 		}
 		else {
-			JOptionPane.showMessageDialog(null, "Your turn was skipped!","", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, gameState.getPlayerName(boom_player+1) + "'s turn was skipped!","", JOptionPane.WARNING_MESSAGE);
 		}
 
 		return pos;
