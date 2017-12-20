@@ -15,25 +15,24 @@ public class BackgroundColorHandler {
 
 	WorldOfSweets wos;
 
-  
-	public BackgroundColorHandler (WorldOfSweets wos) {
+	public BackgroundColorHandler(WorldOfSweets wos) {
 		this.wos = wos;
 	}
-	
-	public JMenuItem backgroundRed(){
+
+	public JMenuItem backgroundRed() {
 
 		red = new JMenuItem("Red");
-		
+
 		red.getAccessibleContext().setAccessibleDescription("Change background to red.");
 
-        ActionListener redlistener = new RedListener();
+		ActionListener redlistener = new RedListener();
 		red.addActionListener(redlistener);
 
 		return red;
 	}
 
-	public JMenuItem backgroundBlue(){
-		
+	public JMenuItem backgroundBlue() {
+
 		blue = new JMenuItem("Blue");
 
 		blue.getAccessibleContext().setAccessibleDescription("Change background to blue.");
@@ -44,10 +43,10 @@ public class BackgroundColorHandler {
 		return blue;
 	}
 
-	public JMenuItem backgroundGreen(){
+	public JMenuItem backgroundGreen() {
 
 		green = new JMenuItem("Green");
-		
+
 		green.getAccessibleContext().setAccessibleDescription("Change background to green.");
 
 		ActionListener greenlistener = new GreenListener();
@@ -58,20 +57,20 @@ public class BackgroundColorHandler {
 
 	private class RedListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-        	wos.board_panel.setBackground(new java.awt.Color(255, 143, 143));
-      	}
+			wos.board_panel.setBackground(new java.awt.Color(255, 143, 143));
+		}
 	}
-	  
+
 	private class BlueListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-        	wos.board_panel.setBackground(new java.awt.Color(143, 236, 255));
-      	}
-	  }
-	  
+			wos.board_panel.setBackground(new java.awt.Color(143, 236, 255));
+		}
+	}
+
 	private class GreenListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-        	wos.board_panel.setBackground(new java.awt.Color(181, 255, 143));
-      	}
-  	}
+			wos.board_panel.setBackground(new java.awt.Color(181, 255, 143));
+		}
+	}
 
 }

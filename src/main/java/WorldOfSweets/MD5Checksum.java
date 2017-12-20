@@ -1,7 +1,7 @@
 package WorldOfSweets;
+
 import java.io.*;
 import java.security.MessageDigest;
-
 
 /*
 * Source: http://www.rgagnon.com/javadetails/java-0416.html
@@ -10,7 +10,7 @@ import java.security.MessageDigest;
 public class MD5Checksum {
 
     public static byte[] createChecksum(String filename) throws Exception {
-        InputStream fis =  new FileInputStream(filename);
+        InputStream fis = new FileInputStream(filename);
 
         byte[] buffer = new byte[1024];
         MessageDigest complete = MessageDigest.getInstance("MD5");
@@ -33,16 +33,16 @@ public class MD5Checksum {
         byte[] b = createChecksum(filename);
         String result = "";
 
-        for (int i=0; i < b.length; i++) {
-            result += Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring( 1 );
+        for (int i = 0; i < b.length; i++) {
+            result += Integer.toString((b[i] & 0xff) + 0x100, 16).substring(1);
         }
 
-       return result;
-   }
+        return result;
+    }
 
     // reads in checksum stored in text file and compares it with the checksum calculated with the file
     // returns true if they are equal and false if they are not equal
-    public static boolean compareChecksum(File file){
+    public static boolean compareChecksum(File file) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(file.getPath() + "_checksum.txt"));
             String checksum = br.readLine();
@@ -50,7 +50,7 @@ public class MD5Checksum {
             String fileChecksum = getMD5Checksum(file.getPath());
 
             return checksum.equals(fileChecksum);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

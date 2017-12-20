@@ -4,8 +4,8 @@ import GameObjects.*;
 import java.io.Serializable;
 import javax.swing.*;
 
-public class LoadSaveObject implements Serializable{
-	
+public class LoadSaveObject implements Serializable {
+
     public CardPanel card_panel;
     public DeckManager dm;
     public int num_players;
@@ -16,7 +16,7 @@ public class LoadSaveObject implements Serializable{
     public long time_elapsed;
     public long old_time_elapsed;
 
-	public LoadSaveObject(){
+    public LoadSaveObject() {
 
-	}
+    }
 }

@@ -1,11 +1,11 @@
 package GameObjects;
+
 import WorldOfSweets.*;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.Serializable;
-
 
 public class CardPanel implements Serializable {
 
@@ -33,49 +33,48 @@ public class CardPanel implements Serializable {
 
     public static DeckManager dm;
 
-
     public CardPanel(DeckManager dm, GameState gs, Boomerang br) {
 
         togglestate = 0;
 
-    	this.dm = dm;
-    	this.gm = null;
-	    this.br = br;
+        this.dm = dm;
+        this.gm = null;
+        this.br = br;
         gameState = gs;
 
         //-------------------------------------------------------
         // set min, preferred, and max sizes in order to prevent JLabels from
         // resizing when values change
 
-        deckText.setMinimumSize(new Dimension(width/2, height/12));
-        deckText.setPreferredSize(new Dimension(width/2, height/12));
-        deckText.setMaximumSize(new Dimension(width/2, height/12));
+        deckText.setMinimumSize(new Dimension(width / 2, height / 12));
+        deckText.setPreferredSize(new Dimension(width / 2, height / 12));
+        deckText.setMaximumSize(new Dimension(width / 2, height / 12));
 
-        cardText.setMinimumSize(new Dimension(width/2, height/12));
-        cardText.setPreferredSize(new Dimension(width/2, height/12));
-        cardText.setMaximumSize(new Dimension(width/2, height/12));
+        cardText.setMinimumSize(new Dimension(width / 2, height / 12));
+        cardText.setPreferredSize(new Dimension(width / 2, height / 12));
+        cardText.setMaximumSize(new Dimension(width / 2, height / 12));
 
-        deckLabel.setMinimumSize(new Dimension(width/2, height/6));
-        deckLabel.setPreferredSize(new Dimension(width/2, height/6));
-        deckLabel.setMaximumSize(new Dimension(width/2, height/6));
+        deckLabel.setMinimumSize(new Dimension(width / 2, height / 6));
+        deckLabel.setPreferredSize(new Dimension(width / 2, height / 6));
+        deckLabel.setMaximumSize(new Dimension(width / 2, height / 6));
 
-        cardLabel.setMinimumSize(new Dimension(width/2, height/6));
-        cardLabel.setPreferredSize(new Dimension(width/2, height/6));
-        cardLabel.setMaximumSize(new Dimension(width/2, height/6));
+        cardLabel.setMinimumSize(new Dimension(width / 2, height / 6));
+        cardLabel.setPreferredSize(new Dimension(width / 2, height / 6));
+        cardLabel.setMaximumSize(new Dimension(width / 2, height / 6));
 
-        deckCount.setMinimumSize(new Dimension(width/2, height/12));
-        deckCount.setPreferredSize(new Dimension(width/2, height/12));
-        deckCount.setMaximumSize(new Dimension(width/2, height/12));
+        deckCount.setMinimumSize(new Dimension(width / 2, height / 12));
+        deckCount.setPreferredSize(new Dimension(width / 2, height / 12));
+        deckCount.setMaximumSize(new Dimension(width / 2, height / 12));
 
-        cardValue.setMinimumSize(new Dimension(width/2, height/12));
-        cardValue.setPreferredSize(new Dimension(width/2, height/12));
-        cardValue.setMaximumSize(new Dimension(width/2, height/12));
+        cardValue.setMinimumSize(new Dimension(width / 2, height / 12));
+        cardValue.setPreferredSize(new Dimension(width / 2, height / 12));
+        cardValue.setMaximumSize(new Dimension(width / 2, height / 12));
 
         //-----------------------------------------------------------
 
-	    cards_panel = new javax.swing.JPanel();
+        cards_panel = new javax.swing.JPanel();
 
-	    cards_panel.setPreferredSize(new java.awt.Dimension(width, height/3));
+        cards_panel.setPreferredSize(new java.awt.Dimension(width, height / 3));
 
         cards_panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -85,7 +84,6 @@ public class CardPanel implements Serializable {
         cardLabel.setBackground(new java.awt.Color(0, 0, 0));
         cardLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         cardLabel.setOpaque(true);
-
 
         deckLabel.setBackground(new java.awt.Color(0, 0, 0));
         deckLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -135,7 +133,7 @@ public class CardPanel implements Serializable {
         buttonPanel.add(_drawCardButton);
 
         // Add boomerang button
-        if(gs.getMode() == 1){
+        if (gs.getMode() == 1) {
             buttonPanel.add(_boomerangButton);
         }
 
@@ -152,17 +150,17 @@ public class CardPanel implements Serializable {
         ActionListener playForMeListener = new PlayForMeListener();
         _playForMeButton.addActionListener(playForMeListener);
 
-    	// Combine card panel and turn panel
-    	combinedPanel = new javax.swing.JPanel();
-    	combinedPanel.setLayout(new BoxLayout(combinedPanel, BoxLayout.Y_AXIS));
+        // Combine card panel and turn panel
+        combinedPanel = new javax.swing.JPanel();
+        combinedPanel.setLayout(new BoxLayout(combinedPanel, BoxLayout.Y_AXIS));
 
-	    combinedPanel.add(cards_panel);
+        combinedPanel.add(cards_panel);
         combinedPanel.add(buttonPanel);
 
     }
 
     public JPanel getCardsPanel() {
-	    return combinedPanel;
+        return combinedPanel;
     }
 
     public void changeCard(Card card) {
@@ -171,17 +169,16 @@ public class CardPanel implements Serializable {
         deckCount.setText(Integer.toString(dm.getCount()));
     }
 
-    public Card getCurrentCard(){
+    public Card getCurrentCard() {
         return currentCard;
     }
-
 
     private class CardButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
             // Disable the buttons
             toggleDrawButton();
-	        toggleBoomButton();
+            toggleBoomButton();
             togglePlayForMeButton();
 
             // Draw a new card
@@ -204,7 +201,7 @@ public class CardPanel implements Serializable {
     }
 
     private class BoomerangListener implements ActionListener {
-        public void actionPerformed(ActionEvent e){
+        public void actionPerformed(ActionEvent e) {
             // Disable the buttons
             toggleDrawButton();
             toggleBoomButton();
@@ -212,7 +209,7 @@ public class CardPanel implements Serializable {
 
             //Choose player
             int player = choosePlayer();
-            if(player == -1) {
+            if (player == -1) {
                 return;
             }
 
@@ -237,8 +234,8 @@ public class CardPanel implements Serializable {
             int cur = gameState.returnCurrPlayer();
             br.useBoom(cur);
 
-            for(int i = 1; i <= gameState.getPlayers(); i++){
-                if(i != cur) {
+            for (int i = 1; i <= gameState.getPlayers(); i++) {
+                if (i != cur) {
                     model.addElement(gameState.getPlayerName(i));
                 }
             }
@@ -247,13 +244,12 @@ public class CardPanel implements Serializable {
 
             panel.add(new JLabel("Choose a Player"));
             panel.add(selection);
-            UIManager.put("OptionPane.minimumSize",new Dimension(300,100));
+            UIManager.put("OptionPane.minimumSize", new Dimension(300, 100));
             int response = JOptionPane.showConfirmDialog(null, panel, "Boomerang", JOptionPane.DEFAULT_OPTION);
 
-            if(response != JOptionPane.OK_OPTION){
+            if (response != JOptionPane.OK_OPTION) {
                 return -1;
-            }
-            else{
+            } else {
                 return gameState.getPlayerNumber(selection.getSelectedItem().toString());
             }
         }
@@ -279,35 +275,35 @@ public class CardPanel implements Serializable {
     }
 
     public Color getCardColor() {
-	    return cardLabel.getBackground();
+        return cardLabel.getBackground();
     }
 
     public int getType() {
-    	switch(cardValue.getText()) {
-        	case "Single":
-    		  return 6;
-        	case "Double":
-    		  return 7;
-        	case "Skip":
-    		  return 5;
-        	case "Ice Cream":
-    		  return 0;
-    	    case "Cake":
-    		  return 1;
-    	    case "Cookie":
-    		  return 2;
-    	    case "Cupcake":
-    		  return 3;
-    	    case "Pie":
-    		  return 4;
+        switch (cardValue.getText()) {
+        case "Single":
+            return 6;
+        case "Double":
+            return 7;
+        case "Skip":
+            return 5;
+        case "Ice Cream":
+            return 0;
+        case "Cake":
+            return 1;
+        case "Cookie":
+            return 2;
+        case "Cupcake":
+            return 3;
+        case "Pie":
+            return 4;
 
         }
 
-	    return -1;
+        return -1;
     }
 
     public void setGameManager(GameManager gm) {
-	    this.gm = gm;
+        this.gm = gm;
     }
 
     public void toggleDrawButton() {
@@ -321,16 +317,16 @@ public class CardPanel implements Serializable {
     public void toggleBoomButton() {
         if (togglestate == 0) {
             _boomerangButton.setEnabled(false);
-	        togglestate = 1;
+            togglestate = 1;
         } else {
-	        if(br.getNumLeft(gameState.getPlayer()) != 0) {
-		        _boomerangButton.setEnabled(true);
+            if (br.getNumLeft(gameState.getPlayer()) != 0) {
+                _boomerangButton.setEnabled(true);
                 togglestate = 0;
             }
         }
     }
 
-    public void togglePlayForMeButton(){
+    public void togglePlayForMeButton() {
         if (_playForMeButton.isEnabled()) {
             _playForMeButton.setEnabled(false);
         } else {
