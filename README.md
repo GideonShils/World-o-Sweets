@@ -1,6 +1,6 @@
-# World of Sweets
+# World of Sweets 1.0
 
-#### "Similar to, but legally distinct from Candyland(tm) -  10/10" - New York Review of Games
+##### "Similar to, but legally distinct from Candyland -  10/10" - *New York Review of Games*
  
 ## How to play
 
@@ -12,9 +12,9 @@ gradle run
 
 ## Gameplay & Game Modes:
 
-This game supports 2-4 players, any of which can be either human or AI.
+This game supports 2-4 players, all of which can be either human or AI.
 
-Players take turns drawing cards from a deck and moving their token to the apporpriate space on the board. The majority of the spaces contain simple colors, but there are also a number of special spaces which can only be reached by drawing certain cards. The first player to reach the last square on the board wins the Game.
+Players take turns drawing cards from a deck and moving their token to the apporpriate space on the board. The majority of the spaces contain simple colors, but there are also a number of special spaces which can only be reached by drawing certain cards. The first player to reach the last square on the board wins the game.
 
 ### Classic mode:
 
@@ -42,6 +42,8 @@ This game also includes a few extra features:
 
 1. "Dad" cheat: If a player enters their name as "Dad", the game will automatically deliver the worst possible card in the deck during each of that player's turns.
 
-2. Saving / Loading: You can save or load the game in an incorruptible file which remembers the current game state.
+2. AI mode: At the player selection stage, any player can be set to AI, meaning they will play every turn automatically.
 
-3. Play for me button: Even if a player is human rather than AI, they can choose the "play for me" button during each turn to avoid selecting whether to use a boomerang, drawing a card, and moving their token.
+3. Saving / Loading: You can save or load the game in an incorruptible file which remembers the current game state.
+
+4. Play for me button: Even if a player is human rather than AI, they can choose the "play for me" button during each turn to avoid selecting whether to use a boomerang, drawing a card, and moving their token.

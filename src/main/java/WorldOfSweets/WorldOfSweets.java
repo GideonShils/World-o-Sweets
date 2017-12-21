@@ -111,10 +111,10 @@ public class WorldOfSweets extends JFrame implements Serializable {
                 positions[pos++] = pie; //Go To Five, off map, Position 35
 
                 setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-                //setPreferredSize(new java.awt.Dimension(872, 690));
-                setExtendedState(JFrame.MAXIMIZED_BOTH);
+                setPreferredSize(new java.awt.Dimension(1000, 800));
+                //setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-                header_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 24));
+                header_label.setFont(new java.awt.Font("Helvetica", 0, 24));
                 header_label.setHorizontalAlignment(SwingConstants.CENTER);
                 header_label.setText("World of Sweets!");
                 header_label.setMaximumSize(new java.awt.Dimension(248, 50));
@@ -448,7 +448,7 @@ public class WorldOfSweets extends JFrame implements Serializable {
                         board_panel.add(temp_panel);
                 }
 
-                start_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 13));
+                start_label.setFont(new java.awt.Font("Helvetica", 0, 13));
                 start_label.setHorizontalAlignment(SwingConstants.CENTER);
                 start_label.setText("Start");
                 start_label.setVerticalAlignment(SwingConstants.TOP);
