@@ -1,4 +1,4 @@
-# World of Sweets 1.0
+# World of Sweets 0.1
 
 ##### "Similar to, but legally distinct from Candyland -  10/10" - *New York Review of Games*
  
