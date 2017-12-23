@@ -220,7 +220,7 @@ public class GameState implements Serializable {
     public JPanel turnPanel() {
         //Create the label and set the font + size
         temp_label = new JLabel(getPlayerName(currentPlayer) + "'s Turn!");
-        temp_label.setFont(new java.awt.Font("Helvetica", 0, 16));
+        temp_label.setFont(new java.awt.Font("Helvetica", 0, 17));
 
         //Add label to panel
         JPanel tp = new JPanel();
@@ -231,7 +231,7 @@ public class GameState implements Serializable {
 
     public JPanel boomPanel() {
         boom_label = new JLabel(br.getNumLeft(currentPlayer) + " boomerangs left");
-        boom_label.setFont(new java.awt.Font("Helvetica", 0, 16));
+        boom_label.setFont(new java.awt.Font("Helvetica", 0, 17));
 
         JPanel tp = new JPanel();
         tp.add(boom_label);
@@ -245,7 +245,7 @@ public class GameState implements Serializable {
             temp_label.setText(getPlayerName(currentPlayer) + "'s turn!");
 
         } else if (num == 2) {
-            String labelText = String.format("<html><div width=%d>" + getPlayerName(currentPlayer)
+            String labelText = String.format("<html><div width=%d style=\"text-align: center\">" + getPlayerName(currentPlayer)
                     + "'s turn has been skipped! " + getPlayerName(getNextPlayer(currentPlayer)) + "'s turn!</div></html>", 250);
             temp_label.setText(labelText);
         }
@@ -258,7 +258,7 @@ public class GameState implements Serializable {
     public JPanel currentInstruction() {
         instruction_label = new JLabel("Please draw a card.");
 
-        instruction_label.setFont(new java.awt.Font("Helvetica", 0, 16));
+        instruction_label.setFont(new java.awt.Font("Helvetica", 0, 17));
 
         //Add label to panel
         JPanel tp = new JPanel();

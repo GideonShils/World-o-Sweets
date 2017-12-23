@@ -477,14 +477,13 @@ public class WorldOfSweets extends JFrame implements Serializable {
                         combinedPanel.add(boom_panel);
                 }
 
-                non_board_panel.add(combinedPanel);
-
                 JPanel current_instruction = gameState.currentInstruction();
-                non_board_panel.add(current_instruction);
+                combinedPanel.add(current_instruction);
 
-                //Long.toString(System.currentTimeMillis())
                 JPanel timer_panel = timer.getTimerPanel();
-                non_board_panel.add(timer_panel);
+                combinedPanel.add(timer_panel);
+
+                non_board_panel.add(combinedPanel);
 
                 game_container_panel.add(non_board_panel);
 
