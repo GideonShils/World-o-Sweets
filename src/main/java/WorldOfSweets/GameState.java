@@ -3,9 +3,7 @@ package WorldOfSweets;
 import GameObjects.*;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import java.lang.*;
 import java.io.Serializable;
 
 public class GameState implements Serializable {
@@ -222,7 +220,7 @@ public class GameState implements Serializable {
     public JPanel turnPanel() {
         //Create the label and set the font + size
         temp_label = new JLabel(getPlayerName(currentPlayer) + "'s Turn!");
-        temp_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
+        temp_label.setFont(new java.awt.Font("Helvetica", 0, 16));
 
         //Add label to panel
         JPanel tp = new JPanel();
@@ -233,7 +231,7 @@ public class GameState implements Serializable {
 
     public JPanel boomPanel() {
         boom_label = new JLabel(br.getNumLeft(currentPlayer) + " boomerangs left");
-        boom_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
+        boom_label.setFont(new java.awt.Font("Helvetica", 0, 16));
 
         JPanel tp = new JPanel();
         tp.add(boom_label);
@@ -260,7 +258,7 @@ public class GameState implements Serializable {
     public JPanel currentInstruction() {
         instruction_label = new JLabel("Please draw a card.");
 
-        instruction_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
+        instruction_label.setFont(new java.awt.Font("Helvetica", 0, 16));
 
         //Add label to panel
         JPanel tp = new JPanel();

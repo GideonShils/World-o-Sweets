@@ -5,4 +5,8 @@ WorldOfSweets/*
 .gradle/*
 build/*
 .DS_Store
-test.txt
+.classpath
+.project
+.settings/
+bin/
+.vscode/

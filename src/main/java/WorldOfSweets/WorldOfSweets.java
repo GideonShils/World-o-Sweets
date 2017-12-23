@@ -517,24 +517,21 @@ public class WorldOfSweets extends JFrame implements Serializable {
                 dm.shuffle();
 
                 try {
-                        for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                                if ("Nimbus".equals(info.getName())) {
-                                        UIManager.setLookAndFeel(info.getClassName());
-                                        break;
-                                }
-                        }
-                } catch (ClassNotFoundException ex) {
-                        java.util.logging.Logger.getLogger(WorldOfSweets.class.getName())
-                                        .log(java.util.logging.Level.SEVERE, null, ex);
-                } catch (InstantiationException ex) {
-                        java.util.logging.Logger.getLogger(WorldOfSweets.class.getName())
-                                        .log(java.util.logging.Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                        java.util.logging.Logger.getLogger(WorldOfSweets.class.getName())
-                                        .log(java.util.logging.Level.SEVERE, null, ex);
-                } catch (UnsupportedLookAndFeelException ex) {
-                        java.util.logging.Logger.getLogger(WorldOfSweets.class.getName())
-                                        .log(java.util.logging.Level.SEVERE, null, ex);
+                        // Set System L&F
+                    UIManager.setLookAndFeel(
+                        UIManager.getSystemLookAndFeelClassName());
+                } 
+                catch (UnsupportedLookAndFeelException e) {
+                   // handle exception
+                }
+                catch (ClassNotFoundException e) {
+                   // handle exception
+                }
+                catch (InstantiationException e) {
+                   // handle exception
+                }
+                catch (IllegalAccessException e) {
+                   // handle exception
                 }
 
                 /* Create and display the form */
