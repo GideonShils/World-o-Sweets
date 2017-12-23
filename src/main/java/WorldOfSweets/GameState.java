@@ -14,7 +14,7 @@ public class GameState implements Serializable {
     public String gameType = ""; //Type of game
     int totalPlayers = 0; // Number of total players
     public int currentPlayer = 0;
-    public int curr_player = 1;
+    public int curr_player = 0;
     JLabel temp_label;
     JLabel boom_label;
     JLabel instruction_label;
@@ -122,53 +122,53 @@ public class GameState implements Serializable {
 
             int result = JOptionPane.showConfirmDialog(null, combinedPanel, "Player Names",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-            namesArr = new String[totalPlayers + 1];
+            namesArr = new String[totalPlayers];
 
             // Create bool array where 1 indicates that player is AI
-            isPlayerAI = new boolean[totalPlayers + 1];
+            isPlayerAI = new boolean[totalPlayers];
 
             if (result != JOptionPane.OK_OPTION) {
                 System.exit(0);
             } else {
                 if (totalPlayers == 2) {
-                    namesArr[1] = player1.getText();
-                    namesArr[2] = player2.getText();
+                    namesArr[0] = player1.getText();
+                    namesArr[1] = player2.getText();
                     if (aiPlayer1.isSelected()) {
-                        isPlayerAI[1] = true;
+                        isPlayerAI[0] = true;
                     }
                     if (aiPlayer2.isSelected()) {
-                        isPlayerAI[2] = true;
+                        isPlayerAI[1] = true;
                     }
                 } else if (totalPlayers == 3) {
-                    namesArr[1] = player1.getText();
-                    namesArr[2] = player2.getText();
-                    namesArr[3] = player3.getText();
+                    namesArr[0] = player1.getText();
+                    namesArr[1] = player2.getText();
+                    namesArr[2] = player3.getText();
                     if (aiPlayer1.isSelected()) {
-                        isPlayerAI[1] = true;
+                        isPlayerAI[0] = true;
                     }
                     if (aiPlayer2.isSelected()) {
-                        isPlayerAI[2] = true;
+                        isPlayerAI[1] = true;
                     }
                     if (aiPlayer3.isSelected()) {
-                        isPlayerAI[3] = true;
+                        isPlayerAI[2] = true;
                     }
 
                 } else if (totalPlayers == 4) {
-                    namesArr[1] = player1.getText();
-                    namesArr[2] = player2.getText();
-                    namesArr[3] = player3.getText();
-                    namesArr[4] = player4.getText();
+                    namesArr[0] = player1.getText();
+                    namesArr[1] = player2.getText();
+                    namesArr[2] = player3.getText();
+                    namesArr[3] = player4.getText();
                     if (aiPlayer1.isSelected()) {
-                        isPlayerAI[1] = true;
+                        isPlayerAI[0] = true;
                     }
                     if (aiPlayer2.isSelected()) {
-                        isPlayerAI[2] = true;
+                        isPlayerAI[1] = true;
                     }
                     if (aiPlayer3.isSelected()) {
-                        isPlayerAI[3] = true;
+                        isPlayerAI[2] = true;
                     }
                     if (aiPlayer4.isSelected()) {
-                        isPlayerAI[4] = true;
+                        isPlayerAI[3] = true;
                     }
                 }
             }
@@ -201,32 +201,27 @@ public class GameState implements Serializable {
     }
 
     // Used for turns
-    public int getNextPlayer() {
-        if (currentPlayer == totalPlayers) {
-            currentPlayer = 1;
-            return 1;
+    public int getNextPlayer(int player) {
+        return (player + 1) % totalPlayers;
+    }
+
+    // Increment to next player
+    public void incrementPlayer() {
+        if (currentPlayer == totalPlayers - 1) {
+            currentPlayer = 0;
         } else {
-            currentPlayer += 1;
-            return currentPlayer;
+            currentPlayer++;
         }
     }
 
-    public int returnCurrPlayer() {
-        if (curr_player == totalPlayers) {
-            curr_player = 1;
-            return totalPlayers;
-        } else {
-            return curr_player++;
-        }
-    }
-
-    public int getPlayer() {
-        return curr_player;
+    // Get current player
+    public int getCurrPlayer() {
+        return currentPlayer;
     }
 
     public JPanel turnPanel() {
         //Create the label and set the font + size
-        temp_label = new JLabel(getPlayerName(getNextPlayer()) + "'s Turn!");
+        temp_label = new JLabel(getPlayerName(currentPlayer) + "'s Turn!");
         temp_label.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 16));
 
         //Add label to panel
@@ -249,11 +244,11 @@ public class GameState implements Serializable {
     public void changeTxt(int num) {
         if (num == 1) {
             //change player number
-            temp_label.setText(getPlayerName(getNextPlayer()) + "'s turn!");
+            temp_label.setText(getPlayerName(currentPlayer) + "'s turn!");
 
         } else if (num == 2) {
             String labelText = String.format("<html><div width=%d>" + getPlayerName(currentPlayer)
-                    + "'s turn has been skipped! " + getNextPlayer() + "'s turn!</div></html>", 250);
+                    + "'s turn has been skipped! " + getPlayerName(getNextPlayer(currentPlayer)) + "'s turn!</div></html>", 250);
             temp_label.setText(labelText);
         }
 
