@@ -1,12 +1,7 @@
 package WorldOfSweets;
 
 import javax.swing.*;
-import java.awt.Color;
-import java.awt.*;
 import java.awt.event.*;
-import java.io.Serializable;
-
-import GameObjects.*;
 
 public class BackgroundColorHandler {
 	private JMenuItem red;

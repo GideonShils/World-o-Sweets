@@ -27,8 +27,7 @@ public class GameManager implements Serializable {
 	public int[] sweets_spaces;
 	public Boomerang br;
 
-	public GameManager(JPanel[] array, CardPanel card_panel, Token[] tokens, JLabel end, GameState gs,
-			int[] sweets_spaces, Boomerang br) {
+	public GameManager(JPanel[] array, CardPanel card_panel, Token[] tokens, JLabel end, GameState gs, int[] sweets_spaces, Boomerang br) {
 		gameState = gs;
 		this.array = array;
 		this.card_panel = card_panel;
@@ -477,10 +476,9 @@ public class GameManager implements Serializable {
 	}
 
 	private class PositionListener implements MouseListener {
-		private int previous, next;
+		private int next;
 
-		private PositionListener(int previous, int next) {
-			this.previous = previous;
+		private PositionListener(int next) {
 			this.next = next;
 		}
 
@@ -536,7 +534,7 @@ public class GameManager implements Serializable {
 
 	public void endGame() {
 		end.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
-		end.addMouseListener(new PositionListener(0, 0));
+		end.addMouseListener(new PositionListener(0));
 	}
 
 	public void endGameAi() {

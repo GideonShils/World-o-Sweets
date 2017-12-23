@@ -182,7 +182,7 @@ public class CardPanel implements Serializable {
             togglePlayForMeButton();
 
             // Draw a new card
-            if (gameState.getPlayerName(gameState.curr_player).toUpperCase().equals("DAD")) {
+            if (gameState.getPlayerName(gameState.getCurrPlayer()).toUpperCase().equals("DAD")) {
                 currentCard = dm.drawWorstCardForward();
             } else {
                 currentCard = dm.draw();
@@ -259,7 +259,7 @@ public class CardPanel implements Serializable {
         public void actionPerformed(ActionEvent e) {
 
             // Special case for dad mode
-            if (gameState.getPlayerName(gameState.curr_player).toUpperCase().equals("DAD")) {
+            if (gameState.getPlayerName(gameState.getCurrPlayer()).toUpperCase().equals("DAD")) {
                 currentCard = dm.drawWorstCardForward();
             } else {
                 currentCard = dm.draw();

@@ -1,9 +1,6 @@
 package WorldOfSweets;
 
 import javax.swing.*;
-import java.awt.event.*;
-import java.awt.*;
-import java.lang.String.*;
 
 public class TimeCounter implements Runnable {
     public long timeAtStart;

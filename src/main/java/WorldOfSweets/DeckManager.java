@@ -153,7 +153,7 @@ public class DeckManager implements Serializable {
 		}
 
 		// current position of dad
-		int currPosition = gm.tokens[gm.gameState.curr_player].getPosition();
+		int currPosition = gm.tokens[gm.gameState.getCurrPlayer()].getPosition();
 
 		// grab next card on deck
 		Card minCard = deck.get(currentIndex);

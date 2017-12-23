@@ -48,7 +48,7 @@ public class MD5Checksum {
             String checksum = br.readLine();
 
             String fileChecksum = getMD5Checksum(file.getPath());
-
+            br.close();
             return checksum.equals(fileChecksum);
         } catch (Exception e) {
             e.printStackTrace();

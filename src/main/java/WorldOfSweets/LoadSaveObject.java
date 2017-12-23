@@ -2,7 +2,6 @@ package WorldOfSweets;
 
 import GameObjects.*;
 import java.io.Serializable;
-import javax.swing.*;
 
 public class LoadSaveObject implements Serializable {
 
