@@ -231,10 +231,10 @@ public class CardPanel implements Serializable {
             JPanel panel = new JPanel(new GridLayout(0, 1));
             DefaultComboBoxModel model = new DefaultComboBoxModel();
 
-            int cur = gameState.returnCurrPlayer();
+            int cur = gameState.getCurrPlayer();
             br.useBoom(cur);
 
-            for (int i = 1; i <= gameState.getPlayers(); i++) {
+            for (int i = 0; i < gameState.getPlayers(); i++) {
                 if (i != cur) {
                     model.addElement(gameState.getPlayerName(i));
                 }
@@ -319,7 +319,7 @@ public class CardPanel implements Serializable {
             _boomerangButton.setEnabled(false);
             togglestate = 1;
         } else {
-            if (br.getNumLeft(gameState.getPlayer()) != 0) {
+            if (br.getNumLeft(gameState.getCurrPlayer()) != 0) {
                 _boomerangButton.setEnabled(true);
                 togglestate = 0;
             }

@@ -8,11 +8,11 @@ public class Boomerang {
 	}
 
 	public int getNumLeft(int player) {
-		return boom_left[player - 1];
+		return boom_left[player];
 	}
 
 	public boolean useBoom(int player) {
-		int p = player - 1;
+		int p = player;
 		boom_left[p]--;
 
 		if (boom_left[p] >= 0) {
