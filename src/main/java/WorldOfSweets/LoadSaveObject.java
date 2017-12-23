@@ -5,15 +5,15 @@ import java.io.Serializable;
 
 public class LoadSaveObject implements Serializable {
 
-    public CardPanel card_panel;
+    public CardPanel cardPanel;
     public DeckManager dm;
-    public int num_players;
+    public int numPlayers;
     public Token[] tokens;
-    public Token current_token;
+    public Token currentToken;
     public GameManager gm;
     public GameState gs;
-    public long time_elapsed;
-    public long old_time_elapsed;
+    public long timeElapsed;
+    public long oldTimeElapsed;
 
     public LoadSaveObject() {
 

@@ -19,31 +19,31 @@ import GameObjects.*;
 
 public class GameManager implements Serializable {
 	public JPanel[] array;
-	public CardPanel card_panel;
+	public CardPanel cardPanel;
 	public Token[] tokens;
 	public int currentPlayer;
 	public JLabel end;
 	public GameState gameState;
-	public int[] sweets_spaces;
+	public int[] sweetsSpaces;
 	public Boomerang br;
 
-	public GameManager(JPanel[] array, CardPanel card_panel, Token[] tokens, JLabel end, GameState gs, int[] sweets_spaces, Boomerang br) {
+	public GameManager(JPanel[] array, CardPanel cardPanel, Token[] tokens, JLabel end, GameState gs, int[] sweetsSpaces, Boomerang br) {
 		gameState = gs;
 		this.array = array;
-		this.card_panel = card_panel;
+		this.cardPanel = cardPanel;
 		this.tokens = tokens;
 		this.currentPlayer = 0;
 		this.end = end;
-		this.sweets_spaces = sweets_spaces;
+		this.sweetsSpaces = sweetsSpaces;
 		this.br = br;
 	}
 
 	public void findNext(Color color, int current_pos, int card_type) {
-
+		int pos;
 		// Regular single / double
 		if (card_type > 5) {
-			if (current_pos != sweets_spaces[4]) {
-				int pos = -1;
+			if (current_pos != sweetsSpaces[4]) {
+				pos = -1;
 				int j = 0;
 				for (int i = 0; i < card_type - 5; i++) {
 					for (j = current_pos + 1; j < array.length; j++) {
@@ -62,7 +62,7 @@ public class GameManager implements Serializable {
 				if (j != array.length) {
 					tokens[currentPlayer].setPosition(pos);
 					array[pos].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
-					array[pos].addMouseListener(new PositionListener(current_pos, pos));
+					array[pos].addMouseListener(new PositionListener(pos));
 				}
 			}
 		}
@@ -70,7 +70,7 @@ public class GameManager implements Serializable {
 		else if (card_type <= 4) {
 			// Pie (jail)
 			if (card_type == 4) {
-				if (current_pos != sweets_spaces[4]) {
+				if (current_pos != sweetsSpaces[4]) {
 					JOptionPane.showMessageDialog(null,
 							"You have been sent to Pie Land, draw another sweets card to return", "",
 							JOptionPane.WARNING_MESSAGE);
@@ -79,11 +79,11 @@ public class GameManager implements Serializable {
 				}
 			}
 			// Other specials
-			int location = sweets_spaces[card_type];
+			pos = sweetsSpaces[card_type];
 
-			tokens[currentPlayer].setPosition(location);
-			array[location].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
-			array[location].addMouseListener(new PositionListener(current_pos, location));
+			tokens[currentPlayer].setPosition(pos);
+			array[pos].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
+			array[pos].addMouseListener(new PositionListener(pos));
 		}
 		// Skip
 		else {
@@ -95,7 +95,7 @@ public class GameManager implements Serializable {
 	public int findNextDadMode(Color color, int current_pos, int card_type) {
 
 		if (card_type > 5) {
-			if (current_pos != sweets_spaces[4]) {
+			if (current_pos != sweetsSpaces[4]) {
 				int pos = -1;
 				int j = 0;
 
@@ -122,7 +122,7 @@ public class GameManager implements Serializable {
 			if (card_type == 4) {
 				return -1;
 			}
-			return sweets_spaces[card_type];
+			return sweetsSpaces[card_type];
 		}
 
 		return -2;
@@ -138,20 +138,20 @@ public class GameManager implements Serializable {
 		// Skip
 		if (card.skip()) {
 			// Renable the buttons
-			card_panel.toggleDrawButton();
-			card_panel.toggleBoomButton();
-			card_panel.togglePlayForMeButton();
+			cardPanel.toggleDrawButton();
+			cardPanel.toggleBoomButton();
+			cardPanel.togglePlayForMeButton();
 
 			// Change to skip text
 			gameState.changeTxt(2);
 		}
 		// If currently on pie land
-		else if (tokens[currentPlayer].getPosition() == sweets_spaces[4]) {
+		else if (tokens[currentPlayer].getPosition() == sweetsSpaces[4]) {
 			// If new card isn't another special, stay put
 			if (!card.goTo()) {
-				card_panel.toggleDrawButton();
-				card_panel.toggleBoomButton();
-				card_panel.togglePlayForMeButton();
+				cardPanel.toggleDrawButton();
+				cardPanel.toggleBoomButton();
+				cardPanel.togglePlayForMeButton();
 
 				JOptionPane.showMessageDialog(null, "You didn't draw another sweets card!", "",
 						JOptionPane.WARNING_MESSAGE);
@@ -163,9 +163,9 @@ public class GameManager implements Serializable {
 			} 
 			// If new card is pie, stay put
 			else if (card.pie()) {
-				card_panel.toggleDrawButton();
-				card_panel.toggleBoomButton();
-				card_panel.togglePlayForMeButton();
+				cardPanel.toggleDrawButton();
+				cardPanel.toggleBoomButton();
+				cardPanel.togglePlayForMeButton();
 			}
 			// If new card is special and not pie, update to move token
 			else {
@@ -178,16 +178,16 @@ public class GameManager implements Serializable {
 		}
 
 		// Find the location
-		findNext(card_panel.getCardColor(), tokens[currentPlayer].getPosition(), card_panel.getType());
+		findNext(cardPanel.getCardColor(), tokens[currentPlayer].getPosition(), cardPanel.getType());
 	}
 
 	public void boomerang(int boom_player) {
 		// Skip
-		if (card_panel.getType() == 5) {
+		if (cardPanel.getType() == 5) {
 			// Renable the button
-			card_panel.toggleDrawButton();
-			card_panel.toggleBoomButton();
-			card_panel.togglePlayForMeButton();
+			cardPanel.toggleDrawButton();
+			cardPanel.toggleBoomButton();
+			cardPanel.togglePlayForMeButton();
 
 			gameState.changeTxt(2);
 		}
@@ -197,18 +197,18 @@ public class GameManager implements Serializable {
 			// Fix for different indexing (still refers to player to be boomed)
 			currentPlayer = boom_player;
 
-			Color color = card_panel.getCardColor();
+			Color color = cardPanel.getCardColor();
 			int current_pos = tokens[(currentPlayer)].getPosition();
 
 			// Cant move backward from pieland, so move back relative to position of player that chose boomerang
-			if (current_pos == sweets_spaces[4]) {
+			if (current_pos == sweetsSpaces[4]) {
 				current_pos = tokens[gameState.getCurrPlayer()].getPosition();
 			}
-			int card_type = card_panel.getType();
-
+			int card_type = cardPanel.getType();
+			int pos;
 			// Single & double
 			if (card_type > 5) {
-				int pos = -1;
+				pos = -1;
 				int j = 0;
 				for (j = current_pos - 1; j > -1; j--) {
 					if (array[j].getBackground().equals(color)) {
@@ -226,7 +226,7 @@ public class GameManager implements Serializable {
 				// Set click border of new position
 				tokens[currentPlayer].setPosition(pos);
 				array[pos].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
-				array[pos].addMouseListener(new PositionListener(current_pos, pos));
+				array[pos].addMouseListener(new PositionListener(pos));
 
 
 			} 
@@ -235,7 +235,7 @@ public class GameManager implements Serializable {
 				// Pie land
 				if (card_type == 4) {
 					// Move to pie land
-					if (current_pos != sweets_spaces[4]) {
+					if (current_pos != sweetsSpaces[4]) {
 						JOptionPane.showMessageDialog(null,
 								gameState.getPlayerName(boom_player)
 										+ " has been sent to Pie Land, draw another sweets card to return",
@@ -247,11 +247,11 @@ public class GameManager implements Serializable {
 					}
 				}
 				// Set new location
-				int location = sweets_spaces[card_type];
+				pos = sweetsSpaces[card_type];
 
-				tokens[currentPlayer].setPosition(location);
-				array[location].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
-				array[location].addMouseListener(new PositionListener(current_pos, location));
+				tokens[currentPlayer].setPosition(pos);
+				array[pos].setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
+				array[pos].addMouseListener(new PositionListener(pos));
 			}
 			// Skip
 			else {
@@ -281,8 +281,8 @@ public class GameManager implements Serializable {
 				aiStandard(currentCard, currentPlayer);
 
 				// Find the correct space
-				int newPosition = findLocation(card_panel.getCardColor(), tokens[currentPlayer].getPosition(),
-						card_panel.getType());
+				int newPosition = findLocation(cardPanel.getCardColor(), tokens[currentPlayer].getPosition(),
+				cardPanel.getType());
 
 				// Move the token if necessary
 				if (newPosition != -1) {
@@ -329,8 +329,8 @@ public class GameManager implements Serializable {
 			aiStandard(currentCard, currentPlayer);
 
 			// Find the correct space
-			int newPosition = findLocation(card_panel.getCardColor(), tokens[currentPlayer].getPosition(),
-					card_panel.getType());
+			int newPosition = findLocation(cardPanel.getCardColor(), tokens[currentPlayer].getPosition(),
+					cardPanel.getType());
 
 			// Move the token if necessary
 			if (newPosition != -1) {
@@ -353,7 +353,7 @@ public class GameManager implements Serializable {
 			gameState.changeTxt(2);
 		}
 		// If player is on the pie card (seperate from rest of board)
-		else if (tokens[player].getPosition() == sweets_spaces[4]) {
+		else if (tokens[player].getPosition() == sweetsSpaces[4]) {
 			// If new card isnt a goto card, they cant move (jail)
 			if (!currentCard.goTo()) {
 
@@ -376,12 +376,12 @@ public class GameManager implements Serializable {
 
 		int pos = -1;
 
-		Color color = card_panel.getCardColor();
+		Color color = cardPanel.getCardColor();
 		int current_pos = tokens[(boom_player)].getPosition();
-		if (current_pos == sweets_spaces[4]) {
+		if (current_pos == sweetsSpaces[4]) {
 			current_pos = tokens[gameState.getCurrPlayer() % tokens.length].getPosition();
 		}
-		int card_type = card_panel.getType();
+		int card_type = cardPanel.getType();
 
 		// Normal double / single
 		if (card_type > 5) {
@@ -407,7 +407,7 @@ public class GameManager implements Serializable {
 		else if (card_type <= 4) {
 			// Pie (jail)
 			if (card_type == 4) {
-				if (current_pos != sweets_spaces[4]) {
+				if (current_pos != sweetsSpaces[4]) {
 					JOptionPane.showMessageDialog(null,
 							gameState.getPlayerName(boom_player)
 									+ " has been sent to Pie Land, draw another sweets card to return",
@@ -415,7 +415,7 @@ public class GameManager implements Serializable {
 				}
 
 			}
-			pos = sweets_spaces[card_type];
+			pos = sweetsSpaces[card_type];
 
 			tokens[currentPlayer].setPosition(pos);
 		} else {
@@ -453,21 +453,21 @@ public class GameManager implements Serializable {
 			Timer timer;
 
 			// Disable the buttons
-			card_panel.toggleBoomButton();
-			card_panel.toggleDrawButton();
-			card_panel.togglePlayForMeButton();
+			cardPanel.toggleBoomButton();
+			cardPanel.toggleDrawButton();
+			cardPanel.togglePlayForMeButton();
 
 			gameState.changeInstruction(3);
 
 			timer = new Timer(1000, new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
 					// Reenable buttons
-					card_panel.togglePlayForMeButton();
-					card_panel.toggleBoomButton();
-					card_panel.toggleDrawButton();
+					cardPanel.togglePlayForMeButton();
+					cardPanel.toggleBoomButton();
+					cardPanel.toggleDrawButton();
 
 					// Fake a play for me click
-					card_panel._playForMeButton.doClick();
+					cardPanel._playForMeButton.doClick();
 				}
 			});
 			timer.setRepeats(false);
@@ -482,21 +482,11 @@ public class GameManager implements Serializable {
 			this.next = next;
 		}
 
-		public void mousePressed(MouseEvent e) {
+		public void mousePressed(MouseEvent e) { }
+		public void mouseReleased(MouseEvent e) { }
+		public void mouseEntered(MouseEvent e) { }
+		public void mouseExited(MouseEvent e) { }
 
-		}
-
-		public void mouseReleased(MouseEvent e) {
-
-		}
-
-		public void mouseEntered(MouseEvent e) {
-
-		}
-
-		public void mouseExited(MouseEvent e) {
-
-		}
 
 		public void mouseClicked(MouseEvent e) {
 
@@ -512,9 +502,9 @@ public class GameManager implements Serializable {
 				array[next].add(tokens[currentPlayer].getLabel());
 
 				// Renable the buttons
-				card_panel.toggleDrawButton();
-				card_panel.toggleBoomButton();
-				card_panel.togglePlayForMeButton();
+				cardPanel.toggleDrawButton();
+				cardPanel.toggleBoomButton();
+				cardPanel.togglePlayForMeButton();
 
 				gameState.changeTxt(1);
 
@@ -554,7 +544,7 @@ public class GameManager implements Serializable {
 		// Regular single / double
 		if (card_type > 5) {
 			// Make sure not in jail
-			if (current_pos != sweets_spaces[4]) {
+			if (current_pos != sweetsSpaces[4]) {
 				pos = -1;
 				int j = 0;
 				for (int i = 0; i < card_type - 5; i++) {
@@ -583,14 +573,14 @@ public class GameManager implements Serializable {
 		else if (card_type <= 4) {
 			// Pie (jail) special message
 			if (card_type == 4) {
-				if (current_pos != sweets_spaces[4]) {
+				if (current_pos != sweetsSpaces[4]) {
 					JOptionPane.showMessageDialog(null, gameState.getPlayerName(currentPlayer) + 
 							" has been sent to Pie Land, draw another sweets card to return", "",
 							JOptionPane.WARNING_MESSAGE);
 				}
 			}
 
-			pos = sweets_spaces[card_type];
+			pos = sweetsSpaces[card_type];
 
 			tokens[currentPlayer].setPosition(pos);
 		}

@@ -4,24 +4,18 @@ import GameObjects.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
 import java.io.Serializable;
 
 public class WorldOfSweets extends JFrame implements Serializable {
-        /**
-         * Creates new form WorldOfSweets
-         */
-        public WorldOfSweets(int num_players) {
-                initComponents(num_players);
+        
+        // Creates new WorldOfSweets
+        public WorldOfSweets(int numPlayers) {
+                initComponents(numPlayers);
         }
 
         @SuppressWarnings("unchecked")
-        public void initComponents(int num_players) {
-                this.num_players = num_players;
+        public void initComponents(int numPlayers) {
+                this.numPlayers = numPlayers;
                 java.awt.GridBagConstraints gridBagConstraints;
                 positions = new JPanel[36];
 
@@ -59,7 +53,7 @@ public class WorldOfSweets extends JFrame implements Serializable {
                 red_four = new JPanel();
                 orange_four = new JPanel();
                 red_five = new JPanel();
-                start_panel = new JPanel();
+                startPanel = new JPanel();
                 green_five = new JPanel();
                 cupcake = new JPanel();
                 cake = new JPanel();
@@ -68,12 +62,12 @@ public class WorldOfSweets extends JFrame implements Serializable {
                 cookie = new JPanel();
                 orange_five = new JPanel();
                 start_label = new JLabel();
-                non_board_panel = new JPanel();
-                instructions_panel = new JPanel();
+                nonBoardPanel = new JPanel();
+                instructionsPanel = new JPanel();
 
                 //adding the jpanels() to the position array
                 int pos = 0;
-                positions[pos++] = start_panel;
+                positions[pos++] = startPanel;
                 positions[pos++] = red_four;
                 positions[pos++] = yellow_two;
                 positions[pos++] = blue_two;
@@ -112,7 +106,6 @@ public class WorldOfSweets extends JFrame implements Serializable {
 
                 setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 setPreferredSize(new java.awt.Dimension(1000, 800));
-                //setExtendedState(JFrame.MAXIMIZED_BOTH);
 
                 header_label.setFont(new java.awt.Font("Helvetica", 0, 24));
                 header_label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -145,7 +138,7 @@ public class WorldOfSweets extends JFrame implements Serializable {
                 board_panel.add(temp_panel);
 
                 grandmas_house.setHorizontalAlignment(SwingConstants.CENTER);
-                grandmas_house.setIcon(new ImageIcon(getClass().getResource("/home-house-icon-94831.png")));
+                grandmas_house.setIcon(new ImageIcon(getClass().getResource("/house.png")));
                 board_panel.add(grandmas_house);
 
                 orange.setBackground(new java.awt.Color(255, 153, 0));
@@ -388,19 +381,19 @@ public class WorldOfSweets extends JFrame implements Serializable {
                         board_panel.add(temp_panel);
                 }
 
-                start_panel.setBackground(new java.awt.Color(255, 255, 255));
-                start_panel.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-                start_panel.setLayout(new java.awt.GridLayout(2, 2));
-                tokens = new Token[num_players];
-                for (int i = 0; i < num_players; i++) {
+                startPanel.setBackground(new java.awt.Color(255, 255, 255));
+                startPanel.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+                startPanel.setLayout(new java.awt.GridLayout(2, 2));
+                tokens = new Token[numPlayers];
+                for (int i = 0; i < numPlayers; i++) {
                         JLabel label = new JLabel();
                         label.setIcon(new ImageIcon(getClass().getResource("/tokens/player" + (i + 1) + ".png")));
                         Token t = new Token(label);
                         t.setPosition(0);
                         tokens[i] = t;
-                        start_panel.add(label);
+                        startPanel.add(label);
                 }
-                board_panel.add(start_panel);
+                board_panel.add(startPanel);
 
                 temp_panel = new JPanel();
                 temp_panel.setOpaque(false);
@@ -463,29 +456,29 @@ public class WorldOfSweets extends JFrame implements Serializable {
 
                 game_container_panel.add(board_panel);
 
-                non_board_panel.setPreferredSize(new java.awt.Dimension(250, 620));
+                nonBoardPanel.setPreferredSize(new java.awt.Dimension(250, 620));
 
-                //Add turn panel + card panel to same panel
-                card_panel = new CardPanel(dm, gameState, br);
+                // Add turn panel + card panel to same panel
+                cardPanel = new CardPanel(dm, gameState, br);
                 combinedPanel = new javax.swing.JPanel();
                 combinedPanel.setLayout(new BoxLayout(combinedPanel, BoxLayout.Y_AXIS));
-                turn_panel = gameState.turnPanel();
-                boom_panel = gameState.boomPanel();
-                combinedPanel.add(card_panel.getCardsPanel());
-                combinedPanel.add(turn_panel);
+                turnPanel = gameState.turnPanel();
+                bomPanel = gameState.boomPanel();
+                combinedPanel.add(cardPanel.getCardsPanel());
+                combinedPanel.add(turnPanel);
                 if (gameState.gameType == "Strategic") {
-                        combinedPanel.add(boom_panel);
+                        combinedPanel.add(bomPanel);
                 }
 
-                JPanel current_instruction = gameState.currentInstruction();
-                combinedPanel.add(current_instruction);
+                JPanel currentInstruction = gameState.currentInstruction();
+                combinedPanel.add(currentInstruction);
 
-                JPanel timer_panel = timer.getTimerPanel();
-                combinedPanel.add(timer_panel);
+                JPanel timerPanel = timer.getTimerPanel();
+                combinedPanel.add(timerPanel);
 
-                non_board_panel.add(combinedPanel);
+                nonBoardPanel.add(combinedPanel);
 
-                game_container_panel.add(non_board_panel);
+                game_container_panel.add(nonBoardPanel);
 
                 getContentPane().add(game_container_panel, java.awt.BorderLayout.CENTER);
 
@@ -497,43 +490,35 @@ public class WorldOfSweets extends JFrame implements Serializable {
          */
         public static void main(String args[]) {
 
-                //create and begin timer
+                // Create and begin timer
                 timer = new TimeCounter();
                 timer.run();
 
                 // Initialize game sate and bring up dialog
                 // asking for number of players
-
                 gameState = new GameState(br);
-
                 gameState.promptPlayers();
 
                 // Create deck manager object
                 dm = new DeckManager();
+
                 // Create the deck itself
                 dm.createDeck(10, 2, 5);
+                
                 // Shuffle the deck
                 dm.shuffle();
 
+                // Set System L&F
                 try {
-                        // Set System L&F
                     UIManager.setLookAndFeel(
                         UIManager.getSystemLookAndFeelClassName());
                 } 
-                catch (UnsupportedLookAndFeelException e) {
-                   // handle exception
-                }
-                catch (ClassNotFoundException e) {
-                   // handle exception
-                }
-                catch (InstantiationException e) {
-                   // handle exception
-                }
-                catch (IllegalAccessException e) {
-                   // handle exception
-                }
+                catch (UnsupportedLookAndFeelException e) {}
+                catch (ClassNotFoundException e) {}
+                catch (InstantiationException e) {}
+                catch (IllegalAccessException e) {}
 
-                /* Create and display the form */
+                // Create and display the game
                 java.awt.EventQueue.invokeLater(new Runnable() {
                         public void run() {
 
@@ -543,10 +528,10 @@ public class WorldOfSweets extends JFrame implements Serializable {
                                 wos.setVisible(true);
 
                                 timer.action(); //Start the timer
-                                gm = new GameManager(positions, card_panel, tokens, grandmas_house, gameState,
-                                                sweets_spaces, br);
+                                gm = new GameManager(positions, cardPanel, tokens, grandmas_house, gameState,
+                                sweetsSpaces, br);
 
-                                card_panel.setGameManager(gm);
+                                cardPanel.setGameManager(gm);
 
                                 dm.gm = gm;
 
@@ -572,11 +557,11 @@ public class WorldOfSweets extends JFrame implements Serializable {
                                 .setAccessibleDescription("Used for changing the background color.");
                 menuBar.add(backgroundMenu);
 
-                color_handler = new BackgroundColorHandler(this);
+                colorHandler = new BackgroundColorHandler(this);
 
-                backgroundMenu.add(color_handler.backgroundRed());
-                backgroundMenu.add(color_handler.backgroundBlue());
-                backgroundMenu.add(color_handler.backgroundGreen());
+                backgroundMenu.add(colorHandler.backgroundRed());
+                backgroundMenu.add(colorHandler.backgroundBlue());
+                backgroundMenu.add(colorHandler.backgroundGreen());
 
                 // adding menu bar to JFrame
                 this.setJMenuBar(menuBar);
@@ -585,28 +570,28 @@ public class WorldOfSweets extends JFrame implements Serializable {
         public void loadGameBoard(LoadSaveObject w) {
 
                 // updates card panel with correct color
-                Card c = w.card_panel.getCurrentCard();
+                Card c = w.cardPanel.getCurrentCard();
 
                 if (c != null)
-                        this.card_panel.changeCard(c);
+                        this.cardPanel.changeCard(c);
 
                 //replaces deck with loaded deck
                 dm.loadDeck(w.dm);
 
                 // removes tokens on start space
-                for (int i = 0; i < num_players; i++) {
+                for (int i = 0; i < numPlayers; i++) {
                         Container parent = tokens[i].getLabel().getParent();
                         parent.remove(tokens[i].getLabel());
                         parent.validate();
                         parent.repaint();
                 }
 
-                this.num_players = w.num_players;
+                this.numPlayers = w.numPlayers;
                 this.tokens = w.tokens;
-                this.current_token = w.current_token;
+                this.currentToken = w.currentToken;
 
                 // updates token locations
-                for (int i = 0; i < num_players; i++) {
+                for (int i = 0; i < numPlayers; i++) {
                         positions[tokens[i].getPosition()].add(tokens[i].getLabel());
                 }
 
@@ -619,7 +604,7 @@ public class WorldOfSweets extends JFrame implements Serializable {
                 gameState.temp_label.setText(gameState.getPlayerName(gameState.currentPlayer) + "'s turn!");
                 gameState.changeInstruction(1);
 
-                timer.old_time_elapsed = w.old_time_elapsed;
+                timer.oldTimeElapsed = w.oldTimeElapsed;
 
                 // Tell timer that this is a loaded game
                 timer.loaded = true;
@@ -672,32 +657,32 @@ public class WorldOfSweets extends JFrame implements Serializable {
         public JPanel yellow_three;
         public JPanel yellow_two;
         public static JLabel grandmas_house;
-        public static JPanel non_board_panel;
-        public static JPanel start_panel;
+        public static JPanel nonBoardPanel;
+        public static JPanel startPanel;
         public static JMenuBar menuBar;
         public static JMenu fileMenu;
         public static JMenu backgroundMenu;
-        public JPanel current_instruction;
-        public JPanel timer_panel;
+        public JPanel currentInstruction;
+        public JPanel timerPanel;
 
-        public static CardPanel card_panel;
+        public static CardPanel cardPanel;
         public static LoadSaveHandler lsh;
         public static TimeCounter timer;
         public static DeckManager dm;
         public static GameState gameState;
-        public static BackgroundColorHandler color_handler;
-        public static int num_players;
+        public static BackgroundColorHandler colorHandler;
+        public static int numPlayers;
         public static Token[] tokens;
-        public static Token current_token;
+        public static Token currentToken;
         public static JPanel[] positions;
         public static GameManager gm;
         public static Boomerang br = new Boomerang();
-        public JPanel instructions_panel;
+        public JPanel instructionsPanel;
         public JPanel combinedPanel;
-        public JPanel turn_panel;
-        public JPanel boom_panel;
+        public JPanel turnPanel;
+        public JPanel bomPanel;
 
-        public final static int[] sweets_spaces = new int[] { 5, 12, 18, 27, 35 };
+        public final static int[] sweetsSpaces = new int[] { 5, 12, 18, 27, 35 };
         public final static String[] sweets = new String[] { "Ice Cream", "Cake", "Cookie", "Cupcake", "Pie" };
 
 }

@@ -51,15 +51,15 @@ public class LoadSaveHandler {
 
 	private boolean saveObject(File file) {
 		LoadSaveObject o = new LoadSaveObject();
-		o.card_panel = WorldOfSweets.card_panel;
+		o.cardPanel = WorldOfSweets.cardPanel;
 		o.dm = WorldOfSweets.dm;
-		o.num_players = WorldOfSweets.num_players;
+		o.numPlayers = WorldOfSweets.numPlayers;
 		o.tokens = WorldOfSweets.tokens;
-		o.current_token = WorldOfSweets.current_token;
+		o.currentToken = WorldOfSweets.currentToken;
 		o.gm = WorldOfSweets.gm;
 		o.gs = WorldOfSweets.gameState;
-		o.time_elapsed = WorldOfSweets.timer.time_elapsed;
-		o.old_time_elapsed = WorldOfSweets.timer.time_elapsed;
+		o.timeElapsed = WorldOfSweets.timer.timeElapsed;
+		o.oldTimeElapsed = WorldOfSweets.timer.timeElapsed;
 
 		try {
 			FileOutputStream fos = new FileOutputStream(file);

@@ -12,7 +12,6 @@ public class GameState implements Serializable {
     public String gameType = ""; //Type of game
     int totalPlayers = 0; // Number of total players
     public int currentPlayer = 0;
-    public int curr_player = 0;
     JLabel temp_label;
     JLabel boom_label;
     JLabel instruction_label;
@@ -299,7 +298,6 @@ public class GameState implements Serializable {
         this.response = gs.response;
         this.totalPlayers = gs.totalPlayers;
         this.currentPlayer = gs.currentPlayer;
-        this.curr_player = gs.curr_player;
 
         this.currCard = gs.currCard;
         this.target = gs.target;
